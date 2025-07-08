@@ -4,24 +4,34 @@
  */
 package Model;
 
+import Utils.Utilitarios;
+
 /**
  *
  * @author Isaias
  */
 public class Funcionario {
-    private String id;
+    private long id = Utilitarios.gerar_id("funcionario");
     private String nomeEmpregado;
     private String funcaoCargo;
+    private long id_empresa_fornecedora;
+
+    public Funcionario( String nomeEmpregado, String funcaoCargo, long id_empresa_fornecedora) {
+        
+        this.nomeEmpregado = nomeEmpregado;
+        this.funcaoCargo = funcaoCargo;
+        this.id_empresa_fornecedora = id_empresa_fornecedora;
+    }
+    
+    
 
     // Getters e Setters
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  
 
     public String getNomeEmpregado() {
         return nomeEmpregado;

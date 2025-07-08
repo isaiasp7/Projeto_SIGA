@@ -4,47 +4,26 @@
  */
 package Model;
 
+import Controller.ConexaoBd;
+import Utils.Utilitarios;
+
 /**
  *
  * @author Isaias
  */
-public class Fornecedor {
-    private String id;
-    private String cnpj;
-    private String nomeEmpresa;
-    private String email;
+public class Fornecedor extends Empresa{
 
-    public String getId() {
-        return id;
+    public Fornecedor(String cnpj, String nomeEmpresa, String email) {
+        super(Utilitarios.gerar_id("fornecedor"),"Fornecedor", cnpj, nomeEmpresa, email);
+        
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public Fornecedor() {
     }
+    
 
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public String getNomeEmpresa() {
-        return nomeEmpresa;
-    }
-
-    public void setNomeEmpresa(String nomeEmpresa) {
-        this.nomeEmpresa = nomeEmpresa;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    
+    
 
 
 }

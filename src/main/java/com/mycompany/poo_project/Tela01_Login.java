@@ -16,12 +16,12 @@ import org.w3c.dom.css.RGBColor;
  *
  * @author Isaias
  */
-public class Tela02_Login extends javax.swing.JFrame {
+public class Tela01_Login extends javax.swing.JFrame {
 
     /**
      * Creates new form Tela02_Login
      */
-   public Tela02_Login() {
+   public Tela01_Login() {
     initComponents();
     ImageIcon img = new ImageIcon("/imgs/20534509-conceito-de-ilustracao-de-entrega-global-em-fundo-branco-vetor.jpg");
     //??????????????????????????????????????

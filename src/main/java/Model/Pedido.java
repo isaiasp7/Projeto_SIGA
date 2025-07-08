@@ -14,20 +14,17 @@ import Model.Requisitante;
  */
 public class Pedido {
 
-    private String id;
+    private long id;
     private Requisitante requisitante;  // associação
     private Produto produto;            // associação
     private int quantidade;
 
     // Getters e Setters
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public Requisitante getRequisitante() {
         return requisitante;

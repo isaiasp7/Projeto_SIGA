@@ -4,25 +4,25 @@
  */
 package Model;
 
+import Utils.Utilitarios;
+
 /**
  *
  * @author Isaias
  */
 public class Produto {
-    private String id;
+    private long id = Utilitarios.gerar_id("produto");
     private String nome;
     private int quantDisponivel;
     private Fornecedor fornecedor;  // associação
 
     // Getters e Setters
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  
 
     public String getNome() {
         return nome;
