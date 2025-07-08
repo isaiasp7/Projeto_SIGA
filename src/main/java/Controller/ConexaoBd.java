@@ -1,3 +1,4 @@
+
 package Controller;
 
 import Model.Funcionario;
@@ -14,18 +15,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  *
  * @author Isaias
  */
+
 public abstract class ConexaoBd {
 
     private Connection conexao;
     private String url = "jdbc:MySQL://localhost:3306/projeto";
     private String user = "root";
     private String pass = "root12345";
-    Class<?> reflexion;
 
     public ConexaoBd() {
         try {
@@ -40,89 +42,99 @@ public abstract class ConexaoBd {
         }
     }
 
-    public boolean create(Object obj, String entidade) {
-        reflexion = obj.getClass();
-        StringBuilder sql = new StringBuilder("INSERT INTO ");
-        sql.append(entidade).append(" SET ");
+    public <T> boolean create(T obj, String tabela) {
+    Field[] fields = obj.getClass().getDeclaredFields();
+    String sql = new String();
+    StringJoiner colunas = new StringJoiner(", ");
+    StringJoiner valores = new StringJoiner(", ");
 
-        try {
-            Field[] fields = reflexion.getDeclaredFields();
-
-            for (int i = 0; i < fields.length; i++) {
-                Field field = fields[i];
-                field.setAccessible(true);
-
-                sql.append(field.getName()).append(" = ");//pega o nome do atributo
-
-                Object valor = field.get(obj);//pega o valor do atributo ^
-
-                if (valor instanceof String) {
-                    sql.append("'").append(valor).append("'");
-                } else {
-                    sql.append(valor);
-                }
-
-                if (i < fields.length - 1) {
-                    sql.append(", ");
-                }
-            }
-
-            System.out.println(sql.toString());
-            Statement exeSql = conexao.prepareStatement(sql.toString());
-            return true;
-        } catch (IllegalAccessException | SQLException e) {
-            System.out.println("Erro : " + e);
-
-            return false;
-        }
+    for (Field f : fields) {
+        colunas.add(f.getName());
+        valores.add("?");
     }
-
-    public <T> boolean update(String tipo, T obj, int id, String nomeCampoID) {
-        reflexion = obj.getClass();
-        HashMap<String, Integer> requisição_id = new HashMap<>();
-        StringBuilder sql = new StringBuilder();
-        sql.append("UPDATE " + tipo + " SET");
-        try {
-
-            Field[] fields = reflexion.getDeclaredFields();
-
-            for (int i = 0; i < fields.length; i++) {
-                Field field = fields[i];
-                field.setAccessible(true);
-
-                sql.append(field.getName()).append(" = ");
-
-                Object valor = field.get(obj);
-
-                if (valor instanceof String) {
-                    sql.append("'").append(valor).append("'");
-                } else {
-                    sql.append(valor);
-                }
-
-                if (i < fields.length - 1) {
-                    sql.append(", ");
-                }
-            }
-            sql.append("WHERE " + nomeCampoID + " = ?");
-            System.out.println(sql.toString());
-            PreparedStatement stmt = conexao.prepareStatement(sql.toString());
-            stmt.setInt(1, id);
-            int retorno = stmt.executeUpdate();//retorna as linhas atualizadas
-            System.out.println("===============================================");
-            System.out.println("Retorno do metodo de atualização : " + retorno);
-            return true;
-        } catch (IllegalAccessException | SQLException e) {
-            System.out.println("Erro : " + e);
-            
+        switch (tabela) {
+            case "Fornecedor":
+            case "Requisitante":
+            case "Pedido":
+            case "Produto":
+                         sql="INSERT INTO " + tabela + " (" + colunas + ") VALUES (" + valores + ")";
+                break;
+            default:
+                System.out.println("Tabela não existe");
         }
+
+    
+    try (PreparedStatement ps = conexao.prepareStatement(sql)) {
+        for (int i = 0; i < fields.length; i++) {
+            fields[i].setAccessible(true);
+            ps.setObject(i + 1, fields[i].get(obj)); // JDBC faz o escape
+        }
+        int linhas = ps.executeUpdate();
+        return linhas == 1;
+    } catch (Exception e) {
+        e.printStackTrace();
         return false;
     }
+}
 
-    public boolean delete(String tipo, String nomeCampoID, int id) {
-        String sql = "DELETE FROM " + tipo + " WHERE codigo = " + nomeCampoID;
-        try {
-            PreparedStatement stmt = conexao.prepareStatement(sql);
+
+    public <T> boolean update(String tabela, T obj, int id, String nomeCampoID) {
+        Field[] fields = obj.getClass().getDeclaredFields();
+    List<String> colunas = new ArrayList<>();
+     List<String> valores = new ArrayList<>();
+
+    for (Field f : fields) {
+        colunas.add(f.getName());
+        valores.add("?");
+    }
+        StringBuilder sql = new StringBuilder();
+         switch (tabela) {
+            case "Fornecedor":
+            case "Requisitante":
+            case "Pedido":
+            case "Produto":
+                        sql.append("UPDATE " + tabela + " SET ");
+                        for (int cont1 = 0; cont1 < colunas.size(); cont1++) {
+                           
+                                sql.append(colunas.get(cont1)).append("=").append(valores.get(cont1));//faz a linha coluna = ?,...                          
+                                if (cont1 < colunas.size() - 1) {
+        sql.append(", "); // adiciona vírgula só se não for o último
+    }
+                            
+                }
+                        sql.append(" WHERE "+nomeCampoID+" = "+id);
+                break;
+            default:
+                System.out.println("Tabela não existe");
+        }
+        
+         try( PreparedStatement ps = conexao.prepareStatement(sql.toString())) {
+               for (int i = 0; i < fields.length; i++) {//esse for é para substituir ? pelo valor
+            fields[i].setAccessible(true);
+            ps.setObject(i + 1, fields[i].get(obj)); // JDBC faz o escape
+        }
+             return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+             System.out.println("============================================");
+             System.out.println("Erro : "+e);
+        }
+         return false;
+       
+
+    }
+
+    public boolean delete(String tabela, String nomeCampoID, int id) {
+        StringBuilder sql = new StringBuilder();
+        List<String> tabelasValidas = List.of("Fornecedor", "Requisitante", "Pedido", "Produto");
+
+        if (tabelasValidas.contains(tabela)) {
+            sql.append("DELETE FROM " + tabela + " WHERE "+nomeCampoID+" =  ?");
+        } else {
+            throw new IllegalArgumentException("Tabela inválida!");
+        }                        
+        try (PreparedStatement ps = conexao.prepareStatement(sql.toString())){
+            ;
+            ps.setInt(1, id);
             System.out.println("===============================================");
             System.out.println("Dado removido do banco");
             return true;
@@ -136,10 +148,18 @@ public abstract class ConexaoBd {
 
     public <T> List<T> readAll(String tabela, MontadorReadAll<T> montador) {//<T> → indica que esse método é genérico, e List<T> é o que será retornado
         List<T> lista = new ArrayList<>();
-        String sql = "SELECT * FROM " + tabela;
+        List<String> tabelasValidas = List.of("Fornecedor", "Requisitante", "Pedido", "Produto");
+         String sql;
+        if (tabelasValidas.contains(tabela)) {
+            sql = "SELECT * FROM "+tabela ;
+        } else {
+            throw new IllegalArgumentException("Tabela inválida!");
+        }
+        
 
         try {
             PreparedStatement script = conexao.prepareStatement(sql);
+            script.setString(1, tabela);
             ResultSet rs = script.executeQuery();
 
             while (rs.next()) {
