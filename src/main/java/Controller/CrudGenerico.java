@@ -22,25 +22,9 @@ import java.util.StringJoiner;
  * @author Isaias
  */
 
-public abstract class ConexaoBd {
-
-    private Connection conexao;
-    private String url = "jdbc:MySQL://localhost:3306/projeto";
-    private String user = "root";
-    private String pass = "root12345";
-
-    public ConexaoBd() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conexao = DriverManager.getConnection(url, user, pass);
-            /*
-               PreparedStatement stmt = conexao.prepareStatement(script sql);
-            ResultSet rs = stmt.executeQuery();
-             */
-        } catch (Exception e) {
-            System.out.println("Erro ao conectar: " + e.getMessage());
-        }
-    }
+public abstract class CrudGenerico {
+    private Connection conexao = ConexaoSingleton.getInstancia().getConexao();
+    
 
     public <T> boolean create(T obj, String tabela) {
     Field[] fields = obj.getClass().getDeclaredFields();
@@ -60,7 +44,7 @@ public abstract class ConexaoBd {
                          sql="INSERT INTO " + tabela + " (" + colunas + ") VALUES (" + valores + ")";
                 break;
             default:
-                System.out.println("Tabela não existe");
+                throw new IllegalArgumentException("Tabela inválida!");
         }
 
     
@@ -102,10 +86,10 @@ public abstract class ConexaoBd {
     }
                             
                 }
-                        sql.append(" WHERE "+nomeCampoID+" = "+id);
+                        sql.append(" WHERE "+nomeCampoID+" = ?");
                 break;
             default:
-                System.out.println("Tabela não existe");
+                 throw new IllegalArgumentException("Tabela inválida!");
         }
         
          try( PreparedStatement ps = conexao.prepareStatement(sql.toString())) {
@@ -113,6 +97,7 @@ public abstract class ConexaoBd {
             fields[i].setAccessible(true);
             ps.setObject(i + 1, fields[i].get(obj)); // JDBC faz o escape
         }
+               ps.setInt(fields.length+1, id);
              return ps.executeUpdate() > 0;
         } catch (Exception e) {
              System.out.println("============================================");
@@ -159,7 +144,6 @@ public abstract class ConexaoBd {
 
         try {
             PreparedStatement script = conexao.prepareStatement(sql);
-            script.setString(1, tabela);
             ResultSet rs = script.executeQuery();
 
             while (rs.next()) {
@@ -175,6 +159,28 @@ public abstract class ConexaoBd {
 
         return lista;
     }
+   public <T> T searchID(List<T> lista, String nomeCampoId, long id) {
+    for (T item : lista) {
+        try {
+            Field campo = item.getClass().getDeclaredField(nomeCampoId);
+            campo.setAccessible(true);
+            Object valor = campo.get(item);
+
+            if (valor instanceof Long && ((Long) valor).longValue() == id) {
+                return item;
+            } else if (valor instanceof Integer && ((Integer) valor).longValue() == id) {
+                return item;
+            } else if (valor instanceof Long && valor.equals(id)) {
+                return item;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    return null;
+}
+
 
    
 

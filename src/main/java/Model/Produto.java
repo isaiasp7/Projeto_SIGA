@@ -14,7 +14,7 @@ public class Produto {
     private long id = Utilitarios.gerar_id("produto");
     private String nome;
     private int quantDisponivel;
-    private Fornecedor fornecedor;  // associação
+    private long id_fornecedor;  // associação
 
     // Getters e Setters
 
@@ -22,8 +22,11 @@ public class Produto {
         return id;
     }
 
-  
+    public void setId(long id) {
+        this.id = id;
+    }
 
+  
     public String getNome() {
         return nome;
     }
@@ -40,13 +43,22 @@ public class Produto {
         this.quantDisponivel = quantDisponivel;
     }
 
-    public Fornecedor getFornecedor() {
-        return fornecedor;
+    public long getId_fornecedor() {
+        return id_fornecedor;
+    }
+
+    public void setId_fornecedor(long id_fornecedor) {
+        this.id_fornecedor = id_fornecedor;
+    }
+    
+    /*public Fornecedor getFornecedor() {
+        requisita ao banco de acordo com o id e retorna o obj 
     }
 
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
-    }
-    
+    }*/
+
+   
 }
 

@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import Controller.ConexaoBd;
+import Controller.CrudGenerico;
 import Controller.Montador.MontadorEmpresa;
 import Controller.MontadorReadAll;
 import Model.Empresa;
@@ -18,10 +18,10 @@ import java.util.List;
  *
  * @author Isaias
  */
-public class EmpresaDAO extends ConexaoBd{
+public class EmpresaDAO extends CrudGenerico{
     
     public boolean createFornecedor(Fornecedor fornecedor){
-        return this.create(fornecedor, "Fornecedor");
+        return this.create(fornecedor, "empresa");
     }
    public List<Empresa> readFornecedor(String tabela){
        return this.readAll(tabela, new MontadorEmpresa());
@@ -34,13 +34,13 @@ public class EmpresaDAO extends ConexaoBd{
    }
   /*===============================================================================================*/
       public boolean createRequisitante(Requisitante fornecedor){
-        return this.create(fornecedor, "Requisitante");
+        return this.create(fornecedor, "empresa");
     }
    public List<Empresa> readRequisitante(String tabela){
        return this.readAll(tabela, new MontadorEmpresa());
    }
     public boolean updateRequisitante(String tipo, Requisitante obj, int id, String nomeCampoID) {
-        return this.update(tipo, obj, id, nomeCampoID) ;
+        return this.update("Empresa", obj, id, "id_empresa") ;
     }
    public boolean deleteRequisitante(String tipo, String nomeCampoID, int id){
        return this.delete(tipo, nomeCampoID, id);

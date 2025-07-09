@@ -1,7 +1,12 @@
 package Model;
 
 
+import DTO.ProdutoDTO;
 import Model.Requisitante;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,42 +19,47 @@ import Model.Requisitante;
  */
 public class Pedido {
 
-    private long id;
-    private Requisitante requisitante;  // associação
-    private Produto produto;            // associação
-    private int quantidade;
+    private long id_pedido;
+    private long id_requisitante;  // associação
+    private HashMap<Integer,ProdutoDTO> lista_pedido = new HashMap<>();// lista_pedido = id_produto= {nome, quantidade pedida}
+    private long id_funcionario;
+    
+    
+   
 
     // Getters e Setters
-
-    public long getId() {
-        return id;
-    }
-
-
-    public Requisitante getRequisitante() {
-        return requisitante;
-    }
-
-    public void setRequisitante(Requisitante requisitante) {
-        this.requisitante = requisitante;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
     
+    
+    public void setId_funcionario(long id_funcionario) {
+        this.id_funcionario = id_funcionario;
+    }
+ public long getId_funcionario() {
+        return id_funcionario;
+    }
+    public long getId_pedido() {
+        return id_pedido;
+    }
 
+    public void setId_pedido(long id_pedido) {
+        this.id_pedido = id_pedido;
+    }
+
+    public long getId_requisitante() {
+        return id_requisitante;
+    }
+
+    public void setId_requisitante(long id_requisitante) {
+        this.id_requisitante = id_requisitante;
+    }
+
+   public List<ProdutoDTO> getProduto_Pedido(){//retorna sem sem os id
+       List<ProdutoDTO> lista = new ArrayList<>();
+       for (ProdutoDTO value : lista_pedido.values()) {
+           lista.add(value);
+       }
+       return lista;
+   }
+
+  
 
 }

@@ -4,7 +4,7 @@
  */
 package Model;
 
-import Controller.ConexaoBd;
+import Controller.CrudGenerico;
 import Utils.Utilitarios;
 
 /**
