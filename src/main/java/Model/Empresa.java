@@ -4,6 +4,8 @@
  */
 package Model;
 
+import Utils.Utilitarios;
+
 /**
  *
  * @author Isaias
@@ -15,8 +17,8 @@ public class Empresa {
     private String nomeEmpresa;
     private String email;
 
-    public Empresa(long id, String tipo, String cnpj, String nomeEmpresa, String email) {
-        this.id = id;
+    public Empresa( String tipo, String cnpj, String nomeEmpresa, String email) {
+        this.id =Utilitarios.gerar_id("empresa");
         this.tipo = tipo;
         this.cnpj = cnpj;
         this.nomeEmpresa = nomeEmpresa;

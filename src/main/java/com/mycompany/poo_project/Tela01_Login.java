@@ -229,7 +229,7 @@ public class Tela01_Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Tela02_Login().setVisible(true);
+                new Tela01_Login().setVisible(true);
             }
         });
     }

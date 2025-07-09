@@ -11,11 +11,24 @@ import Utils.Utilitarios;
  * @author Isaias
  */
 public class Produto {
-    private long id = Utilitarios.gerar_id("produto");
+    private long id;
     private String nome;
     private int quantDisponivel;
     private long id_fornecedor;  // associação
 
+    public Produto(String nome, int quantDisponivel, long id_fornecedor) {
+        this.id = Utilitarios.gerar_id("produto");
+        this.nome = nome;
+        this.quantDisponivel = quantDisponivel;
+        this.id_fornecedor = id_fornecedor;
+    }
+
+    public Produto() {
+    }
+    
+
+    
+    
     // Getters e Setters
 
     public long getId() {

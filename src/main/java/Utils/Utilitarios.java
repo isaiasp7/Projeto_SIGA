@@ -17,7 +17,7 @@ public class Utilitarios {
                      case "pedido" ->
                              ThreadLocalRandom.current().nextLong(10000000, 99999999);//length =8
                      case "funcionario" ->    ThreadLocalRandom.current().nextLong(1000000, 9999999);//length =7
-                     case "requisitante" -> ThreadLocalRandom.current().nextLong(100000, 999999);//length = 6
+                     case "empresa" -> ThreadLocalRandom.current().nextLong(100000, 999999);//length = 6
                      default -> throw new IllegalArgumentException("Tipo de ID desconhecido: " + tipo);
                  };
 

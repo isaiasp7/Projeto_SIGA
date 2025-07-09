@@ -14,7 +14,7 @@ import Utils.Utilitarios;
 public class Fornecedor extends Empresa{
 
     public Fornecedor(String cnpj, String nomeEmpresa, String email) {
-        super(Utilitarios.gerar_id("fornecedor"),"Fornecedor", cnpj, nomeEmpresa, email);
+        super("Fornecedor", cnpj, nomeEmpresa, email);
         
     }
 

@@ -14,7 +14,7 @@ import Utils.Utilitarios;
 public class Requisitante extends Empresa{
     
     public Requisitante( String cnpj, String nomeEmpresa, String email) {
-        super(Utilitarios.gerar_id("requisitante"),"Requisitante", cnpj, nomeEmpresa, email);
+        super("Requisitante", cnpj, nomeEmpresa, email);
     }
    
     
