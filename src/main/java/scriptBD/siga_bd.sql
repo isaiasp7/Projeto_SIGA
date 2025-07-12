@@ -6,8 +6,10 @@ create table empresa (
     nome_empresa varchar(150) not null,
     tipo_empresa enum('requisitante', 'fornecedor') not null,
     email varchar(100),
-    CNPJ varchar(20) not null
+    CNPJ varchar(20) not null,
+    senha varchar(10)
 );
+
 
 
 create table produto (
@@ -27,6 +29,7 @@ create table funcionario (
     cargo varchar(100) not null,
     email varchar(100),
     id_empresa_fk int,
+	senha varchar(10),
      constraint fk_funcionario_empresa
 		foreign key(id_empresa_fk) references empresa(id_empresa)
          on delete set null
@@ -59,4 +62,39 @@ create table itensPedido (
 		foreign key (idPedido_fk) references pedido (id_pedido)
 		on delete cascade
 );
+
+INSERT INTO empresa VALUES
+(1, 'TechFornece Ltda', 'fornecedor', 'OrgTechForneceLtda241937@gmail.com', '12345678000101'),
+(2, 'Alimentos Bons S/A', 'fornecedor', 'OrgAlimentosBonsSA857104@gmail.com', '23456789000102'),
+(3, 'Construreq LTDA', 'requisitante', 'OrgConstrureqLTDA769311@gmail.com', '34567890000103'),
+(4, 'Oficina Requintada', 'requisitante', 'OrgOficinaRequintada322510@gmail.com', '45678900000104'),
+(5, 'ServFácil Forn', 'fornecedor', 'OrgServFácilForn617288@gmail.com', '56789000000105');
+
+INSERT INTO produto VALUES
+(1, 'Parafuso 12mm', 1, 500),
+(2, 'Cimento CP-II', 2, 300),
+(3, 'Furadeira Bosch', 5, 150),
+(4, 'Tinta Acrílica 18L', 1, 200),
+(5, 'Chave de Fenda', 5, 100);
+INSERT INTO funcionario VALUES
+(1, 'João Martins', 'Engenheiro Civil', 'EmpregJoãoMartins782041@gmail.com', 3),
+(2, 'Ana Clara', 'Compradora', 'EmpregAnaClara324507@gmail.com', 4),
+(3, 'Carlos Silva', 'Técnico de Obras', 'EmpregCarlosSilva915622@gmail.com', 3),
+(4, 'Maria Souza', 'Gerente de Suprimentos', 'EmpregMariaSouza431005@gmail.com', 4),
+(5, 'Pedro Lopes', 'Auxiliar de Compras', 'EmpregPedroLopes628390@gmail.com', 3);
+
+
+INSERT INTO pedido VALUES
+(1, 3, 1),
+(2, 4, 2),
+(3, 3, 5),
+(4, 4, 4),
+(5, 3, 3);
+INSERT INTO itensPedido VALUES
+(1, 1, 100),
+(1, 2, 50),
+(2, 3, 2),
+(3, 4, 5),
+(4, 5, 10);
+
 

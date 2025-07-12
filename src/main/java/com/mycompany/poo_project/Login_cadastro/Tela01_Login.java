@@ -2,13 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.poo_project;
+package com.mycompany.poo_project.Login_cadastro;
 
+import DAO.EmpresaDAO;
+import DAO.FuncionarioDAO;
+import com.mycompany.poo_project.Tela_Funcionario.Tela02_Sistema01;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.w3c.dom.css.RGBColor;
 
@@ -16,20 +20,21 @@ import org.w3c.dom.css.RGBColor;
  *
  * @author Isaias
  */
+
 public class Tela01_Login extends javax.swing.JFrame {
+
+    FuncionarioDAO funcDAO = new FuncionarioDAO();
+    EmpresaDAO empDAO = new EmpresaDAO();
 
     /**
      * Creates new form Tela01_Login
      */
-   public Tela01_Login() {
-    initComponents();
-    ImageIcon img = new ImageIcon("/imgs/20534509-conceito-de-ilustracao-de-entrega-global-em-fundo-branco-vetor.jpg");
-    //??????????????????????????????????????
+    public Tela01_Login() {
+        initComponents();
+        ImageIcon img = new ImageIcon("/imgs/20534509-conceito-de-ilustracao-de-entrega-global-em-fundo-branco-vetor.jpg");
+        //??????????????????????????????????????
 
-    
-    
-}
-
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,12 +48,11 @@ public class Tela01_Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         TextLogin = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonEntrar = new javax.swing.JButton();
         inputSenha = new javax.swing.JTextField();
         inputEmail = new javax.swing.JTextField();
         textSenha = new javax.swing.JLabel();
         textEmail = new javax.swing.JLabel();
-        imgTEste = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -61,6 +65,8 @@ public class Tela01_Login extends javax.swing.JFrame {
             .addGap(0, 298, Short.MAX_VALUE)
         );
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
         TextLogin.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         TextLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TextLogin.setText("Login");
@@ -72,7 +78,12 @@ public class Tela01_Login extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Entrar");
+        jButtonEntrar.setText("Entrar");
+        jButtonEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEntrarActionPerformed(evt);
+            }
+        });
 
         inputSenha.setForeground(new java.awt.Color(124, 124, 124));
         inputSenha.setText("Senha");
@@ -97,150 +108,189 @@ public class Tela01_Login extends javax.swing.JFrame {
             }
         });
 
-        imgTEste.setText("jLabel1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addComponent(TextLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(367, Short.MAX_VALUE)
+                .addContainerGap(419, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(35, 35, 35))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(imgTEste)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(inputEmail)
-                        .addComponent(inputSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54))
+                    .addComponent(textSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                    .addComponent(inputSenha))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(78, 78, 78)
-                    .addComponent(jButton2)
-                    .addContainerGap(355, Short.MAX_VALUE)))
+                    .addComponent(jButtonEntrar)
+                    .addContainerGap(400, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(22, 22, 22)
                 .addComponent(TextLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(textSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(imgTEste)))
+                .addGap(18, 18, 18)
+                .addComponent(textSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(22, 22, 22))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(249, Short.MAX_VALUE)
-                    .addComponent(jButton2)
+                    .addComponent(jButtonEntrar)
                     .addGap(22, 22, 22)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void getTelaCadastro(){
+       Tela01_cadastro cadastro = new Tela01_cadastro();
+            cadastro.setVisible(true);
+    }
+    private void getTelaFuncionario(){
+       Tela02_Sistema01 telafunc  =  new Tela02_Sistema01();
+        telafunc.setVisible(true);
+    }
+    private void getTela_Requisitante(){
+        //
+    }
+    private void Login() {
+        if (inputEmail.getText().contains("Empreg")) {
+            if (funcDAO.validacaoLogin(inputEmail.getText(), Integer.parseInt(inputSenha.getText()))) {//true/false para a vericação
+                System.out.println("É UM FUNCIONARIO");
+                this.getTelaFuncionario();
+            }
+        } else if (inputEmail.getText().contains("Org")) {
+            if (empDAO.validacaoLogin(inputEmail.getText(), Integer.parseInt(inputSenha.getText()))) {
+                System.out.println("É UMA EMPRESA");
+                
+            } 
 
+        }else {
+                    JOptionPane.showMessageDialog(null, 
+          "Campo de senha ou email incorreto","alerta", JOptionPane.ERROR_MESSAGE);
+
+            }
+
+        
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Tela02_cadastro cadastro = new Tela02_cadastro();
+        Tela01_cadastro cadastro = new Tela01_cadastro();
         cadastro.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void inputEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusGained
-       if (inputEmail.getText().equals("Email")) {
-        inputEmail.setText("");
-        inputEmail.setForeground(Color.BLACK);
-        textEmail.setText("Email");
-    }
+        if (inputEmail.getText().equals("Email")) {
+            inputEmail.setText("");
+            inputEmail.setForeground(Color.BLACK);
+            textEmail.setText("Email");
+        }
     }//GEN-LAST:event_inputEmailFocusGained
 
     private void inputEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusLost
         // TODO add your handling code here:
-           if (inputEmail.getText().isBlank()) {
-        inputEmail.setText("Email");
-        inputEmail.setForeground(new Color(124, 124, 124));
-        textEmail.setText("");
-    }
+        if (inputEmail.getText().isBlank()) {
+            inputEmail.setText("Email");
+            inputEmail.setForeground(new Color(124, 124, 124));
+            textEmail.setText("");
+        }
     }//GEN-LAST:event_inputEmailFocusLost
 
     private void inputSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputSenhaFocusGained
-         if (inputSenha.getText().equals("Senha")) {
-        inputSenha.setText("");
-        inputSenha.setForeground(Color.BLACK);
-        textSenha.setText("Senha");
-    }
+        if (inputSenha.getText().equals("Senha")) {
+            inputSenha.setText("");
+            inputSenha.setForeground(Color.BLACK);
+            textSenha.setText("Senha");
+        }
     }//GEN-LAST:event_inputSenhaFocusGained
 
     private void inputSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputSenhaFocusLost
         // TODO add your handling code here:
-           if (inputSenha.getText().isBlank()) {
-        inputSenha.setText("Senha");
-        inputSenha.setForeground(new Color(124, 124, 124));
-        textSenha.setText("");
-    }
+        if (inputSenha.getText().isBlank()) {
+            inputSenha.setText("Senha");
+            inputSenha.setForeground(new Color(124, 124, 124));
+            textSenha.setText("");
+        }
     }//GEN-LAST:event_inputSenhaFocusLost
 
+    private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
+
+        /*
+        System.out.println("senha = "+inputSenha.getText());
+        System.out.println("email = "+inputEmail.getText());*/
+            if ((!inputEmail.getText().isBlank()&& !inputEmail.getText().contains("email"))&& (!inputSenha.getText().isBlank()&&!inputSenha.getText().contains("Senha"))) {
+                //System.out.println("if");
+                this.Login();
+        }else {
+                    JOptionPane.showMessageDialog(null, "Preencha todos os campos","alerta"
+          , JOptionPane.ERROR_MESSAGE);
+                //System.out.println("else");
+                
+            }
+        
+    
+
+
+    }//GEN-LAST:event_jButtonEntrarActionPerformed
+
     /**
+     * 
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Tela01_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Tela01_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Tela01_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Tela01_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Tela01_Login().setVisible(true);
-            }
-        });
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(Tela01_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(Tela01_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(Tela01_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(Tela01_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
+
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new Tela01_Login().setVisible(true);
+        }
+    });
+
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TextLogin;
-    private javax.swing.JLabel imgTEste;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JTextField inputSenha;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonEntrar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel textEmail;
     private javax.swing.JLabel textSenha;

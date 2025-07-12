@@ -180,6 +180,11 @@ public abstract class CrudGenerico {
     }
     return null;
 }
+    /*public <T> T requestID(String id) {
+        
+    }*/
+   
+ 
 
 
    

@@ -4,12 +4,15 @@
  */
 package DAO;
 
+import Controller.ConexaoSingleton;
 import Controller.CrudGenerico;
 import Controller.Montador.MontadorEmpresa;
 import Controller.MontadorReadAll;
 import Model.Empresa;
 import Model.Fornecedor;
 import Model.Requisitante;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -19,6 +22,7 @@ import java.util.List;
  * @author Isaias
  */
 public class EmpresaDAO extends CrudGenerico{
+      private Connection conexao = ConexaoSingleton.getInstancia().getConexao();
     
     public boolean createFornecedor(Fornecedor fornecedor){
         return this.create(fornecedor, "empresa");
@@ -44,6 +48,24 @@ public class EmpresaDAO extends CrudGenerico{
     }
    public boolean deleteRequisitante(String tipo, String nomeCampoID, int id){
        return this.delete(tipo, nomeCampoID, id);
+   }
+   
+    public boolean validacaoLogin(String email, int senha){
+       String sql = "SELECT email,senha FROM empresa WHERE email=? AND senha=? ";
+        
+       try {
+            PreparedStatement script = this.conexao.prepareStatement(sql);
+            script.setString(1, email);
+            script.setInt(2,senha);
+            ResultSet rs = script.executeQuery();           
+             return rs.next();
+          
+        } catch (Exception e) {
+            System.out.println("ERRO: "+e);
+        }
+        return false;
+
+   
    }
  
  

@@ -24,5 +24,17 @@ public class Utilitarios {
             return id;
 
         }
+         
+          public static String gerar_email(String tipo,String nome){//verificar dentro do banco se o id ja existe
+                 String email = switch (tipo) {
+                     
+                     case "funcionario" ->  "Empreg"+nome+String.valueOf(ThreadLocalRandom.current().nextLong(100000, 999999))+"@gmail.com";
+                     case "empresa" -> "Org"+nome+String.valueOf(ThreadLocalRandom.current().nextLong(100000, 999999))+"@gmail.com";
+                     default -> throw new IllegalArgumentException("Tipo desconhecido: " + tipo);
+                 };
+
+            return email;
+
+        }
     
 }

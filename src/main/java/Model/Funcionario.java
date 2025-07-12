@@ -4,6 +4,7 @@
  */
 package Model;
 
+import DAO.EmpresaDAO;
 import Utils.Utilitarios;
 
 /**
@@ -71,6 +72,11 @@ public String getEmail() {
     public void setId_empresa_fornecedora(long id_empresa_fornecedora) {
         this.id_empresa_fornecedora = id_empresa_fornecedora;
     }
+    /*public Empresa getEmpresa(){
+        EmpresaDAO empDAO = new EmpresaDAO();
+        empDAO.
+        this.id_empresa_fornecedora
+    }*/
     
     
 }

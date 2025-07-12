@@ -14,7 +14,7 @@ import java.sql.DriverManager;
 public class ConexaoSingleton {
     private static ConexaoSingleton instancia;
     private Connection conexao;
-    private String url = "jdbc:MySQL://localhost:3306/projeto";
+    private String url = "jdbc:MySQL://localhost:3306/siga_bd";
     private String user = "root";
     private String pass = "root12345";
 
