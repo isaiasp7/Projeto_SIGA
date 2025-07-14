@@ -7,21 +7,23 @@ create table empresa (
     tipo_empresa enum('requisitante', 'fornecedor') not null,
     email varchar(100),
     CNPJ varchar(20) not null,
-    senha varchar(10)
+    senha varchar(10) not null
 );
 
 
 
-create table produto (
-	id_prod int primary key,
-    nome_prod varchar(100) not null,
-    id_fornecedor int,
-    quant_disponivel int not null,
-    
-    constraint fk_produto_empresa
-		foreign key (id_fornecedor) references empresa (id_empresa)
-        on delete set null
+CREATE TABLE produto (
+    id_prod INT PRIMARY KEY,
+    nome_prod VARCHAR(100) NOT NULL,
+    id_fornecedor_fk INT NOT NULL,
+    quant_disponivel INT NOT NULL,
+    preco INT NOT NULL,
+    CONSTRAINT fk_produto_empresa
+        FOREIGN KEY (id_fornecedor_fk)
+        REFERENCES empresa(id_empresa)
+        ON DELETE CASCADE
 );
+
 
 create table funcionario (
 	id_func int primary key,
@@ -39,6 +41,9 @@ create table pedido (
 	id_pedido int primary key,
     id_requisitante int not null,
     id_funcionario int not null,
+    data_pedido date not null,
+    status enum('Empacotando', 'Enviado','Entregue') not null,
+    total_pedido int not null,
     constraint fk_pedido_empresa
 		foreign key (id_requisitante) references empresa (id_empresa)
         on delete cascade,
@@ -48,6 +53,7 @@ create table pedido (
    
 	
 );
+
 
 create table itensPedido (
 	idPedido_fk int not null,

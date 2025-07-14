@@ -37,10 +37,10 @@ public abstract class CrudGenerico {
         valores.add("?");
     }
         switch (tabela) {
-            case "Fornecedor":
-            case "Requisitante":
-            case "Pedido":
-            case "Produto":
+            case "fornecedor":
+            case "requisitante":
+            case "pedido":
+            case "produto":
                          sql="INSERT INTO " + tabela + " (" + colunas + ") VALUES (" + valores + ")";
                 break;
             default:
@@ -73,10 +73,10 @@ public abstract class CrudGenerico {
     }
         StringBuilder sql = new StringBuilder();
          switch (tabela) {
-            case "Fornecedor":
-            case "Requisitante":
-            case "Pedido":
-            case "Produto":
+            case "fornecedor":
+            case "requisitante":
+            case "pedido":
+            case "produto":
                         sql.append("UPDATE " + tabela + " SET ");
                         for (int cont1 = 0; cont1 < colunas.size(); cont1++) {
                            
@@ -110,7 +110,7 @@ public abstract class CrudGenerico {
 
     public boolean delete(String tabela, String nomeCampoID, int id) {
         StringBuilder sql = new StringBuilder();
-        List<String> tabelasValidas = List.of("Fornecedor", "Requisitante", "Pedido", "Produto");
+        List<String> tabelasValidas = List.of("fornecedor", "requisitante", "pedido", "produto");
 
         if (tabelasValidas.contains(tabela)) {
             sql.append("DELETE FROM " + tabela + " WHERE "+nomeCampoID+" =  ?");
@@ -133,9 +133,10 @@ public abstract class CrudGenerico {
 
     public <T> List<T> readAll(String tabela, MontadorReadAll<T> montador) {//<T> → indica que esse método é genérico, e List<T> é o que será retornado
         List<T> lista = new ArrayList<>();
-        List<String> tabelasValidas = List.of("Fornecedor", "Requisitante", "Pedido", "Produto");
+        List<String> tabelasValidas = List.of("fornecedor", "requisitante", "pedido", "produto");
          String sql;
         if (tabelasValidas.contains(tabela)) {
+            System.out.println("tabela foi ");
             sql = "SELECT * FROM "+tabela ;
         } else {
             throw new IllegalArgumentException("Tabela inválida!");
@@ -145,9 +146,11 @@ public abstract class CrudGenerico {
         try {
             PreparedStatement script = conexao.prepareStatement(sql);
             ResultSet rs = script.executeQuery();
-
+            System.out.println("===========================");
+            System.out.println("requisição feita");
             while (rs.next()) {
                 T obj = montador.montar(rs);
+                
                 lista.add(obj);
             }
 

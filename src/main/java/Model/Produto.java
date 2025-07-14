@@ -22,6 +22,11 @@ public class Produto {
         this.quantDisponivel = quantDisponivel;
         this.id_fornecedor = id_fornecedor;
     }
+    public Produto(long id,String nome,long id_fornecedor){
+        this.id = id;
+        this.nome = nome;
+        this.id_fornecedor = id_fornecedor;
+    }
 
     public Produto() {
     }

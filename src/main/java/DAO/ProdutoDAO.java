@@ -29,6 +29,22 @@ public class ProdutoDAO extends CrudGenerico{
    public boolean deleteProduto(int id){
        return this.delete(this.nomeTabelaBd, "id_prod", id);
    }
+   public Produto searchID(List<Produto> lista, String id){
+       for (Produto produto : lista) {
+           if (String.valueOf(produto.getId()).contains(id)) {
+               return produto;
+           }
+       }
+       return null;
+   }
+   public Produto searchNome(List<Produto> lista, String nome){
+       for (Produto produto : lista) {
+           if (String.valueOf(produto.getId()).contains(nome)) {
+               return produto;
+           }
+       }
+       return null;
+   }
     
 
 }

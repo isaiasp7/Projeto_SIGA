@@ -22,7 +22,7 @@ public class MontadorProduto extends CrudGenerico implements MontadorReadAll<Pro
         e.setId(rs.getInt("id_prod"));
         e.setNome(rs.getString("nome_prod"));
         e.setQuantDisponivel(Integer.parseInt(rs.getString("quant_disponivel")));
-        e.setId_fornecedor(rs.getLong("id_fornecedor"));
+        e.setId_fornecedor(rs.getLong("id_fornecedor_fk"));
         return e;
     }
     
