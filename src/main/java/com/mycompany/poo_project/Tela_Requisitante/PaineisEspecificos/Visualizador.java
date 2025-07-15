@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos;
 
@@ -8,24 +8,23 @@ import DAO.ProdutoDAO;
 import Model.Produto;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Isaias
  */
-public class Visualizar extends JPanel {
+public class Visualizador extends javax.swing.JPanel {
+      ProdutoDAO produto = new ProdutoDAO();
+    List<Produto> lista = new ArrayList<>();
 
-  
     /**
-     * Creates new form visualizar
+     * Creates new form Visualizador1
      */
-    public Visualizar() {
+    public Visualizador() {
         initComponents();
-        //renderizandoDados();
+        this.renderizandoDados();
     }
 
     /**
@@ -42,8 +41,7 @@ public class Visualizar extends JPanel {
         jInputSearch = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(new java.awt.Dimension(848, 659));
+        setPreferredSize(new java.awt.Dimension(872, 659));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,15 +76,15 @@ public class Visualizar extends JPanel {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 382, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 406, Short.MAX_VALUE)
                 .addComponent(jInputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
@@ -98,35 +96,45 @@ public class Visualizar extends JPanel {
                     .addComponent(jButton1)
                     .addComponent(jInputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
+
+        public void renderizandoDados() {
+        long id;
+        String nome;
+        long id_f;
+        int quant;
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+        lista = produto.readProduto();
+        for (Produto prod1 : lista) {
+            id = prod1.getId();
+            nome = prod1.getNome();
+            id_f = prod1.getId_fornecedor();
+            quant = prod1.getQuantDisponivel();
+            model.addRow(new Object[]{id, nome, id_f, quant});
+
+        }
+    }
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+
+        //JOptionPane.s
+    }//GEN-LAST:event_jTable1MouseClicked
 
     private void jInputSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInputSearchActionPerformed
         // TODO add your handling code here:
 
-
     }//GEN-LAST:event_jInputSearchActionPerformed
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-      
-       
-        
-
-        
-        //JOptionPane.s
-    }//GEN-LAST:event_jTable1MouseClicked
 
     private void jInputSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jInputSearchKeyReleased
         // TODO add your handling code here:
-          ProdutoDAO prod = new ProdutoDAO();
-           DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        ProdutoDAO prod = new ProdutoDAO();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String pesquisa = jInputSearch.getText();
-          long id;
+        long id;
         String nome;
         long id_f;
         int quant;
@@ -134,21 +142,21 @@ public class Visualizar extends JPanel {
             model.setRowCount(0);
             this.renderizandoDados();
         }else{
-        model.setRowCount(0);
-        if (pesquisa.matches("[1-9][0-9]*")) {
-            id = prod.searchID(lista, pesquisa).getId();
-            nome = prod.searchID(lista, pesquisa).getNome();
-            id_f = prod.searchID(lista, pesquisa).getId_fornecedor();
-            quant = prod.searchID(lista, pesquisa).getQuantDisponivel();
-            model.addRow(new Object[]{id, nome, id_f, quant});
+            model.setRowCount(0);
+            if (pesquisa.matches("[1-9][0-9]*")) {
+                id = prod.searchID(lista, pesquisa).getId();
+                nome = prod.searchID(lista, pesquisa).getNome();
+                id_f = prod.searchID(lista, pesquisa).getId_fornecedor();
+                quant = prod.searchID(lista, pesquisa).getQuantDisponivel();
+                model.addRow(new Object[]{id, nome, id_f, quant});
 
-        } else if(pesquisa.matches("[A-Za-z]")) {
-            prod.searchNome(lista, pesquisa);
-        }else{
-            JOptionPane.showMessageDialog(null, "Nenhum dado com esse identificador");
-            jInputSearch.setText("");
-             this.renderizandoDados();
-        }
+            } else if(pesquisa.matches("[A-Za-z]")) {
+                prod.searchNome(lista, pesquisa);
+            }else{
+                JOptionPane.showMessageDialog(null, "Nenhum dado com esse identificador");
+                jInputSearch.setText("");
+                this.renderizandoDados();
+            }
         }
     }//GEN-LAST:event_jInputSearchKeyReleased
 
@@ -157,52 +165,17 @@ public class Visualizar extends JPanel {
         //Carrinho.setLista( jTable1.getSelectedRow().);
         int linha = jTable1.getSelectedRow();
         Produto p = new Produto(
-                Long.parseLong(jTable1.getValueAt(linha, 0).toString()),
-                jTable1.getValueAt(linha, 1).toString(),
-                Long.parseLong(jTable1.getValueAt(linha, 2).toString())
-            
+            Long.parseLong(jTable1.getValueAt(linha, 0).toString()),
+            jTable1.getValueAt(linha, 1).toString(),
+            Long.parseLong(jTable1.getValueAt(linha, 2).toString())
+
         );
-       
-         Carrinho.listaCarrinho.add(p);
-         System.out.println("");
+        
+
+        Carrinho car = new Carrinho();
+        car.setListaCarrinho(p);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Visualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Visualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Visualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Visualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Visualizar().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

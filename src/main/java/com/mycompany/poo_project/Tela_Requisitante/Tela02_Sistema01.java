@@ -4,8 +4,11 @@
  */
 package com.mycompany.poo_project.Tela_Requisitante;
 
-import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Visualizador1;
+import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Carrinho;
+import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Situacao;
+import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Visualizador;
 import java.awt.BorderLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,8 +22,8 @@ public class Tela02_Sistema01 extends javax.swing.JFrame {
     public Tela02_Sistema01() {
         initComponents();
         
-        Visualizador1 tela1 = new Visualizador1();
-        tela1.setSize(848,659);
+        Visualizador tela1 = new Visualizador();
+        tela1.setSize(872, 557);
         tela1.setLocation(0, 0);
         
         content.removeAll();
@@ -38,25 +41,35 @@ public class Tela02_Sistema01 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        PCarrinho = new javax.swing.JButton();
+        PProdutos = new javax.swing.JButton();
+        PSituacao = new javax.swing.JButton();
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton2.setText("Carrinho");
-
-        jButton4.setText("Produtos");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        PCarrinho.setText("Carrinho");
+        PCarrinho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                PCarrinhoActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Situação");
+        PProdutos.setText("Produtos");
+        PProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PProdutosActionPerformed(evt);
+            }
+        });
+
+        PSituacao.setText("Situação");
+        PSituacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PSituacaoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -65,33 +78,24 @@ public class Tela02_Sistema01 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                    .addComponent(PProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PCarrinho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PSituacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(78, 78, 78)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(98, 98, 98)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
         );
 
-        javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
-        content.setLayout(contentLayout);
-        contentLayout.setHorizontalGroup(
-            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 848, Short.MAX_VALUE)
-        );
-        contentLayout.setVerticalGroup(
-            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        content.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,7 +104,7 @@ public class Tela02_Sistema01 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -108,16 +112,44 @@ public class Tela02_Sistema01 extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        content.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void PSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PSituacaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        Situacao s = new  Situacao();
+       this.renderizaJPanel(s);
+    }//GEN-LAST:event_PSituacaoActionPerformed
+
+    private void PProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PProdutosActionPerformed
+        // TODO add your handling code here:
+        Visualizador v = new Visualizador();
+        this.renderizaJPanel(v);
+    }//GEN-LAST:event_PProdutosActionPerformed
+
+    private void PCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PCarrinhoActionPerformed
+        // TODO add your handling code here:
+        Carrinho c = new Carrinho();
+        this.renderizaJPanel(c);
+    }//GEN-LAST:event_PCarrinhoActionPerformed
+    
+    private void renderizaJPanel(JPanel p){
+       p.setSize(872, 557);        // Define o tamanho do painel novo
+       p.setLocation(0, 0);        // Define a posição inicial
+
+       content.removeAll();        // Remove o conteúdo anterior
+       content.add(p, BorderLayout.CENTER); // Adiciona o novo painel
+
+       content.revalidate();       // REORGANIZA os componentes com base no layout
+       content.repaint();          //️ REDESENHA a interface com os componentes atualizados
+   }
+
 
     /**
      * @param args the command line arguments
@@ -155,10 +187,10 @@ public class Tela02_Sistema01 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton PCarrinho;
+    private javax.swing.JButton PProdutos;
+    private javax.swing.JButton PSituacao;
     private javax.swing.JPanel content;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
