@@ -9,6 +9,8 @@ import Model.Produto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +27,16 @@ public class Visualizador extends javax.swing.JPanel {
     public Visualizador() {
         initComponents();
         this.renderizandoDados();
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // Aplica o centralizador a todas as colunas
+        for (int i = 0; i < jTable1.getColumnCount(); i++) {
+            jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer();
+headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+
     }
 
     /**
@@ -39,7 +51,7 @@ public class Visualizador extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jInputSearch = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        AdicionarCar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(872, 659));
 
@@ -51,6 +63,9 @@ public class Visualizador extends javax.swing.JPanel {
                 "ID", "Nome", "ID Fornecedor"
             }
         ));
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable1.setDoubleBuffered(true);
+        jTable1.setRequestFocusEnabled(false);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -69,10 +84,10 @@ public class Visualizador extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Adicionar ao carrinho");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        AdicionarCar.setText("Adicionar ao carrinho");
+        AdicionarCar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                AdicionarCarActionPerformed(evt);
             }
         });
 
@@ -83,7 +98,7 @@ public class Visualizador extends javax.swing.JPanel {
             .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(jButton1)
+                .addComponent(AdicionarCar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 406, Short.MAX_VALUE)
                 .addComponent(jInputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
@@ -93,7 +108,7 @@ public class Visualizador extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(AdicionarCar)
                     .addComponent(jInputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
@@ -101,7 +116,7 @@ public class Visualizador extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-        public void renderizandoDados() {
+        private void renderizandoDados() {
         long id;
         String nome;
         long id_f;
@@ -114,7 +129,7 @@ public class Visualizador extends javax.swing.JPanel {
             nome = prod1.getNome();
             id_f = prod1.getId_fornecedor();
             quant = prod1.getQuantDisponivel();
-            model.addRow(new Object[]{id, nome, id_f, quant});
+            model.addRow(new Object[]{id, nome, id_f});
 
         }
     }
@@ -160,7 +175,7 @@ public class Visualizador extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jInputSearchKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void AdicionarCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarCarActionPerformed
         // TODO add your handling code here:
         //Carrinho.setLista( jTable1.getSelectedRow().);
         int linha = jTable1.getSelectedRow();
@@ -173,12 +188,13 @@ public class Visualizador extends javax.swing.JPanel {
         
 
         Carrinho car = new Carrinho();
-        car.setListaCarrinho(p);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        car.setListaID(p.getId());
+        System.out.println("");
+    }//GEN-LAST:event_AdicionarCarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton AdicionarCar;
     private javax.swing.JTextField jInputSearch;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

@@ -15,9 +15,12 @@ public class Produto {
     private String nome;
     private int quantDisponivel;
     private long id_fornecedor;  // associação
-
-    public Produto(String nome, int quantDisponivel, long id_fornecedor) {
+    private double valor;
+    
+    public Produto() {}
+    public Produto(String nome, int quantDisponivel, long id_fornecedor, double valor) {
         this.id = Utilitarios.gerar_id("produto");
+        this.valor = valor;
         this.nome = nome;
         this.quantDisponivel = quantDisponivel;
         this.id_fornecedor = id_fornecedor;
@@ -28,8 +31,7 @@ public class Produto {
         this.id_fornecedor = id_fornecedor;
     }
 
-    public Produto() {
-    }
+    
     
 
     
@@ -43,6 +45,15 @@ public class Produto {
     public void setId(long id) {
         this.id = id;
     }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+    
 
   
     public String getNome() {

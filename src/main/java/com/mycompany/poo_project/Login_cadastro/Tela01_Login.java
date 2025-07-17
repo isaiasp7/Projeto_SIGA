@@ -253,7 +253,7 @@ public class Tela01_Login extends javax.swing.JFrame {
         //
     }
 
-    private void Login() {
+    private void Login() {  
         if (inputEmail.getText().contains("Empreg")) {
             if (funcDAO.validacaoLogin(inputEmail.getText(), Integer.parseInt(inputSenha.getText()))) {//true/false para a vericação
                 System.out.println("É UM FUNCIONARIO");
@@ -262,6 +262,8 @@ public class Tela01_Login extends javax.swing.JFrame {
         } else if (inputEmail.getText().contains("Org")) {
             if (empDAO.validacaoLogin(inputEmail.getText(), Integer.parseInt(inputSenha.getText()))) {
                 System.out.println("É UMA EMPRESA");
+                
+                //this.getTelaRequisitante;
 
             }
 

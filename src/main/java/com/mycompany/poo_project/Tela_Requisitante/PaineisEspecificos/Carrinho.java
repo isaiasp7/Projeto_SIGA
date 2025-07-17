@@ -4,9 +4,21 @@
  */
 package com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos;
 
+import DAO.PedidoDAO;
+import DAO.ProdutoDAO;
+import DAO.itensPedidoDAO;
+import DTO.ProdutoDTO;
+import Login.RequisitanteLogin;
+import Model.Pedido;
 import Model.Produto;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,35 +26,99 @@ import javax.swing.table.DefaultTableModel;
  * @author Isaias
  */
 public class Carrinho extends javax.swing.JPanel {
-    public static List<Produto> listaCarrinho = new ArrayList<>();
+
+    private ProdutoDAO prod = new ProdutoDAO();
+    private Integer quantidade;//usado para calcular os valores de cada produto
+    public static List<Long> ids = new ArrayList<>();//public, pois é usado dentro de Visualização
+    private List<Produto> listaCarrinho = new ArrayList<>();
 
     /**
      * Creates new form Carrinho1
      */
     public Carrinho() {
+
         initComponents();
         this.renderizandoDados();
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // Aplica o centralizador a todas as colunas
+        for (int i = 0; i < jTable2.getColumnCount(); i++) {
+            jTable2.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) jTable2.getTableHeader().getDefaultRenderer();
+        headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+
     }
 
-    public static void setListaCarrinho(Produto p) {
-        Carrinho.listaCarrinho.add(p);
+    public void setListaCarrinho(Produto p) {
+        this.listaCarrinho.add(p);
     }
-   
-    public void renderizandoDados() {
-        long id;
-        String nome;
-        long id_f;
-        int quant;
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        for (Produto prod1 : listaCarrinho) {
-            id = prod1.getId();
-            nome = prod1.getNome();
-            id_f = prod1.getId_fornecedor();
-            quant = prod1.getQuantDisponivel();
-            model.addRow(new Object[]{id, nome, id_f, quant});
+
+    public static void setListaID(long id) {
+        ids.add(id);
+    }
+
+    private void renderizandoDados() {
+
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        for (long l : ids) {
+            Produto p = prod.requestID(l);
+            this.setListaCarrinho(p);
+            model.addRow(new Object[]{p.getId(), p.getNome(), p.getId_fornecedor(), p.getQuantDisponivel(), 0, p.getValor()});
+            System.out.println("");
+        }
+
+    }
+
+    /*private void renderizandoDados(List<Produto> prod) {
+        for (Produto p : prod) {
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            model.addRow(new Object[]{p.getId(), p.getNome(), p.getId_fornecedor(), p.getQuantDisponivel(), 0, p.getValor()});
+            System.out.println("");
 
         }
+
     }
+
+    private void renderizandoDados(Produto p) {//usado para mudar o valor do pedido
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.addRow(new Object[]{p.getId(), p.getNome(), p.getId_fornecedor(), p.getQuantDisponivel(), 0, p.getValor()});
+        System.out.println("");
+
+    }*/
+
+ private boolean atualizandoLinha = false;
+
+private void reescreveValores() {
+    jTable2.getModel().addTableModelListener(e -> {
+        if (e.getType() == TableModelEvent.UPDATE && !atualizandoLinha) {
+            atualizandoLinha = true; // evita recursão infinita
+
+            int row = e.getFirstRow();
+            int totalColunas = jTable2.getColumnCount();
+            Object[] linhaCompleta = new Object[totalColunas];
+
+            for (int i = 0; i < totalColunas; i++) {
+                linhaCompleta[i] = jTable2.getValueAt(row, i);
+            }
+
+            Number quantDisponivel = (Number) linhaCompleta[3];
+            System.out.println("VAlor total = "+quantDisponivel);
+            Number quantDesejada   = (Number) linhaCompleta[linhaCompleta.length - 2];
+            System.out.println("VAlor desejado = "+quantDesejada);
+            linhaCompleta[3] = quantDisponivel.intValue() - quantDesejada.intValue();
+            Number novoValor =  (Number)linhaCompleta[linhaCompleta.length-1];
+            linhaCompleta[linhaCompleta.length - 1] =novoValor.intValue()*quantDesejada.intValue();
+            for (int i = 0; i < totalColunas; i++) {
+                jTable2.setValueAt(linhaCompleta[i], row, i);
+            }
+
+            atualizandoLinha = false; // libera novamente
+        }
+    });
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,65 +129,144 @@ public class Carrinho extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jInputSearch = new javax.swing.JTextField();
 
         setMinimumSize(new java.awt.Dimension(872, 557));
         setPreferredSize(new java.awt.Dimension(848, 659));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nome", "ID Fornecedor"
+                "ID", "Nome", "ID Fornecedor", "Quantidade Disponivel", "Quantidade Desejada", "Valor"
             }
-        ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Long.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jTable2.setRowSelectionAllowed(false);
+        jTable2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTable2FocusLost(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
 
-        jLabel1.setText("carrinho");
+        jButton1.setText("Fazer Pedido");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jInputSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jInputSearchKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
+                .addGap(298, 298, 298)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(374, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(289, 289, 289))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(135, 135, 135))))
+                .addComponent(jInputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jLabel1)
-                .addGap(41, 41, 41)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(jInputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(jButton1)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void jTable2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable2FocusLost
         // TODO add your handling code here:
+        this.reescreveValores();
 
-        //JOptionPane.s
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_jTable2FocusLost
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        PedidoDAO pediDAO = new PedidoDAO();
+        HashMap<Long,ProdutoDTO> lista_pedido = new HashMap<>();
+        for (Produto p : listaCarrinho) {
+            lista_pedido.put(p.getId(), new ProdutoDTO(p));
+        }
+        Pedido p = new Pedido(RequisitanteLogin.getId(),lista_pedido);
+        
+        
+        //itensPedidoDAO itensp = new itensPedidoDAO();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jInputSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jInputSearchKeyReleased
+        // TODO add your handling code here:
+        ProdutoDAO prod = new ProdutoDAO();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        String pesquisa = jInputSearch.getText();
+        long id;
+        String nome;
+        long id_f;
+        int quant;
+        if (pesquisa.isBlank()) {
+            model.setRowCount(0);
+            this.renderizandoDados();
+        }else{
+            model.setRowCount(0);
+            if (pesquisa.matches("[1-9][0-9]*")) {
+                id = prod.searchID(listaCarrinho, pesquisa).getId();
+                nome = prod.searchID(listaCarrinho, pesquisa).getNome();
+                id_f = prod.searchID(listaCarrinho, pesquisa).getId_fornecedor();
+                quant = prod.searchID(listaCarrinho, pesquisa).getQuantDisponivel();
+                model.addRow(new Object[]{id, nome, id_f, quant});
+
+            } else if(pesquisa.matches("[A-Za-z]")) {
+                prod.searchNome(listaCarrinho, pesquisa);
+            }else{
+                JOptionPane.showMessageDialog(null, "Nenhum dado com esse identificador");
+                jInputSearch.setText("");
+                this.renderizandoDados();
+            }
+        }
+    }//GEN-LAST:event_jInputSearchKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField jInputSearch;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

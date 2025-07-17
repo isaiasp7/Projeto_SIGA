@@ -3,6 +3,7 @@ package Model;
 
 import DTO.ProdutoDTO;
 import Model.Requisitante;
+import static Model.StatusPedido.PENDENTE;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,14 +22,25 @@ public class Pedido {
 
     private long id_pedido;
     private long id_requisitante;  // associação
-    private HashMap<Integer,ProdutoDTO> lista_pedido = new HashMap<>();// lista_pedido = id_produto= {nome, quantidade pedida}
+    private HashMap<Long,ProdutoDTO> lista_pedido = new HashMap<>();// lista_pedido = id_produto= {nome, quantidade pedida}
     private long id_funcionario;
+    private StatusPedido status;
 
-    public Pedido(long id_pedido, long id_requisitante, long id_funcionario) {
-        this.id_pedido = id_pedido;
+    public Pedido( long id_requisitante) {
+        this.id_pedido = Utils.Utilitarios.gerar_id("pedido");
         this.id_requisitante = id_requisitante;
-        this.id_funcionario = id_funcionario;
+        this.status = PENDENTE;
     }
+
+    public Pedido(long id_requisitante, HashMap<Long,ProdutoDTO> lista_pedido) {
+        this.id_pedido = Utils.Utilitarios.gerar_id("pedido");
+        this.id_requisitante = id_requisitante;
+        this.lista_pedido = lista_pedido;
+        this.status = PENDENTE;
+
+    }
+    
+    
 
     public Pedido() {
     }

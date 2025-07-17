@@ -20,6 +20,7 @@ public class Utilitarios {
                      case "empresa" -> ThreadLocalRandom.current().nextLong(100000, 999999);//length = 6
                      default -> throw new IllegalArgumentException("Tipo de ID desconhecido: " + tipo);
                  };
+                 //verificar se o id gerado já existe. se for o caso, gerar outro
 
             return id;
 

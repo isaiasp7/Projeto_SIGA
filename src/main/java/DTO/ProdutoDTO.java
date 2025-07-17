@@ -4,6 +4,8 @@
  */
 package DTO;
 
+import Model.Produto;
+
 /**
  *
  * @author Isaias
@@ -11,6 +13,13 @@ package DTO;
 public class ProdutoDTO {
       private String nome;
     private int quantDisponivel;
+
+    public  ProdutoDTO(Produto p) {
+        this.nome = p.getNome();
+        this.quantDisponivel = p.getQuantDisponivel();
+    }
+    
+    
 
     public String getNome() {
         return nome;

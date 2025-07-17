@@ -17,12 +17,13 @@ CREATE TABLE produto (
     nome_prod VARCHAR(100) NOT NULL,
     id_fornecedor_fk INT NOT NULL,
     quant_disponivel INT NOT NULL,
-    preco INT NOT NULL,
+   preco DOUBLE NOT NULL,
     CONSTRAINT fk_produto_empresa
         FOREIGN KEY (id_fornecedor_fk)
         REFERENCES empresa(id_empresa)
         ON DELETE CASCADE
 );
+
 
 
 create table funcionario (
@@ -70,37 +71,37 @@ create table itensPedido (
 );
 
 INSERT INTO empresa VALUES
-(1, 'TechFornece Ltda', 'fornecedor', 'OrgTechForneceLtda241937@gmail.com', '12345678000101'),
-(2, 'Alimentos Bons S/A', 'fornecedor', 'OrgAlimentosBonsSA857104@gmail.com', '23456789000102'),
-(3, 'Construreq LTDA', 'requisitante', 'OrgConstrureqLTDA769311@gmail.com', '34567890000103'),
-(4, 'Oficina Requintada', 'requisitante', 'OrgOficinaRequintada322510@gmail.com', '45678900000104'),
-(5, 'ServFácil Forn', 'fornecedor', 'OrgServFácilForn617288@gmail.com', '56789000000105');
-
+(1, 'Alpha Supplies', 'fornecedor', 'contato@alpha.com', '12.345.678/0001-11', 'alpha123'),
+(2, 'Beta Logistics', 'requisitante', 'logistica@beta.com', '98.765.432/0001-99', 'beta321'),
+(3, 'Gama Tools', 'fornecedor', 'vendas@gama.com', '11.222.333/0001-00', 'gama456'),
+(4, 'Delta Tech', 'requisitante', 'ti@delta.com', '44.555.666/0001-22', 'delta789'),
+(5, 'Epsilon Parts', 'fornecedor', 'suporte@epsilon.com', '77.888.999/0001-33', 'eps12345');
 INSERT INTO produto VALUES
-(1, 'Parafuso 12mm', 1, 500),
-(2, 'Cimento CP-II', 2, 300),
-(3, 'Furadeira Bosch', 5, 150),
-(4, 'Tinta Acrílica 18L', 1, 200),
-(5, 'Chave de Fenda', 5, 100);
+(101, 'Teclado USB', 1, 150, 120),
+(102, 'Mouse Óptico', 3, 200, 60),
+(103, 'Monitor 24"', 1, 80, 800),
+(104, 'Fonte ATX 500W', 5, 120, 230),
+(105, 'HD SSD 240GB', 3, 95, 290);
 INSERT INTO funcionario VALUES
-(1, 'João Martins', 'Engenheiro Civil', 'EmpregJoãoMartins782041@gmail.com', 3),
-(2, 'Ana Clara', 'Compradora', 'EmpregAnaClara324507@gmail.com', 4),
-(3, 'Carlos Silva', 'Técnico de Obras', 'EmpregCarlosSilva915622@gmail.com', 3),
-(4, 'Maria Souza', 'Gerente de Suprimentos', 'EmpregMariaSouza431005@gmail.com', 4),
-(5, 'Pedro Lopes', 'Auxiliar de Compras', 'EmpregPedroLopes628390@gmail.com', 3);
-
-
+(201, 'Lucas Mendes', 'Almoxarife', 'lucas@beta.com', 2, 'lucas123'),
+(202, 'Ana Souza', 'TI', 'ana@delta.com', 4, 'ana456'),
+(203, 'Marcos Lima', 'Compras', 'marcos@beta.com', 2, 'marc789'),
+(204, 'Patrícia Silva', 'Gestão', 'patricia@delta.com', 4, 'patr123'),
+(205, 'Fernanda Dias', 'Recebimento', 'fernanda@beta.com', 2, 'fern000');
 INSERT INTO pedido VALUES
-(1, 3, 1),
-(2, 4, 2),
-(3, 3, 5),
-(4, 4, 4),
-(5, 3, 3);
+(301, 2, 201, '2025-07-01', 'Empacotando', 500),
+(302, 4, 202, '2025-07-03', 'Enviado', 980),
+(303, 2, 203, '2025-07-04', 'Entregue', 180),
+(304, 4, 204, '2025-07-05', 'Enviado', 370),
+(305, 2, 205, '2025-07-06', 'Empacotando', 240);
 INSERT INTO itensPedido VALUES
-(1, 1, 100),
-(1, 2, 50),
-(2, 3, 2),
-(3, 4, 5),
-(4, 5, 10);
+(301, 101, 2),
+(301, 102, 5),
+(302, 103, 1),
+(303, 105, 2),
+(304, 104, 1);
+
+
+
 
 
