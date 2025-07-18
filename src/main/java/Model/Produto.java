@@ -11,21 +11,21 @@ import Utils.Utilitarios;
  * @author Isaias
  */
 public class Produto {
-    private long id;
+    private Integer id;
     private String nome;
     private int quantDisponivel;
-    private long id_fornecedor;  // associação
+    private Integer id_fornecedor;  // associação
     private double valor;
     
     public Produto() {}
-    public Produto(String nome, int quantDisponivel, long id_fornecedor, double valor) {
+    public Produto(String nome, int quantDisponivel, Integer id_fornecedor, double valor) {
         this.id = Utilitarios.gerar_id("produto");
         this.valor = valor;
         this.nome = nome;
         this.quantDisponivel = quantDisponivel;
         this.id_fornecedor = id_fornecedor;
     }
-    public Produto(long id,String nome,long id_fornecedor){
+    public Produto(Integer id,String nome,Integer id_fornecedor){
         this.id = id;
         this.nome = nome;
         this.id_fornecedor = id_fornecedor;
@@ -38,11 +38,11 @@ public class Produto {
     
     // Getters e Setters
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -72,11 +72,11 @@ public class Produto {
         this.quantDisponivel = quantDisponivel;
     }
 
-    public long getId_fornecedor() {
+    public Integer getId_fornecedor() {
         return id_fornecedor;
     }
 
-    public void setId_fornecedor(long id_fornecedor) {
+    public void setId_fornecedor(Integer id_fornecedor) {
         this.id_fornecedor = id_fornecedor;
     }
     

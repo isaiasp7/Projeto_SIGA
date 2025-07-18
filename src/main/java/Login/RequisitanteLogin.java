@@ -9,23 +9,23 @@ package Login;
  * @author Isaias
  */
 public class RequisitanteLogin {
-    private static long id;
+    private static Integer id;
     private static String nome;
     private static String email;
-    private static long senha;
+    private static Integer senha;
 
-    public RequisitanteLogin(long id, String nome, String email, long senha) {
+    public RequisitanteLogin(Integer id, String nome, String email, Integer senha) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
     }
 
-    public static long getId() {
+    public static Integer getId() {
         return id;
     }
 
-    public  void setId(long id) {
+    public  void setId(Integer id) {
         this.id = id;
     }
 
@@ -45,11 +45,11 @@ public class RequisitanteLogin {
         this.email = email;
     }
 
-    public long getSenha() {
+    public Integer getSenha() {
         return senha;
     }
 
-    public void setSenha(long senha) {
+    public void setSenha(Integer senha) {
         this.senha = senha;
     }
     

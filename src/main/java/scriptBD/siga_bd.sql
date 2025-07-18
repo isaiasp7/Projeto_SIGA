@@ -41,10 +41,10 @@ create table funcionario (
 create table pedido (
 	id_pedido int primary key,
     id_requisitante int not null,
-    id_funcionario int not null,
+    id_funcionario int,
     data_pedido date not null,
-    status enum('Empacotando', 'Enviado','Entregue') not null,
-    total_pedido int not null,
+ status enum('Pendente','Recusado','Empacotando', 'Enviado','Entregue') not null,
+   total_pedido decimal(7,2) not null,
     constraint fk_pedido_empresa
 		foreign key (id_requisitante) references empresa (id_empresa)
         on delete cascade,
@@ -54,7 +54,6 @@ create table pedido (
    
 	
 );
-
 
 create table itensPedido (
 	idPedido_fk int not null,
@@ -88,12 +87,14 @@ INSERT INTO funcionario VALUES
 (203, 'Marcos Lima', 'Compras', 'marcos@beta.com', 2, 'marc789'),
 (204, 'Patrícia Silva', 'Gestão', 'patricia@delta.com', 4, 'patr123'),
 (205, 'Fernanda Dias', 'Recebimento', 'fernanda@beta.com', 2, 'fern000');
-INSERT INTO pedido VALUES
-(301, 2, 201, '2025-07-01', 'Empacotando', 500),
-(302, 4, 202, '2025-07-03', 'Enviado', 980),
-(303, 2, 203, '2025-07-04', 'Entregue', 180),
-(304, 4, 204, '2025-07-05', 'Enviado', 370),
-(305, 2, 205, '2025-07-06', 'Empacotando', 240);
+INSERT INTO pedido (
+	id_pedido, id_requisitante, id_funcionario, data_pedido, status, total_pedido
+) VALUES
+(301, 2, 201, '2025-07-01', 'Empacotando', 1000.00),
+(302, 4, 202, '2025-07-03', 'Enviado', 2500.00),
+(303, 2, 203, '2025-07-04', 'Entregue', 665.00),
+(304, 4, 204, '2025-07-05', 'Enviado', 900.00),
+(305, 2, 205, '2025-07-06', 'Empacotando', 12000.00);
 INSERT INTO itensPedido VALUES
 (301, 101, 2),
 (301, 102, 5),

@@ -15,8 +15,10 @@ import java.util.List;
  */
 public class PedidoDAO extends CrudGenerico {
       private String nomeTabelaBd = "pedido";
+      private itensPedidoDAO ip = new itensPedidoDAO();
       
-     public boolean createPedido(Pedido prod ){
+     public boolean createPedido(Pedido prod){
+         
         return this.create(prod, this.nomeTabelaBd);
     }
    public List<Pedido> readPedido(){

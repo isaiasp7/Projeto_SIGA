@@ -180,9 +180,9 @@ headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         //Carrinho.setLista( jTable1.getSelectedRow().);
         int linha = jTable1.getSelectedRow();
         Produto p = new Produto(
-            Long.parseLong(jTable1.getValueAt(linha, 0).toString()),
+                Integer.parseInt(jTable1.getValueAt(linha, 0).toString()),
             jTable1.getValueAt(linha, 1).toString(),
-            Long.parseLong(jTable1.getValueAt(linha, 2).toString())
+            Integer.parseInt(jTable1.getValueAt(linha, 2).toString())
 
         );
         

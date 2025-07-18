@@ -12,13 +12,13 @@ import Utils.Utilitarios;
  * @author Isaias
  */
 public class Funcionario {
-    private long id = Utilitarios.gerar_id("funcionario");
+    private Integer id = Utilitarios.gerar_id("funcionario");
     private String nomeEmpregado;
     private String funcaoCargo;
-    private long id_empresa_fornecedora;
+    private Integer id_empresa_fornecedora;
     private String email;
 
-    public Funcionario( String nomeEmpregado, String funcaoCargo, long id_empresa_fornecedora) {
+    public Funcionario( String nomeEmpregado, String funcaoCargo, Integer id_empresa_fornecedora) {
         
         this.nomeEmpregado = nomeEmpregado;
         this.funcaoCargo = funcaoCargo;
@@ -40,10 +40,10 @@ public String getEmail() {
     public void setEmail(String email) {
         this.email = email;
     }
-    public long getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(long id){
+    public void setId(Integer id){
         this.id = id;
     }
 
@@ -65,11 +65,11 @@ public String getEmail() {
         this.funcaoCargo = funcaoCargo;
     }
 
-    public long getId_empresa_fornecedora() {
+    public Integer getId_empresa_fornecedora() {
         return id_empresa_fornecedora;
     }
 
-    public void setId_empresa_fornecedora(long id_empresa_fornecedora) {
+    public void setId_empresa_fornecedora(Integer id_empresa_fornecedora) {
         this.id_empresa_fornecedora = id_empresa_fornecedora;
     }
     /*public Empresa getEmpresa(){

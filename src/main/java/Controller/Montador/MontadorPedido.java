@@ -18,9 +18,9 @@ public class MontadorPedido implements MontadorReadAll<Pedido>{
     @Override
     public Pedido montar(ResultSet rs) throws SQLException {
        Pedido ped = new Pedido();
-       ped.setId_pedido(rs.getLong("id_pedido"));
-       ped.setId_requisitante(rs.getLong("id_requisitante"));
-       ped.setId_funcionario(rs.getLong("id_funcionario"));
+       ped.setId_pedido(rs.getInt("id_pedido"));
+       ped.setId_requisitante(rs.getInt("id_requisitante"));
+       ped.setId_funcionario(rs.getInt("id_funcionario"));
        return ped;
     }
     

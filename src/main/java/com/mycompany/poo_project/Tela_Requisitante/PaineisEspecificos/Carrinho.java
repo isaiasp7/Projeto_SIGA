@@ -220,12 +220,12 @@ private void reescreveValores() {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         PedidoDAO pediDAO = new PedidoDAO();
-        HashMap<Long,ProdutoDTO> lista_pedido = new HashMap<>();
+        HashMap<Integer,ProdutoDTO> lista_pedido = new HashMap<>();
         for (Produto p : listaCarrinho) {
             lista_pedido.put(p.getId(), new ProdutoDTO(p));
         }
-        Pedido p = new Pedido(RequisitanteLogin.getId(),lista_pedido);
-        
+        Pedido p = new Pedido(RequisitanteLogin.getId(),lista_pedido);//preciso gerenciar como o funcionario vai entrar nessa jogada
+        pediDAO.createPedido(p);
         
         //itensPedidoDAO itensp = new itensPedidoDAO();
         
