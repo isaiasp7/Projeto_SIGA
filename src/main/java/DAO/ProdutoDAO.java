@@ -11,6 +11,7 @@ import Model.Produto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,22 +43,24 @@ public class ProdutoDAO extends CrudGenerico {
        return this.requestById(nomeTabelaBd, "id_prod", id,new MontadorProduto());
     }
 
-    public Produto searchID(List<Produto> lista, String id) {
+    public List<Produto> searchID(List<Produto> lista, String id) {
+        List<Produto> p = new ArrayList<>();
         for (Produto produto : lista) {
             if (String.valueOf(produto.getId()).contains(id)) {
-                return produto;
+                 p.add(produto);
             }
         }
-        return null;
+        return p;
     }
 
-    public Produto searchNome(List<Produto> lista, String nome) {
+    public List<Produto> searchNome(List<Produto> lista, String nome) {
+        List<Produto> p = new ArrayList<>();
         for (Produto produto : lista) {
-            if (String.valueOf(produto.getId()).contains(nome)) {
-                return produto;
+            if (String.valueOf(produto.getNome()).contains(nome)) {
+                p.add(produto);
             }
         }
-        return null;
+         return p;
     }
 
 }

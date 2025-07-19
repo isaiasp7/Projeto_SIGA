@@ -224,6 +224,8 @@ private void reescreveValores() {
         for (Produto p : listaCarrinho) {
             lista_pedido.put(p.getId(), new ProdutoDTO(p));
         }
+        System.out.println("pedido criado");
+        System.out.println("id de quem fez login = "+RequisitanteLogin.getId());
         Pedido p = new Pedido(RequisitanteLogin.getId(),lista_pedido);//preciso gerenciar como o funcionario vai entrar nessa jogada
         pediDAO.createPedido(p);
         
@@ -236,28 +238,26 @@ private void reescreveValores() {
         ProdutoDAO prod = new ProdutoDAO();
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         String pesquisa = jInputSearch.getText();
-        long id;
-        String nome;
-        long id_f;
-        int quant;
+         List<Produto> resultados = new ArrayList<>();
         if (pesquisa.isBlank()) {
             model.setRowCount(0);
             this.renderizandoDados();
         }else{
             model.setRowCount(0);
             if (pesquisa.matches("[1-9][0-9]*")) {
-                id = prod.searchID(listaCarrinho, pesquisa).getId();
-                nome = prod.searchID(listaCarrinho, pesquisa).getNome();
-                id_f = prod.searchID(listaCarrinho, pesquisa).getId_fornecedor();
-                quant = prod.searchID(listaCarrinho, pesquisa).getQuantDisponivel();
-                model.addRow(new Object[]{id, nome, id_f, quant});
+                resultados = prod.searchID(listaCarrinho, pesquisa);
+            } else if (pesquisa.matches("[A-Za-z]+")) {
+                resultados = prod.searchNome(listaCarrinho, pesquisa);
+            } else {
 
-            } else if(pesquisa.matches("[A-Za-z]")) {
-                prod.searchNome(listaCarrinho, pesquisa);
-            }else{
                 JOptionPane.showMessageDialog(null, "Nenhum dado com esse identificador");
                 jInputSearch.setText("");
                 this.renderizandoDados();
+            }
+        }
+          if (resultados.size() > -1) {
+            for (Produto p : resultados) {
+                model.addRow(new Object[]{p.getId(), p.getNome(), p.getId_fornecedor(), p.getQuantDisponivel()});
             }
         }
     }//GEN-LAST:event_jInputSearchKeyReleased

@@ -18,7 +18,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Isaias
  */
 public class Visualizador extends javax.swing.JPanel {
-      ProdutoDAO produto = new ProdutoDAO();
+
+    ProdutoDAO produto = new ProdutoDAO();
     List<Produto> lista = new ArrayList<>();
 
     /**
@@ -35,7 +36,7 @@ public class Visualizador extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
         DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer();
-headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 
     }
 
@@ -116,7 +117,7 @@ headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         );
     }// </editor-fold>//GEN-END:initComponents
 
-        private void renderizandoDados() {
+    private void renderizandoDados() {
         long id;
         String nome;
         long id_f;
@@ -149,30 +150,29 @@ headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         ProdutoDAO prod = new ProdutoDAO();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String pesquisa = jInputSearch.getText();
-        long id;
-        String nome;
-        long id_f;
-        int quant;
+        List<Produto> resultados = new ArrayList<>();
         if (pesquisa.isBlank()) {
             model.setRowCount(0);
             this.renderizandoDados();
-        }else{
+        } else {
             model.setRowCount(0);
             if (pesquisa.matches("[1-9][0-9]*")) {
-                id = prod.searchID(lista, pesquisa).getId();
-                nome = prod.searchID(lista, pesquisa).getNome();
-                id_f = prod.searchID(lista, pesquisa).getId_fornecedor();
-                quant = prod.searchID(lista, pesquisa).getQuantDisponivel();
-                model.addRow(new Object[]{id, nome, id_f, quant});
+                resultados = prod.searchID(lista, pesquisa);
+            } else if (pesquisa.matches("[A-Za-z]+")) {
+                resultados = prod.searchNome(lista, pesquisa);
+            } else {
 
-            } else if(pesquisa.matches("[A-Za-z]")) {
-                prod.searchNome(lista, pesquisa);
-            }else{
                 JOptionPane.showMessageDialog(null, "Nenhum dado com esse identificador");
                 jInputSearch.setText("");
                 this.renderizandoDados();
             }
         }
+        if (resultados.size() > -1) {
+            for (Produto p : resultados) {
+                model.addRow(new Object[]{p.getId(), p.getNome(), p.getId_fornecedor(), p.getQuantDisponivel()});
+            }
+        }
+
     }//GEN-LAST:event_jInputSearchKeyReleased
 
     private void AdicionarCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarCarActionPerformed
@@ -181,11 +181,9 @@ headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         int linha = jTable1.getSelectedRow();
         Produto p = new Produto(
                 Integer.parseInt(jTable1.getValueAt(linha, 0).toString()),
-            jTable1.getValueAt(linha, 1).toString(),
-            Integer.parseInt(jTable1.getValueAt(linha, 2).toString())
-
+                jTable1.getValueAt(linha, 1).toString(),
+                Integer.parseInt(jTable1.getValueAt(linha, 2).toString())
         );
-        
 
         Carrinho car = new Carrinho();
         car.setListaID(p.getId());

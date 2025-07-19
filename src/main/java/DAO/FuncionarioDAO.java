@@ -33,20 +33,20 @@ public class FuncionarioDAO extends CrudGenerico{
    public boolean deleteFuncionario(int id){
        return this.delete(this.nomeTabelaBd, "id_func", id);
    }
-   public boolean validacaoLogin(String email, int senha){
+   public  ResultSet validacaoLoginFuncionario(String email, String senha){
        String sql = "SELECT email,senha FROM funcionario WHERE email=? AND senha=? ";
         
        try {
             PreparedStatement script = this.conexao.prepareStatement(sql);
             script.setString(1, email);
-            script.setInt(2,senha);
+            script.setString(2,senha);
             ResultSet rs = script.executeQuery();           
-             return rs.next();
+             return rs;
           
         } catch (Exception e) {
-            System.out.println("ERRO: "+e);
+            System.out.println("ERRO (validação login): "+e);
         }
-        return false;
+        return null;
 
    
    }

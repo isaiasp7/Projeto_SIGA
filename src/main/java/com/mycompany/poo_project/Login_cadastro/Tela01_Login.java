@@ -8,13 +8,17 @@ import DAO.EmpresaDAO;
 import DAO.FuncionarioDAO;
 import DAO.ProdutoDAO;
 import Model.Produto;
-import com.mycompany.poo_project.Tela_Funcionario.Tela02_Sistema01;
+import com.mycompany.poo_project.Login_cadastro.Tela01_cadastro;
+import com.mycompany.poo_project.Tela_Funcionario.Tela02_Funcionario;
+import com.mycompany.poo_project.Tela_Requisitante.Tela02_Requisitante;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -37,11 +41,8 @@ public class Tela01_Login extends javax.swing.JFrame {
     public Tela01_Login() {
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
-       
-        
+
     }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -180,19 +181,21 @@ public class Tela01_Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
- 
-
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
 
         /*
         System.out.println("senha = "+inputSenha.getText());
         System.out.println("email = "+inputEmail.getText());*/
         if ((!inputEmail.getText().isBlank() && !inputEmail.getText().contains("email")) && (!inputSenha.getText().isBlank() && !inputSenha.getText().contains("Senha"))) {
-            //System.out.println("if");
-            this.Login();
+            if (inputEmail.getText().contains("Emp")) {
+                this.Login("funcionario");
+            } else {
+                 this.Login("empresa");
+            }
+
         } else {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos", "alerta",
-                JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.ERROR_MESSAGE);
             //System.out.println("else");
 
         }
@@ -201,8 +204,7 @@ public class Tela01_Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Tela01_cadastro cadastro = new Tela01_cadastro();
-        cadastro.setVisible(rootPaneCheckingEnabled);
+        this.getTelaCadastro();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void inputEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusLost
@@ -245,39 +247,48 @@ public class Tela01_Login extends javax.swing.JFrame {
     }
 
     private void getTelaFuncionario() {
-        Tela02_Sistema01 telafunc = new Tela02_Sistema01();
-        telafunc.setVisible(true);
+        Tela02_Funcionario telaFunc = new Tela02_Funcionario();
+        telaFunc.setVisible(true);
     }
 
     private void getTela_Requisitante() {
+        Tela02_Requisitante telaReq = new Tela02_Requisitante();
+        telaReq.setVisible(true);
         //
     }
 
-    private void Login() {  
-        if (inputEmail.getText().contains("Empreg")) {
-            if (funcDAO.validacaoLogin(inputEmail.getText(), Integer.parseInt(inputSenha.getText()))) {//true/false para a vericação
-                System.out.println("É UM FUNCIONARIO");
-                this.getTelaFuncionario();
-            }
-        } else if (inputEmail.getText().contains("Org")) {
-            if (empDAO.validacaoLogin(inputEmail.getText(), Integer.parseInt(inputSenha.getText()))) {
-                System.out.println("É UMA EMPRESA");
+    private void Login(String userTipo) {
+        ResultSet rs = null;
+        if (userTipo == "funcionario") {
+            rs = funcDAO.validacaoLoginFuncionario(inputEmail.getText(), inputSenha.getText());
+        } else if (userTipo == "empresa") {
+            rs = empDAO.validacaoLoginEmpresa(inputEmail.getText(), inputSenha.getText());
+
+            try {
                 
-                //this.getTelaRequisitante;
+                if (rs != null && rs.next()) { // move para o primeiro resultado
+                    String tipo = rs.getString("email"); // lê o valor do campo
+                    if (tipo.contains("Emp")) {
+                        this.getTelaFuncionario();
+                    } else {
+                    }
+                    this.getTela_Requisitante();
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Campo de senha ou email incorreto", "alerta", JOptionPane.ERROR_MESSAGE);
+                    System.out.println("Login inválido ou sem retorno");
+                }
 
+            } catch (SQLException e) {
+                System.out.println("ERRO NA REQUISIÇÃO DO LOGIN: " + e);
             }
-
-        } else {
-            JOptionPane.showMessageDialog(null,
-                    "Campo de senha ou email incorreto", "alerta", JOptionPane.ERROR_MESSAGE);
 
         }
-
     }
-    /**
-     *
-     * @param args the command line arguments
-     */
+        /**
+         *
+         * @param args the command line arguments
+         */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -82,11 +82,11 @@ INSERT INTO produto VALUES
 (104, 'Fonte ATX 500W', 5, 120, 230),
 (105, 'HD SSD 240GB', 3, 95, 290);
 INSERT INTO funcionario VALUES
-(201, 'Lucas Mendes', 'Almoxarife', 'lucas@beta.com', 2, 'lucas123'),
-(202, 'Ana Souza', 'TI', 'ana@delta.com', 4, 'ana456'),
-(203, 'Marcos Lima', 'Compras', 'marcos@beta.com', 2, 'marc789'),
-(204, 'Patrícia Silva', 'Gestão', 'patricia@delta.com', 4, 'patr123'),
-(205, 'Fernanda Dias', 'Recebimento', 'fernanda@beta.com', 2, 'fern000');
+(201, 'Lucas Mendes', 'Almoxarife', 'Emplucas@beta.com', 2, 'lucas123'),
+(202, 'Ana Souza', 'TI', 'Empana@delta.com', 4, 'ana456'),
+(203, 'Marcos Lima', 'Compras', 'Empmarcos@beta.com', 2, 'marc789'),
+(204, 'Patrícia Silva', 'Gestão', 'Emppatricia@delta.com', 4, 'patr123'),
+(205, 'Fernanda Dias', 'Recebimento', 'Empfernanda@beta.com', 2, 'fern000');
 INSERT INTO pedido (
 	id_pedido, id_requisitante, id_funcionario, data_pedido, status, total_pedido
 ) VALUES
