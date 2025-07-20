@@ -7,6 +7,7 @@ package com.mycompany.poo_project.Login_cadastro;
 import DAO.EmpresaDAO;
 import DAO.FuncionarioDAO;
 import DAO.ProdutoDAO;
+import Login.RequisitanteLogin;
 import Model.Produto;
 import com.mycompany.poo_project.Login_cadastro.Tela01_cadastro;
 import com.mycompany.poo_project.Tela_Funcionario.Tela02_Funcionario;
@@ -115,6 +116,11 @@ public class Tela01_Login extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 inputEmailFocusLost(evt);
+            }
+        });
+        inputEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputEmailActionPerformed(evt);
             }
         });
 
@@ -241,6 +247,10 @@ public class Tela01_Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_inputSenhaFocusGained
 
+    private void inputEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputEmailActionPerformed
+
     private void getTelaCadastro() {
         Tela01_cadastro cadastro = new Tela01_cadastro();
         cadastro.setVisible(true);
@@ -262,17 +272,22 @@ public class Tela01_Login extends javax.swing.JFrame {
         if (userTipo == "funcionario") {
             rs = funcDAO.validacaoLoginFuncionario(inputEmail.getText(), inputSenha.getText());
         } else if (userTipo == "empresa") {
-            rs = empDAO.validacaoLoginEmpresa(inputEmail.getText(), inputSenha.getText());
 
+            rs = empDAO.validacaoLoginEmpresa(inputEmail.getText(), inputSenha.getText());
             try {
-                
+                System.out.println("entrou no try");
                 if (rs != null && rs.next()) { // move para o primeiro resultado
                     String tipo = rs.getString("email"); // lê o valor do campo
+
                     if (tipo.contains("Emp")) {
                         this.getTelaFuncionario();
-                    } else {
+                    } else{ 
+                        
+                        new RequisitanteLogin(rs.getInt("id_empresa"),rs.getString("nome_empresa"),tipo,this.inputSenha.getText());
+                        this.getTela_Requisitante();
                     }
-                    this.getTela_Requisitante();
+                    
+                    
                 } else {
                     JOptionPane.showMessageDialog(null,
                             "Campo de senha ou email incorreto", "alerta", JOptionPane.ERROR_MESSAGE);

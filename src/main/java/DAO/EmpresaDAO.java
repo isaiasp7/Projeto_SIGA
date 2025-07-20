@@ -51,7 +51,7 @@ public class EmpresaDAO extends CrudGenerico{
    }
    
     public  ResultSet validacaoLoginEmpresa(String email, String senha){
-       String sql = "SELECT email,senha FROM empresa WHERE email=? AND senha=? ";
+       String sql = "SELECT id_empresa,nome_empresa,email,senha FROM empresa WHERE email=? AND senha=? ";
         
        try {
             PreparedStatement script = this.conexao.prepareStatement(sql);

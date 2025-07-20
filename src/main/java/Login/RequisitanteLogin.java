@@ -12,9 +12,9 @@ public class RequisitanteLogin {
     private static Integer id;
     private static String nome;
     private static String email;
-    private static Integer senha;
+    private static String senha;
 
-    public RequisitanteLogin(Integer id, String nome, String email, Integer senha) {
+    public RequisitanteLogin(Integer id, String nome, String email, String senha) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -45,11 +45,11 @@ public class RequisitanteLogin {
         this.email = email;
     }
 
-    public Integer getSenha() {
+    public String getSenha() {
         return senha;
     }
 
-    public void setSenha(Integer senha) {
+    public void setSenha(String senha) {
         this.senha = senha;
     }
     

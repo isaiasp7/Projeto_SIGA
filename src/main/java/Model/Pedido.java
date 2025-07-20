@@ -104,6 +104,11 @@ public class Pedido {
     public HashMap<Integer, ProdutoDTO> getLista_pedido() {
         return lista_pedido;
     }
+
+    public void setLista_pedido(HashMap<Integer, ProdutoDTO> lista_pedido) {
+        this.lista_pedido = lista_pedido;
+    }
+    
    
 
 }

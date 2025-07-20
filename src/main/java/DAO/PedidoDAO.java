@@ -4,31 +4,55 @@
  */
 package DAO;
 
+import Controller.ConexaoSingleton;
 import Controller.CrudGenerico;
 import Controller.Montador.MontadorPedido;
+import DTO.ProdutoDTO;
 import Model.Pedido;
+import java.lang.reflect.Field;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author Isaias
  */
 public class PedidoDAO extends CrudGenerico {
-      private String nomeTabelaBd = "pedido";
-      private itensPedidoDAO ip = new itensPedidoDAO();
-      
-     public boolean createPedido(Pedido prod){
-         
-        return this.create(prod, this.nomeTabelaBd);
+ private Connection conexao = ConexaoSingleton.getInstancia().getConexao();
+    private String nomeTabelaBd = "pedido";
+    private itensPedidoDAO ip = new itensPedidoDAO();
+
+    public boolean createPedido(Pedido ped, double valorPedido) {//pedido possui uma hash com id = {nome, quantidade desejada}
+        String sql = new String();
+sql = "INSERT INTO pedido (id_pedido, id_requisitante, total, data_pedido, status) VALUES (" +
+       ped.getId_pedido() + ", " +
+       ped.getId_requisitante() + ", " +
+       valorPedido + ", '" +
+       ped.getData_pedido() + "', '" +
+       ped.getStatus() + "')";
+
+        try (PreparedStatement ps = conexao.prepareStatement(sql)) {
+            ps.execute();
+            return  ps.executeUpdate()>0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
-   public List<Pedido> readPedido(){
-       return this.readAll(this.nomeTabelaBd, new MontadorPedido());
-   }
-    public boolean updatePedido( Pedido obj, int id) {
-        return this.update(this.nomeTabelaBd, obj, id, "id_pedido") ;
+
+    public List<Pedido> readPedido() {
+        return this.readAll(this.nomeTabelaBd, new MontadorPedido());
     }
-   public boolean deletePedido(int id){
-       return this.delete(this.nomeTabelaBd, "id_pedido", id);
-   }
-    
+
+    public boolean updatePedido(Pedido obj, int id) {
+        return this.update(this.nomeTabelaBd, obj, id, "id_pedido");
+    }
+
+    public boolean deletePedido(int id) {
+        return this.delete(this.nomeTabelaBd, "id_pedido", id);
+    }
+
 }

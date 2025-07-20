@@ -11,37 +11,39 @@ import Model.Produto;
  * @author Isaias
  */
 public class ProdutoDTO {
-      private String nome;
-    private int quantDisponivel;
+      private int id_produto;
+      private int quantidadeDesejada;
+    private double totalpedido;
 
-    public  ProdutoDTO(Produto p) {
-        this.nome = p.getNome();
-        this.quantDisponivel = p.getQuantDisponivel();
-    }
-    
-    
-
-    public String getNome() {
-        return nome;
+    public ProdutoDTO(int id_produto, int quantidadeDesejada, double totalpedido) {
+        this.id_produto = id_produto;
+        this.quantidadeDesejada = quantidadeDesejada;
+        this.totalpedido = totalpedido;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public int getId_produto() {
+        return id_produto;
     }
 
-    public int getQuantDisponivel() {
-        return quantDisponivel;
+    public void setId_produto(int id_produto) {
+        this.id_produto = id_produto;
     }
 
-    public void setQuantDisponivel(int quantDisponivel) {
-        this.quantDisponivel = quantDisponivel;
+    public int getQuantidadeDesejada() {
+        return quantidadeDesejada;
     }
 
-    @Override
-    public String toString() {
-        return  "{ Nome =" + nome + ", quantDisponivel=" + quantDisponivel + '}';
+    public void setQuantidadeDesejada(int quantidadeDesejada) {
+        this.quantidadeDesejada = quantidadeDesejada;
     }
-    
-    
-    
+
+    public double getTotalpedido() {
+        return totalpedido;
+    }
+
+    public void setTotalpedido(double totalpedido) {
+        this.totalpedido = totalpedido;
+    }
+
+   
 }
