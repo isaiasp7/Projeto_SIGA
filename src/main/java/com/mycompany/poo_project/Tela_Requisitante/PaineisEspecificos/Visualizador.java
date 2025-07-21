@@ -121,7 +121,7 @@ public class Visualizador extends javax.swing.JPanel {
         long id;
         String nome;
         long id_f;
-        int quant;
+        //int quant;
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
         lista = produto.readProduto();
@@ -129,7 +129,7 @@ public class Visualizador extends javax.swing.JPanel {
             id = prod1.getId();
             nome = prod1.getNome();
             id_f = prod1.getId_fornecedor();
-            quant = prod1.getQuantDisponivel();
+            //quant = prod1.getQuantDisponivel();
             model.addRow(new Object[]{id, nome, id_f});
 
         }

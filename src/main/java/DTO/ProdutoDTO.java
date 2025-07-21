@@ -11,22 +11,29 @@ import Model.Produto;
  * @author Isaias
  */
 public class ProdutoDTO {
-      private int id_produto;
+      private Produto prod;
       private int quantidadeDesejada;
-    private double totalpedido;
+    
 
-    public ProdutoDTO(int id_produto, int quantidadeDesejada, double totalpedido) {
-        this.id_produto = id_produto;
+   
+
+    public ProdutoDTO(Produto p,int quantidadeDesejada) {
+        this.prod.setId(p.getId());
         this.quantidadeDesejada = quantidadeDesejada;
-        this.totalpedido = totalpedido;
     }
 
-    public int getId_produto() {
-        return id_produto;
+    public ProdutoDTO(Produto prod) {
+        this.prod = prod;
+        this.quantidadeDesejada =0;
+    }
+    
+
+    public Produto getProd() {
+        return prod;
     }
 
-    public void setId_produto(int id_produto) {
-        this.id_produto = id_produto;
+    public void setProd(Produto prod) {
+        this.prod = prod;
     }
 
     public int getQuantidadeDesejada() {
@@ -36,14 +43,9 @@ public class ProdutoDTO {
     public void setQuantidadeDesejada(int quantidadeDesejada) {
         this.quantidadeDesejada = quantidadeDesejada;
     }
+    
+    
 
-    public double getTotalpedido() {
-        return totalpedido;
-    }
-
-    public void setTotalpedido(double totalpedido) {
-        this.totalpedido = totalpedido;
-    }
-
+   
    
 }

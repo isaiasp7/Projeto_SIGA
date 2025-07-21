@@ -11,24 +11,24 @@ import Utils.Utilitarios;
  * @author Isaias
  */
 public class Produto {
-    private Integer id;
-    private String nome;
-    private int quantDisponivel;
-    private Integer id_fornecedor;  // associação
-    private double valor;
+    private Integer id_prod;
+    private String nome_prod;
+    private int quant_disponivel;
+    private Integer id_fornecedor_fk;  // associação
+    private double preco;
     
     public Produto() {}
     public Produto(String nome, int quantDisponivel, Integer id_fornecedor, double valor) {
-        this.id = Utilitarios.gerar_id("produto");
-        this.valor = valor;
-        this.nome = nome;
-        this.quantDisponivel = quantDisponivel;
-        this.id_fornecedor = id_fornecedor;
+        this.id_prod = Utilitarios.gerar_id("produto");
+        this.preco = valor;
+        this.nome_prod = nome;
+        this.quant_disponivel = quantDisponivel;
+        this.id_fornecedor_fk = id_fornecedor;
     }
     public Produto(Integer id,String nome,Integer id_fornecedor){
-        this.id = id;
-        this.nome = nome;
-        this.id_fornecedor = id_fornecedor;
+        this.id_prod = id;
+        this.nome_prod = nome;
+        this.id_fornecedor_fk = id_fornecedor;
     }
 
     
@@ -39,45 +39,45 @@ public class Produto {
     // Getters e Setters
 
     public Integer getId() {
-        return id;
+        return id_prod;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id_prod = id;
     }
 
     public double getValor() {
-        return valor;
+        return preco;
     }
 
     public void setValor(double valor) {
-        this.valor = valor;
+        this.preco = valor;
     }
     
 
   
     public String getNome() {
-        return nome;
+        return nome_prod;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome_prod = nome;
     }
 
     public int getQuantDisponivel() {
-        return quantDisponivel;
+        return quant_disponivel;
     }
 
     public void setQuantDisponivel(int quantDisponivel) {
-        this.quantDisponivel = quantDisponivel;
+        this.quant_disponivel = quantDisponivel;
     }
 
     public Integer getId_fornecedor() {
-        return id_fornecedor;
+        return id_fornecedor_fk;
     }
 
     public void setId_fornecedor(Integer id_fornecedor) {
-        this.id_fornecedor = id_fornecedor;
+        this.id_fornecedor_fk = id_fornecedor;
     }
     
     /*public Fornecedor getFornecedor() {

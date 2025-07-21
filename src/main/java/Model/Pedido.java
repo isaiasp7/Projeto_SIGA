@@ -23,10 +23,11 @@ public class Pedido {
 
     private Integer id_pedido;
     private Integer id_requisitante;  // associação
-    private HashMap<Integer,ProdutoDTO> lista_pedido = new HashMap<>();// lista_pedido = id_produto= {nome, quantidade pedida}
+    private List<ProdutoDTO> lista_pedido = new ArrayList<>();// lista_pedido = id_produto= {nome, quantidade pedida}
     private Integer id_funcionario;
     private LocalDate data_pedido;
     private StatusPedido status;
+    private double valorTotal;
 
     public Pedido( Integer id_requisitante) {
         this.id_pedido = Utils.Utilitarios.gerar_id("pedido");
@@ -35,12 +36,13 @@ public class Pedido {
         this.status = PENDENTE;
     }
 
-    public Pedido(Integer id_requisitante, HashMap<Integer,ProdutoDTO> lista_pedido) {
+    public Pedido(Integer id_requisitante, List<ProdutoDTO> lista_pedido, double valor) {
         this.id_pedido = Utils.Utilitarios.gerar_id("pedido");
         this.id_requisitante = id_requisitante;
         this.lista_pedido = lista_pedido;
          this.data_pedido = LocalDate.now();
         this.status = PENDENTE;
+        this.valorTotal = valor;
 
     }
     
@@ -93,21 +95,15 @@ public class Pedido {
         this.id_requisitante = id_requisitante;
     }
 
-   public List<ProdutoDTO> getProduto_Pedido(){//retorna sem sem os id
-       List<ProdutoDTO> lista = new ArrayList<>();
-       for (ProdutoDTO value : lista_pedido.values()) {
-           lista.add(value);
-       }
-       return lista;
-   }
-
-    public HashMap<Integer, ProdutoDTO> getLista_pedido() {
-        return lista_pedido;
+    public double getValorTotal() {
+        return valorTotal;
     }
 
-    public void setLista_pedido(HashMap<Integer, ProdutoDTO> lista_pedido) {
-        this.lista_pedido = lista_pedido;
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
     }
+
+   
     
    
 

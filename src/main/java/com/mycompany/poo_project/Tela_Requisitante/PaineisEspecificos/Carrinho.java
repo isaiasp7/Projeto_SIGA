@@ -11,12 +11,15 @@ import DTO.ProdutoDTO;
 import Login.RequisitanteLogin;
 import Model.Pedido;
 import Model.Produto;
+import Model.itensPedido;
+import com.mycompany.poo_project.Tela_Requisitante.Tela02_Requisitante;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -29,16 +32,17 @@ public class Carrinho extends javax.swing.JPanel {
 
     private ProdutoDAO prod = new ProdutoDAO();
     private double valorTotalCal;//usado para calcular os valores de cada produto
-    private double valorTotal;
-    private int quantidadeProd;
+    private double valorProduto;
+    private int quantidadeTotalProd;
+    private int quantDesejadaProd;
     public static List<Long> ids = new ArrayList<>();//public, pois é usado dentro de Visualização para receber os id dos pedidos
-    private List<Produto> listaCarrinho = new ArrayList<>();//o retorno dos ids requisitados estão aqui em listaCarrinho 
+    private List<ProdutoDTO> listaCarrinho = new ArrayList<>();//o retorno dos ids requisitados estão aqui em listaCarrinho 
 
     /**
      * Creates new form Carrinho1
      */
     public Carrinho() {
-        
+
         initComponents();
         this.renderizandoDados();
         this.reescreveValores();
@@ -54,7 +58,7 @@ public class Carrinho extends javax.swing.JPanel {
 
     }
 
-    public void setListaCarrinho(Produto p) {
+    public void setListaCarrinho(ProdutoDTO p) {
         this.listaCarrinho.add(p);
     }
 
@@ -67,11 +71,11 @@ public class Carrinho extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         for (long l : ids) {
             Produto p = prod.requestID(l);
-            this.setListaCarrinho(p);
-            this.quantidadeProd = p.getQuantDisponivel();
-            this.valorTotal = p.getValor();
+            this.setListaCarrinho(new ProdutoDTO(p));
+            this.quantidadeTotalProd = p.getQuantDisponivel();
+            this.valorProduto = p.getValor();
             model.addRow(new Object[]{p.getId(), p.getNome(), p.getId_fornecedor(), p.getQuantDisponivel(), 0, p.getValor()});
-            System.out.println("");
+
         }
 
     }
@@ -95,47 +99,53 @@ public class Carrinho extends javax.swing.JPanel {
     private boolean atualizandoLinha = false;
 
     private void reescreveValores() {
-    jTable2.getModel().addTableModelListener(e -> {
-        if (e.getType() == TableModelEvent.UPDATE && !atualizandoLinha) {
-            atualizandoLinha = true;
+        jTable2.getModel().addTableModelListener(e -> {
+            if (e.getType() == TableModelEvent.UPDATE && !atualizandoLinha) {
+                atualizandoLinha = true;
 
-            int row = e.getFirstRow();
-            int colunaAlterada = e.getColumn();
+                int row = e.getFirstRow();
+                int colunaAlterada = e.getColumn();
 
-            // Só reage quando a coluna "Quantidade Desejada" for alterada
-            if (colunaAlterada == 4) {
-                try {
-                    // Pega os valores da linha
-                    
-                    int quantDesejada = Integer.parseInt(jTable2.getValueAt(row, 4).toString());
+                // Só reage quando a coluna "Quantidade Desejada" for alterada
+                if (colunaAlterada == 4) {
+                    try {
+                        // Pega os valores da linha
+                        int idProduto = (int) jTable2.getValueAt(row, 0);
+                        quantDesejadaProd = Integer.parseInt(jTable2.getValueAt(row, 4).toString());
+                        for (ProdutoDTO produto : listaCarrinho) {
+                            if (produto.getProd().getId() == idProduto) {
+                                produto.setQuantidadeDesejada(quantDesejadaProd);
+                                break;
+                            }
+                        }
 
-                    // Validação
-                    if (quantDesejada < 0 || quantDesejada > quantidadeProd) {
-                        JOptionPane.showMessageDialog(null, "Quantidade desejada inválida.");
-                        jTable2.setValueAt(0, row, 4);
-                        atualizandoLinha = false;
-                        return;
+                        // Validação
+                        if (quantDesejadaProd < 0 || quantDesejadaProd > quantidadeTotalProd) {
+                            JOptionPane.showMessageDialog(null, "Quantidade desejada inválida.");
+                            jTable2.setValueAt(0, row, 4);
+                            atualizandoLinha = false;
+                            return;
+                        }
+
+                        // Atualiza "Quantidade Disponível"
+                        int novaDisponivel = quantidadeTotalProd - quantDesejadaProd;
+                        jTable2.setValueAt(novaDisponivel, row, 3);
+
+                        // Atualiza "Valor"
+                        double novoValor = valorProduto* quantDesejadaProd;
+                        jTable2.setValueAt(novoValor, row, 5);
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Erro ao processar os valores.");
                     }
 
-                    // Atualiza "Quantidade Disponível"
-                    int novaDisponivel = quantidadeProd - quantDesejada;
-                    jTable2.setValueAt(novaDisponivel, row, 3);
-
-                    // Atualiza "Valor"
-                    double novoValor = valorTotal * quantDesejada;
-                    jTable2.setValueAt(novoValor, row, 5);
-
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Erro ao processar os valores.");
                 }
+
+                atualizandoLinha = false;
             }
-
-            atualizandoLinha = false;
-        }
-    });
-}
-
+        });
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -225,33 +235,42 @@ public class Carrinho extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        PedidoDAO pediDAO = new PedidoDAO();
-        HashMap<Integer, ProdutoDTO> lista_pedido = new HashMap<>();
-        itensPedidoDAO ip = new itensPedidoDAO();
-        Pedido pedido = new Pedido();
-        for (int i = 0; i < listaCarrinho.size(); i++) {
-            for (Produto p : listaCarrinho) {
-            lista_pedido.put(pedido.getId_pedido(), new ProdutoDTO(p.getId(), Integer.parseInt(jTable2.getValueAt(i, 4).toString()),Double.parseDouble(jTable2.getValueAt(i, 5).toString())));
-        }
-        }
+        //1 criar pedido 
+        //2 relacionar itenspedido com pedido
+        //3 atualizar o qunatidade disponivel de produtos com o uso de produtoDTO
         
-        ip.createItensPedido(lista_pedido);
-        System.out.println("ItensPedido criado");
-        System.out.println("id de quem fez login = " + RequisitanteLogin.getId());
-        pedido.setId_requisitante(RequisitanteLogin.getId());
-pedido.setLista_pedido(lista_pedido);//preciso gerenciar como o funcionario vai entrar nessa jogada
-        System.out.println("criado pedido no banco");
         //percorre tabela para somar o total do pedido
-         int totalRows = jTable2.getRowCount();
-         for (int i = 0; i < totalRows; i++) {
-             valorTotal+=Integer.parseInt(jTable2.getValueAt(5, i).toString());
-            
-        }
-        pediDAO.createPedido(pedido,valorTotalCal);
+        int totalRows = jTable2.getRowCount();
+        for (int i = 0; i < totalRows; i++) {
+            valorTotalCal += Double.parseDouble(jTable2.getValueAt( i,5).toString());
 
+        }System.out.println("total a ser pago no pedido = "+valorTotalCal);
+        
+        Pedido pedido = new Pedido(RequisitanteLogin.getId(),listaCarrinho,valorTotalCal);
+        
+        new PedidoDAO().createPedido(pedido);
+        System.out.println("criou pedido no banco");
+        //s
+        
+        for (ProdutoDTO produtoDTO : listaCarrinho) {
+            new itensPedidoDAO().createItensPedido(new itensPedido(pedido.getId_pedido(), produtoDTO.getProd().getId(), produtoDTO.getQuantidadeDesejada()));
+        }
+        System.out.println("itens pedido criado no banco");
+        //3
+        for (ProdutoDTO produtoDTO : listaCarrinho) {
+            new ProdutoDAO().updateProduto(produtoDTO.getProd(), produtoDTO.getProd().getId());
+        }
+         System.out.println("dados de produtos atualizado no banco");
+        
+
+        
+        
+       
+        JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this),"Pedido feito");
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    
     private void jInputSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jInputSearchKeyReleased
         // TODO add your handling code here:
         ProdutoDAO prod = new ProdutoDAO();
@@ -264,9 +283,9 @@ pedido.setLista_pedido(lista_pedido);//preciso gerenciar como o funcionario vai 
         } else {
             model.setRowCount(0);
             if (pesquisa.matches("[1-9][0-9]*")) {
-                resultados = prod.searchID(listaCarrinho, pesquisa);
+                resultados = prod.searchIDdto(listaCarrinho, pesquisa);
             } else if (pesquisa.matches("[A-Za-z]+")) {
-                resultados = prod.searchNome(listaCarrinho, pesquisa);
+                resultados = prod.searchNomedto(listaCarrinho, pesquisa);
             } else {
 
                 JOptionPane.showMessageDialog(null, "Nenhum dado com esse identificador");
@@ -288,4 +307,6 @@ pedido.setLista_pedido(lista_pedido);//preciso gerenciar como o funcionario vai 
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
+
+   
 }

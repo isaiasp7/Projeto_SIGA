@@ -9,13 +9,13 @@ package Model;
  * @author Isaias
  */
 public class itensPedido {
-     private Integer id_pedido;
-    private Integer id_produto;
+     private Integer idPedido_fk;
+    private Integer idProduto_fk;
     private int quantidade;
 
     public itensPedido(Integer id_pedido, Integer id_produto, int quantidade) {
-        this.id_pedido = id_pedido;
-        this.id_produto = id_produto;
+        this.idPedido_fk = id_pedido;
+        this.idProduto_fk = id_produto;
         this.quantidade = quantidade;
     }
 
@@ -25,19 +25,19 @@ public class itensPedido {
     
 
     public Integer getId_pedido() {
-        return id_pedido;
+        return idPedido_fk;
     }
 
     public void setId_pedido(Integer id_pedido) {
-        this.id_pedido = id_pedido;
+        this.idPedido_fk = id_pedido;
     }
 
     public Integer getId_produto() {
-        return id_produto;
+        return idProduto_fk;
     }
 
     public void setId_produto(Integer id_produto) {
-        this.id_produto = id_produto;
+        this.idProduto_fk = id_produto;
     }
 
     public int getQuantidade() {

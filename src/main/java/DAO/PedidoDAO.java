@@ -24,17 +24,16 @@ public class PedidoDAO extends CrudGenerico {
     private String nomeTabelaBd = "pedido";
     private itensPedidoDAO ip = new itensPedidoDAO();
 
-    public boolean createPedido(Pedido ped, double valorPedido) {//pedido possui uma hash com id = {nome, quantidade desejada}
+    public boolean createPedido(Pedido ped) {//pedido possui uma hash com id = {nome, quantidade desejada}
         String sql = new String();
-sql = "INSERT INTO pedido (id_pedido, id_requisitante, total, data_pedido, status) VALUES (" +
+sql = "INSERT INTO pedido (id_pedido, id_requisitante, total_pedido, data_pedido, status) VALUES (" +
        ped.getId_pedido() + ", " +
        ped.getId_requisitante() + ", " +
-       valorPedido + ", '" +
+       ped.getValorTotal() + ", '" +
        ped.getData_pedido() + "', '" +
        ped.getStatus() + "')";
 
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
-            ps.execute();
             return  ps.executeUpdate()>0;
         } catch (Exception e) {
             e.printStackTrace();

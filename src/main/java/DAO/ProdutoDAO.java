@@ -7,6 +7,7 @@ package DAO;
 import Controller.CrudGenerico;
 import Controller.Montador.MontadorProduto;
 import Controller.MontadorReadAll;
+import DTO.ProdutoDTO;
 import Model.Produto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,6 +33,7 @@ public class ProdutoDAO extends CrudGenerico {
     }
 
     public boolean updateProduto(Produto obj, int id) {
+        System.out.println(" dentro de produtoUpdate");
         return this.update(this.nomeTabelaBd, obj, id, "id_prod");
     }
 
@@ -43,7 +45,7 @@ public class ProdutoDAO extends CrudGenerico {
        return this.requestById(nomeTabelaBd, "id_prod", id,new MontadorProduto());
     }
 
-    public List<Produto> searchID(List<Produto> lista, String id) {
+   public List<Produto> searchID(List<Produto> lista, String id) {
         List<Produto> p = new ArrayList<>();
         for (Produto produto : lista) {
             if (String.valueOf(produto.getId()).contains(id)) {
@@ -52,12 +54,30 @@ public class ProdutoDAO extends CrudGenerico {
         }
         return p;
     }
-
-    public List<Produto> searchNome(List<Produto> lista, String nome) {
+       public List<Produto> searchNome(List<Produto> lista, String nome) {
         List<Produto> p = new ArrayList<>();
         for (Produto produto : lista) {
             if (String.valueOf(produto.getNome()).contains(nome)) {
                 p.add(produto);
+            }
+        }
+         return p;
+    }
+     public List<Produto> searchIDdto(List<ProdutoDTO> lista, String id) {
+        List<Produto> p = new ArrayList<>();
+        for (ProdutoDTO produto : lista) {
+            if (String.valueOf(produto.getProd().getId()).contains(id)) {
+                 p.add(produto.getProd());
+            }
+        }
+        return p;
+    }
+
+    public List<Produto> searchNomedto(List<ProdutoDTO> lista, String nome) {
+        List<Produto> p = new ArrayList<>();
+        for (ProdutoDTO produto : lista) {
+            if (String.valueOf(produto.getProd().getNome()).contains(nome)) {
+                p.add(produto.getProd());
             }
         }
          return p;

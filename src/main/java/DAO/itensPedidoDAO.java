@@ -20,18 +20,8 @@ import java.util.Map;
 public class itensPedidoDAO extends CrudGenerico {
     private String nomeTabelaBd = "itenspedido";
 
-    public boolean createItensPedido(HashMap<Integer, ProdutoDTO> pedido) {
-        for (Map.Entry<Integer, ProdutoDTO> entry : pedido.entrySet()) {
-            Integer key = entry.getKey();
-
-            ProdutoDTO val = entry.getValue();
-            System.out.println("Pedido  => "+key+"{"+ val.getId_produto()+" = " +val.getQuantidadeDesejada()+"}");
-            
-            //this.create(new itensPedido(pedido.getId_pedido(), key, val.getQuantDisponivel()), nomeTabelaBd) ;
-
-        }
-
-        return this.create(pedido, this.nomeTabelaBd);
+    public boolean createItensPedido(itensPedido ip) {
+        return this.create(ip, nomeTabelaBd);
     }
 
     public List<Pedido> readItensPedido() {

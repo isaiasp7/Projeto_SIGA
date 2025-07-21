@@ -59,6 +59,7 @@ public abstract class CrudGenerico {
         List<String> valores = new ArrayList<>();
 
         for (Field f : fields) {
+            
             colunas.add(f.getName());
             valores.add("?");
         }
