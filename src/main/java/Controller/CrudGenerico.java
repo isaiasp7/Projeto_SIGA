@@ -44,7 +44,7 @@ public abstract class CrudGenerico {
                 fields[i].setAccessible(true);
                 ps.setObject(i + 1, fields[i].get(obj)); // JDBC faz o escape
             }
-             ;
+            ;
             return ps.executeUpdate() > 0; // retorna true se pelo menos 1 linha foi inserida
 
         } catch (Exception e) {
@@ -59,9 +59,11 @@ public abstract class CrudGenerico {
         List<String> valores = new ArrayList<>();
 
         for (Field f : fields) {
-            
-            colunas.add(f.getName());
-            valores.add("?");
+            if (!f.getName().equals(nomeCampoID)) {
+                colunas.add(f.getName());
+                valores.add("?");
+            }
+
         }
         StringBuilder sql = new StringBuilder();
         sql.append("UPDATE " + tabela + " SET ");

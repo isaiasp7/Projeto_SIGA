@@ -257,7 +257,7 @@ public class Carrinho extends javax.swing.JPanel {
         }
         System.out.println("itens pedido criado no banco");
         //3
-        for (ProdutoDTO produtoDTO : listaCarrinho) {
+        for (ProdutoDTO produtoDTO : listaCarrinho) {//ainda não funciona
             new ProdutoDAO().updateProduto(produtoDTO.getProd(), produtoDTO.getProd().getId());
         }
          System.out.println("dados de produtos atualizado no banco");
