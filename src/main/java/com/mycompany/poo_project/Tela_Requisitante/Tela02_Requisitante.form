@@ -56,9 +56,9 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="PProdutos" alignment="0" max="32767" attributes="0"/>
-                      <Component id="PCarrinho" alignment="0" max="32767" attributes="0"/>
-                      <Component id="PSituacao" alignment="1" pref="100" max="32767" attributes="0"/>
+                      <Component id="BProdutos" alignment="0" max="32767" attributes="0"/>
+                      <Component id="BCarrinho" alignment="0" max="32767" attributes="0"/>
+                      <Component id="BSituacao" alignment="1" pref="100" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -68,39 +68,39 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                  <Component id="PProdutos" min="-2" pref="117" max="-2" attributes="0"/>
+                  <Component id="BProdutos" min="-2" pref="117" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
-                  <Component id="PCarrinho" min="-2" pref="117" max="-2" attributes="0"/>
+                  <Component id="BCarrinho" min="-2" pref="117" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="PSituacao" min="-2" pref="128" max="-2" attributes="0"/>
+                  <Component id="BSituacao" min="-2" pref="128" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="PCarrinho">
+        <Component class="javax.swing.JButton" name="BCarrinho">
           <Properties>
             <Property name="text" type="java.lang.String" value="Carrinho"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PCarrinhoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BCarrinhoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="PProdutos">
+        <Component class="javax.swing.JButton" name="BProdutos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Produtos"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PProdutosActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BProdutosActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="PSituacao">
+        <Component class="javax.swing.JButton" name="BSituacao">
           <Properties>
             <Property name="text" type="java.lang.String" value="Situa&#xe7;&#xe3;o"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PSituacaoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BSituacaoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
