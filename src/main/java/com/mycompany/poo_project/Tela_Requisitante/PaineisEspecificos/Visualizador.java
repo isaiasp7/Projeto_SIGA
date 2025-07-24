@@ -6,6 +6,7 @@ package com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos;
 
 import DAO.ProdutoDAO;
 import Model.Produto;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -27,6 +28,8 @@ public class Visualizador extends javax.swing.JPanel {
      */
     public Visualizador() {
         initComponents();
+        jInputSearch.setText("Search....");
+         jInputSearch.setForeground(new Color(124, 124, 124));
         this.renderizandoDados();
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -75,6 +78,11 @@ public class Visualizador extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        jInputSearch.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jInputSearchFocusGained(evt);
+            }
+        });
         jInputSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jInputSearchActionPerformed(evt);
@@ -117,13 +125,13 @@ public class Visualizador extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1)
-                .addGap(47, 47, 47)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AdicionarCar)
                     .addComponent(jInputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -188,17 +196,32 @@ public class Visualizador extends javax.swing.JPanel {
     private void AdicionarCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarCarActionPerformed
         // TODO add your handling code here:
         //Carrinho.setLista( jTable1.getSelectedRow().);
-        int linha = jTable1.getSelectedRow();
-        Produto p = new Produto(
-                Integer.parseInt(jTable1.getValueAt(linha, 0).toString()),
-                jTable1.getValueAt(linha, 1).toString(),
-                Integer.parseInt(jTable1.getValueAt(linha, 2).toString())
-        );
-
-        Carrinho car = new Carrinho();
-        car.setListaID(p.getId());
-        System.out.println("add ao carrinho : "+p.getId());
+        Integer linha = jTable1.getSelectedRow();
+        System.out.println(" linha = "+linha);
+        if (linha!=-1) {
+              Produto p = new Produto(
+                    Integer.parseInt(jTable1.getValueAt(linha, 0).toString()),
+                    jTable1.getValueAt(linha, 1).toString(),
+                    Integer.parseInt(jTable1.getValueAt(linha, 2).toString())
+            );
+            
+            
+            new Carrinho().setListaID(p.getId());
+            System.out.println("add ao carrinho : "+p.getId());
+           
+        }else{
+           JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada",
+                    "alerta", JOptionPane.ERROR_MESSAGE);
+            
+        }
+        
     }//GEN-LAST:event_AdicionarCarActionPerformed
+
+    private void jInputSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInputSearchFocusGained
+        // TODO add your handling code here:
+         jInputSearch.setText("");
+         jInputSearch.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jInputSearchFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
