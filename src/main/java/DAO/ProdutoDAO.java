@@ -33,7 +33,7 @@ public class ProdutoDAO extends CrudGenerico {
     }
 
     public boolean updateProduto(Produto obj, int id) {
-        System.out.println(" dentro de produtoUpdate");
+       // System.out.println(" dentro de produtoUpdate");
         return this.update(this.nomeTabelaBd, obj, id, "id_prod");
     }
 

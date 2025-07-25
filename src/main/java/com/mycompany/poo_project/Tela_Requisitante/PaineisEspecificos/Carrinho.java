@@ -12,11 +12,12 @@ import Login.RequisitanteLogin;
 import Model.Pedido;
 import Model.Produto;
 import Model.itensPedido;
-import com.mycompany.poo_project.Tela_Requisitante.Tela02_Requisitante;
+import java.awt.Color;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+
 import java.util.List;
+
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -35,7 +36,7 @@ public class Carrinho extends javax.swing.JPanel {
     private double valorProduto;
     private int quantidadeTotalProd;
     private int quantDesejadaProd;
-    public static List<Long> ids = new ArrayList<>();//public, pois é usado dentro de Visualização para receber os id dos pedidos
+    public static List<Integer> ids = new ArrayList<>();//public, pois é usado dentro de Visualização para receber os id dos pedidos
     private List<ProdutoDTO> listaCarrinho = new ArrayList<>();//o retorno dos ids requisitados estão aqui em listaCarrinho 
 
     /**
@@ -44,6 +45,8 @@ public class Carrinho extends javax.swing.JPanel {
     public Carrinho() {
 
         initComponents();
+        jInputSearch.setText("Search....");
+         jInputSearch.setForeground(new Color(124, 124, 124));
         this.renderizandoDados();
         this.reescreveValores();
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -58,18 +61,24 @@ public class Carrinho extends javax.swing.JPanel {
 
     }
 
+   
+
     public void setListaCarrinho(ProdutoDTO p) {
         this.listaCarrinho.add(p);
     }
 
-    public static void setListaID(long id) {
+    public static void setListaID(int id) {
         ids.add(id);
     }
 
-    private void renderizandoDados() {
+    public List<Integer> getIds() {
+        return ids;
+    }
 
+    private void renderizandoDados() {
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        for (long l : ids) {
+        if (ids.size()>0) {
+             for (long l : ids) {
             Produto p = prod.requestID(l);
             this.setListaCarrinho(new ProdutoDTO(p));
             this.quantidadeTotalProd = p.getQuantDisponivel();
@@ -77,20 +86,22 @@ public class Carrinho extends javax.swing.JPanel {
             model.addRow(new Object[]{p.getId(), p.getNome(), p.getId_fornecedor(), p.getQuantDisponivel(), 0, p.getValor()});
 
         }
+        }
+       
 
     }
 
-    /*private void renderizandoDados(List<Produto> prod) {
-        for (Produto p : prod) {
-            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-            model.addRow(new Object[]{p.getId(), p.getNome(), p.getId_fornecedor(), p.getQuantDisponivel(), 0, p.getValor()});
-            System.out.println("");
+    private void renderizandoDados(List<ProdutoDTO> prod) {
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+        for (ProdutoDTO p : prod) {
+            model.addRow(new Object[]{p.getProd().getId(), p.getProd().getNome(), p.getProd().getId_fornecedor(), p.getProd().getQuantDisponivel(), 0, p.getProd().getValor()});
 
         }
 
     }
 
-    private void renderizandoDados(Produto p) {//usado para mudar o valor do pedido
+    /*private void renderizandoDados(Produto p) {//usado para mudar o valor do pedido
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.addRow(new Object[]{p.getId(), p.getNome(), p.getId_fornecedor(), p.getQuantDisponivel(), 0, p.getValor()});
         System.out.println("");
@@ -112,12 +123,7 @@ public class Carrinho extends javax.swing.JPanel {
                         // Pega os valores da linha
                         int idProduto = (int) jTable2.getValueAt(row, 0);
                         quantDesejadaProd = Integer.parseInt(jTable2.getValueAt(row, 4).toString());
-                        for (ProdutoDTO produto : listaCarrinho) {
-                            if (produto.getProd().getId() == idProduto) {
-                                produto.setQuantidadeDesejada(quantDesejadaProd);
-                                break;
-                            }
-                        }
+                        
 
                         // Validação
                         if (quantDesejadaProd < 0 || quantDesejadaProd > quantidadeTotalProd) {
@@ -132,8 +138,16 @@ public class Carrinho extends javax.swing.JPanel {
                         jTable2.setValueAt(novaDisponivel, row, 3);
 
                         // Atualiza "Valor"
-                        double novoValor = valorProduto* quantDesejadaProd;
+                        double novoValor = valorProduto * quantDesejadaProd;
                         jTable2.setValueAt(novoValor, row, 5);
+                        //atualiza valores da listaCarrinho
+                        for (ProdutoDTO produto : listaCarrinho) {
+                            if (produto.getProd().getId() == idProduto) {
+                                produto.setQuantidadeDesejada(quantDesejadaProd);
+                                produto.getProd().setQuantDisponivel(novaDisponivel);
+                                break;
+                            }
+                        }
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -160,6 +174,8 @@ public class Carrinho extends javax.swing.JPanel {
         jTable2 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jInputSearch = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(872, 557));
         setPreferredSize(new java.awt.Dimension(848, 659));
@@ -197,9 +213,29 @@ public class Carrinho extends javax.swing.JPanel {
             }
         });
 
+        jInputSearch.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jInputSearchFocusGained(evt);
+            }
+        });
+        jInputSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jInputSearchActionPerformed(evt);
+            }
+        });
         jInputSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jInputSearchKeyReleased(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setText("Carrinho de compras");
+
+        jButton2.setText("Delete um produto");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -207,29 +243,40 @@ public class Carrinho extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(298, 298, 298)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(374, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jInputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addGap(267, 267, 267)
+                .addComponent(jLabel1)
+                .addContainerGap(273, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 866, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jInputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(292, 292, 292)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jInputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jInputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(jButton1)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -238,39 +285,39 @@ public class Carrinho extends javax.swing.JPanel {
         //1 criar pedido 
         //2 relacionar itenspedido com pedido
         //3 atualizar o qunatidade disponivel de produtos com o uso de produtoDTO
-        
+
         //percorre tabela para somar o total do pedido
         int totalRows = jTable2.getRowCount();
         for (int i = 0; i < totalRows; i++) {
-            valorTotalCal += Double.parseDouble(jTable2.getValueAt( i,5).toString());
+            valorTotalCal += Double.parseDouble(jTable2.getValueAt(i, 5).toString());
 
-        }System.out.println("total a ser pago no pedido = "+valorTotalCal);
-        
-        Pedido pedido = new Pedido(RequisitanteLogin.getId(),listaCarrinho,valorTotalCal);
-        
+        }
+        System.out.println("total a ser pago no pedido = " + valorTotalCal);
+
+        Pedido pedido = new Pedido(RequisitanteLogin.getId(), listaCarrinho, valorTotalCal);
+
         new PedidoDAO().createPedido(pedido);
         System.out.println("criou pedido no banco");
+        JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Pedido feito (Identificador do pedido : " + pedido.getId_pedido() + ")");
         //s
-        
+
         for (ProdutoDTO produtoDTO : listaCarrinho) {
             new itensPedidoDAO().createItensPedido(new itensPedido(pedido.getId_pedido(), produtoDTO.getProd().getId(), produtoDTO.getQuantidadeDesejada()));
         }
         System.out.println("itens pedido criado no banco");
         //3
+        
         for (ProdutoDTO produtoDTO : listaCarrinho) {//ainda não funciona
+            System.out.println(listaCarrinho);
             new ProdutoDAO().updateProduto(produtoDTO.getProd(), produtoDTO.getProd().getId());
         }
-         System.out.println("dados de produtos atualizado no banco");
-        
+        System.out.println("dados de produtos atualizado no banco");
 
         
-        
-       
-        JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this),"Pedido feito");
 
     }//GEN-LAST:event_jButton1ActionPerformed
-    
-    
+
+
     private void jInputSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jInputSearchKeyReleased
         // TODO add your handling code here:
         ProdutoDAO prod = new ProdutoDAO();
@@ -300,13 +347,42 @@ public class Carrinho extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jInputSearchKeyReleased
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String[] idDelete = JOptionPane.showInputDialog("Digite o id do produto:").split(",");
+        for (int cont = 0; cont < listaCarrinho.size(); cont++) {
+            for (String prodId : idDelete) {
+                System.out.print("ID = ");
+                System.out.println(prodId);
+
+                if (listaCarrinho.get(cont).getProd().getId().equals(Integer.parseInt(prodId)) && ids.get(cont).equals(Integer.parseInt(prodId))) {
+                    listaCarrinho.remove(cont);
+                    ids.remove(cont);
+                }
+            }
+        }
+
+        this.renderizandoDados(listaCarrinho);
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jInputSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInputSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jInputSearchActionPerformed
+
+    private void jInputSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInputSearchFocusGained
+        // TODO add your handling code here:
+        jInputSearch.setText("");
+        jInputSearch.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jInputSearchFocusGained
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JTextField jInputSearch;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 
-   
 }

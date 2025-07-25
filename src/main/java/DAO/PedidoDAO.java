@@ -25,6 +25,7 @@ public class PedidoDAO extends CrudGenerico {
     private itensPedidoDAO ip = new itensPedidoDAO();
 
     public boolean createPedido(Pedido ped) {//pedido possui uma hash com id = {nome, quantidade desejada}
+        System.out.println("o pedido criado é o :"+ped.getId_pedido());
         String sql = new String();
 sql = "INSERT INTO pedido (id_pedido, id_requisitante, total_pedido, data_pedido, status) VALUES (" +
        ped.getId_pedido() + ", " +

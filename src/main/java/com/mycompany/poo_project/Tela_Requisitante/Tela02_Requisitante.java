@@ -8,6 +8,7 @@ import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Carrinho;
 import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Situacao;
 import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Visualizador;
 import java.awt.BorderLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
@@ -21,14 +22,22 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
      */
     public Tela02_Requisitante() {
         initComponents();
-        
+
         Visualizador tela1 = new Visualizador();
         tela1.setSize(872, 557);
         tela1.setLocation(0, 0);
-        
+
         content.removeAll();
-        content.add(tela1,BorderLayout.CENTER);
+        content.add(tela1, BorderLayout.CENTER);
         content.repaint();
+        /*ImageIcon icon = new ImageIcon(getClass().getResource("/imagens/vista-lateral-vazia-do-carrinho-de-compras_1")); // Load image from resources
+        BProdutos.setIcon(icon); // Set image as icon
+
+        BProdutos.setText(""); // Remove text
+        BProdutos.setBorderPainted(false); // Remove border (opcional)
+        BProdutos.setContentAreaFilled(false); // Remove fundo (opcional)
+        BProdutos.setFocusPainted(false); // Remove efeito de foco (opcional)*/
+
     }
 
     /**
@@ -41,33 +50,33 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        PCarrinho = new javax.swing.JButton();
-        PProdutos = new javax.swing.JButton();
-        PSituacao = new javax.swing.JButton();
+        BCarrinho = new javax.swing.JButton();
+        BProdutos = new javax.swing.JButton();
+        BSituacao = new javax.swing.JButton();
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        PCarrinho.setText("Carrinho");
-        PCarrinho.addActionListener(new java.awt.event.ActionListener() {
+        BCarrinho.setText("Carrinho");
+        BCarrinho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PCarrinhoActionPerformed(evt);
+                BCarrinhoActionPerformed(evt);
             }
         });
 
-        PProdutos.setText("Produtos");
-        PProdutos.addActionListener(new java.awt.event.ActionListener() {
+        BProdutos.setText("Produtos");
+        BProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PProdutosActionPerformed(evt);
+                BProdutosActionPerformed(evt);
             }
         });
 
-        PSituacao.setText("Situação");
-        PSituacao.addActionListener(new java.awt.event.ActionListener() {
+        BSituacao.setText("Situação");
+        BSituacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PSituacaoActionPerformed(evt);
+                BSituacaoActionPerformed(evt);
             }
         });
 
@@ -78,20 +87,20 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PCarrinho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PSituacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                    .addComponent(BProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BCarrinho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BSituacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(78, 78, 78)
-                .addComponent(PProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(98, 98, 98)
-                .addComponent(PCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
         );
 
@@ -121,35 +130,34 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void PSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PSituacaoActionPerformed
+    private void BSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSituacaoActionPerformed
         // TODO add your handling code here:
-        Situacao s = new  Situacao();
-       this.renderizaJPanel(s);
-    }//GEN-LAST:event_PSituacaoActionPerformed
+        Situacao s = new Situacao();
+        this.renderizaJPanel(s);
+    }//GEN-LAST:event_BSituacaoActionPerformed
 
-    private void PProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PProdutosActionPerformed
+    private void BProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BProdutosActionPerformed
         // TODO add your handling code here:
         Visualizador v = new Visualizador();
         this.renderizaJPanel(v);
-    }//GEN-LAST:event_PProdutosActionPerformed
+    }//GEN-LAST:event_BProdutosActionPerformed
 
-    private void PCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PCarrinhoActionPerformed
+    private void BCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCarrinhoActionPerformed
         // TODO add your handling code here:
         Carrinho c = new Carrinho();
         this.renderizaJPanel(c);
-    }//GEN-LAST:event_PCarrinhoActionPerformed
-    
-    private void renderizaJPanel(JPanel p){
-       p.setSize(872, 557);        // Define o tamanho do painel novo
-       p.setLocation(0, 0);        // Define a posição inicial
+    }//GEN-LAST:event_BCarrinhoActionPerformed
 
-       content.removeAll();        // Remove o conteúdo anterior
-       content.add(p, BorderLayout.CENTER); // Adiciona o novo painel
+    private void renderizaJPanel(JPanel p) {
+        p.setSize(872, 557);        // Define o tamanho do painel novo
+        p.setLocation(0, 0);        // Define a posição inicial
 
-       content.revalidate();       // REORGANIZA os componentes com base no layout
-       content.repaint();          //️ REDESENHA a interface com os componentes atualizados
-   }
+        content.removeAll();        // Remove o conteúdo anterior
+        content.add(p, BorderLayout.CENTER); // Adiciona o novo painel
 
+        content.revalidate();       // REORGANIZA os componentes com base no layout
+        content.repaint();          //️ REDESENHA a interface com os componentes atualizados
+    }
 
     /**
      * @param args the command line arguments
@@ -188,9 +196,9 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton PCarrinho;
-    private javax.swing.JButton PProdutos;
-    private javax.swing.JButton PSituacao;
+    private javax.swing.JButton BCarrinho;
+    private javax.swing.JButton BProdutos;
+    private javax.swing.JButton BSituacao;
     private javax.swing.JPanel content;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

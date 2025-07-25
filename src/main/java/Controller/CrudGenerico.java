@@ -65,6 +65,10 @@ public abstract class CrudGenerico {
             }
 
         }
+       /* System.out.println("colunas {");
+        for (String coluna : colunas)System.out.println(coluna) ;
+                System.out.println("}");
+        */
         StringBuilder sql = new StringBuilder();
         sql.append("UPDATE " + tabela + " SET ");
         for (int cont1 = 0; cont1 < colunas.size(); cont1++) {
@@ -78,11 +82,11 @@ public abstract class CrudGenerico {
         sql.append(" WHERE " + nomeCampoID + " = ?");
 
         try (PreparedStatement ps = conexao.prepareStatement(sql.toString())) {
-            for (int i = 0; i < fields.length; i++) {//esse for é para substituir ? pelo valor
+            for (int i = 1; i < fields.length; i++) {//esse for é para substituir ? pelo valor
                 fields[i].setAccessible(true);
-                ps.setObject(i + 1, fields[i].get(obj)); // JDBC faz o escape
+                ps.setObject(i, fields[i].get(obj)); // JDBC faz o escape
             }
-            ps.setInt(fields.length + 1, id);
+            ps.setInt(fields.length, id);
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
             System.out.println("============================================");
