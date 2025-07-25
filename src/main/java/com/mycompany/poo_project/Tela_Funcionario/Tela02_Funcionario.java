@@ -4,10 +4,9 @@
  */
 package com.mycompany.poo_project.Tela_Funcionario;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import DAO.PedidoDAO;
+import Model.Pedido;
+import Model.StatusPedido;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -54,32 +53,36 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
     private void carregarDados() {
         DefaultTableModel modelo = (DefaultTableModel) tabelaPedidosPendentes.getModel();
         modelo.setRowCount(0); 
+        
+        PedidoDAO dao = new PedidoDAO();
+        List<Pedido> pedidos = dao.readPedido();
 
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:MySQL://localhost:3306/siga_bd", "root", "root12345");
-            String sql = "SELECT p.id_pedido, e.nome_empresa, p.data_pedido, p.total_pedido, p.status "
-                   + "FROM pedido p "
-                   + "JOIN empresa e ON p.id_requisitante = e.id_empresa "
-                   + "WHERE p.status = 'Pendente'";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
+        for (Pedido p : pedidos) {
+            if (p.getStatus() == StatusPedido.PENDENTE) {
                 modelo.addRow(new Object[]{
                     false,
-                    rs.getInt("id_pedido"),
-                    rs.getString("nome_empresa"),
-                    rs.getDate("data_pedido"),
-                    rs.getBigDecimal("total_pedido"),
-                    rs.getString("status")
+                    p.getId_pedido(),
+                    p.getId_requisitante(),
+                    java.sql.Date.valueOf(p.getData_pedido()),
+                    p.getValorTotal(),
+                    p.getStatus().toString()
                 });
             }
-
-            conn.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar pedidos: " + e.getMessage());
         }
+        
     }
+    
+    
+    private void atualizarStatusPedidos(List<Integer>ids, StatusPedido novoStatus){
+        PedidoDAO pdao = new PedidoDAO();
+        for (int id : ids) {
+            Pedido p = new Pedido();
+            p.setStatus(novoStatus);
+            pdao.updatePedido(p,id);
+        }
+
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -189,27 +192,11 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
 
         int opcao = JOptionPane.showConfirmDialog(this, "Deseja aceitar os pedidos selecionados?", "Confirmação", JOptionPane.YES_NO_OPTION);
         if (opcao == JOptionPane.YES_OPTION) {
-            try {
-                Connection conn = DriverManager.getConnection("jdbc:MySQL://localhost:3306/siga_bd", "root", "root12345");
-                conn.setAutoCommit(false);
-
-                String sql = "UPDATE pedido SET status = 'Empacotando' WHERE id_pedido = ?";
-                PreparedStatement stmt = conn.prepareStatement(sql);
-
-                for (int idPedido : pedidosSelecionados) {
-                    stmt.setInt(1, idPedido);
-                    stmt.executeUpdate();
-                }
-
-                conn.commit();
-                conn.close();
-
-                JOptionPane.showMessageDialog(this, "Pedidos aceitos.");
-                carregarDados();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
-            }
+            atualizarStatusPedidos(pedidosSelecionados, StatusPedido.APROVADO);
+            JOptionPane.showMessageDialog(this, "Pedidos aceitos.");
+            carregarDados();
         }
+    
     }//GEN-LAST:event_btnAceitarActionPerformed
 
     private void btnRecusarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecusarActionPerformed
@@ -231,27 +218,11 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
 
         int opcao = JOptionPane.showConfirmDialog(this, "Deseja recusar os pedidos selecionados?", "Confirmação", JOptionPane.YES_NO_OPTION);
         if (opcao == JOptionPane.YES_OPTION) {
-            try {
-                Connection conn = DriverManager.getConnection("jdbc:MySQL://localhost:3306/siga_bd", "root", "root12345");
-                conn.setAutoCommit(false);
-
-                String sql = "UPDATE pedido SET status = 'Recusado' WHERE id_pedido = ?";
-                PreparedStatement stmt = conn.prepareStatement(sql);
-
-                for (int idPedido : pedidosSelecionados) {
-                    stmt.setInt(1, idPedido);
-                    stmt.executeUpdate();
-                }
-
-                conn.commit();
-                conn.close();
-
-                JOptionPane.showMessageDialog(this, "Pedidos recusados.");
-                carregarDados();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
-            }
+            atualizarStatusPedidos(pedidosSelecionados, StatusPedido.NEGADO);
+            JOptionPane.showMessageDialog(this, "Pedidos recusados.");
+            carregarDados();
         }
+
     }//GEN-LAST:event_btnRecusarActionPerformed
 
     private void btnVerProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProdutosActionPerformed

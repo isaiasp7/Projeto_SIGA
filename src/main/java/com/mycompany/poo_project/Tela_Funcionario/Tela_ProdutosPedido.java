@@ -4,11 +4,14 @@
  */
 package com.mycompany.poo_project.Tela_Funcionario;
 
+import DAO.itensPedidoDAO;
+import DTO.ProdutoDTO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,34 +39,24 @@ public class Tela_ProdutosPedido extends javax.swing.JFrame {
         setLocationRelativeTo(null); 
     }
 
-    
     private void carregarProdutos() {
         DefaultTableModel model = (DefaultTableModel) tabelaProdutos.getModel();
         model.setRowCount(0); 
 
-        String sql = "SELECT p.id_prod, p.nome_prod, ip.quantidade, p.preco " +
-                     "FROM produto p " +
-                     "JOIN itensPedido ip ON p.id_prod = ip.idProduto_fk " +
-                     "WHERE ip.idPedido_fk = ?";
+        itensPedidoDAO ipdao = new itensPedidoDAO();
+        List<ProdutoDTO> lista = ipdao.getProdutosPorPedido(idPedido);
 
-        try (Connection conn = DriverManager.getConnection("jdbc:MySQL://localhost:3306/siga_bd", "root", "root12345");
-             PreparedStatement pst = conn.prepareStatement(sql)) {
+        for (ProdutoDTO dto : lista) {
+            int id = dto.getProd().getId();
+            String nome = dto.getProd().getNome();
+            int quantidade = dto.getQuantidadeDesejada();
+            double preco = dto.getProd().getValor();
 
-            pst.setInt(1, idPedido);
-            ResultSet rs = pst.executeQuery();
-
-            while (rs.next()) {
-                int idProd = rs.getInt("id_prod");
-                String nomeProd = rs.getString("nome_prod");
-                int quantidade = rs.getInt("quantidade");
-                double preco = rs.getDouble("preco");
-
-                model.addRow(new Object[]{idProd, nomeProd, quantidade, preco});
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar produtos: " + e.getMessage());
+            model.addRow(new Object[]{id, nome, quantidade, preco});
         }
+      
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

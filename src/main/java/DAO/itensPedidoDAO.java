@@ -4,11 +4,17 @@
  */
 package DAO;
 
+import Controller.ConexaoSingleton;
 import Controller.CrudGenerico;
 import Controller.Montador.MontadorPedido;
 import DTO.ProdutoDTO;
 import Model.Pedido;
+import Model.Produto;
 import Model.itensPedido;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +23,10 @@ import java.util.Map;
  *
  * @author Isaias
  */
+
 public class itensPedidoDAO extends CrudGenerico {
+    
+    private Connection conexao = ConexaoSingleton.getInstancia().getConexao();
     private String nomeTabelaBd = "itenspedido";
 
     public boolean createItensPedido(itensPedido ip) {
@@ -34,6 +43,37 @@ public class itensPedidoDAO extends CrudGenerico {
 
     public boolean deleteItensPedido(int id) {
         return this.delete(this.nomeTabelaBd, "id_pedido", id);
+        }
+
+        public List<ProdutoDTO> getProdutosPorPedido(int idPedido) {
+        List<ProdutoDTO> lista = new ArrayList<>();
+
+        String sql = "SELECT p.id_produto, p.nome_produto, p.preco, ip.quantidade " +
+                     "FROM itenspedido ip " +
+                     "JOIN produto p ON p.id_produto = ip.idProduto_fk " +
+                     "WHERE ip.idPedido_fk = ?";
+
+        try (PreparedStatement ps = conexao.prepareStatement(sql)) {
+            ps.setInt(1, idPedido);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Produto prod = new Produto();
+                prod.setId(rs.getInt("id_produto"));
+                prod.setNome(rs.getString("nome_produto"));
+                prod.setValor(rs.getDouble("preco"));
+
+                int qtdDesejada = rs.getInt("quantidade");
+
+                ProdutoDTO dto = new ProdutoDTO(prod, qtdDesejada);
+                lista.add(dto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lista;
     }
 
+    
 }
