@@ -2,13 +2,9 @@ package Model;
 
 
 import DTO.ProdutoDTO;
-import Model.Requisitante;
-import static Model.StatusPedido.PENDENTE;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -26,14 +22,14 @@ public class Pedido {
     private List<ProdutoDTO> lista_pedido = new ArrayList<>();// lista_pedido = id_produto= {nome, quantidade pedida}
     private Integer id_funcionario;
     private LocalDate data_pedido;
-    private StatusPedido status;
-    private double valorTotal;
+    private String status;
+    private double total_pedido;
 
     public Pedido( Integer id_requisitante) {
         this.id_pedido = Utils.Utilitarios.gerar_id("pedido");
         this.id_requisitante = id_requisitante;
         this.data_pedido = LocalDate.now();
-        this.status = PENDENTE;
+        this.status = StatusPedido.Pendente.name();
     }
 
     public Pedido(Integer id_requisitante, List<ProdutoDTO> lista_pedido, double valor) {
@@ -41,8 +37,8 @@ public class Pedido {
         this.id_requisitante = id_requisitante;
         this.lista_pedido = lista_pedido;
          this.data_pedido = LocalDate.now();
-        this.status = PENDENTE;
-        this.valorTotal = valor;
+        this.status = StatusPedido.Pendente.name();
+        this.total_pedido = valor;
 
     }
     
@@ -65,11 +61,11 @@ public class Pedido {
     }
 
     public void setStatus(StatusPedido status) {
-        this.status = status;
+        this.status = status.name();
     }
     
     
-    public StatusPedido getStatus() {
+    public String getStatus() {
         return status;
     }
 
@@ -96,11 +92,11 @@ public class Pedido {
     }
 
     public double getValorTotal() {
-        return valorTotal;
+        return total_pedido;
     }
 
     public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
+        this.total_pedido = valorTotal;
     }
 
    

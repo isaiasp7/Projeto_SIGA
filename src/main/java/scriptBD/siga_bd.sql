@@ -43,7 +43,7 @@ create table pedido (
     id_requisitante int not null,
     id_funcionario int,
     data_pedido date not null,
- status enum('Pendente','Recusado','Empacotando', 'Enviado','Entregue') not null,
+ status enum('Pendente','Recusado','Aprovado','Empacotando', 'Enviado','Entregue') not null,
    total_pedido decimal(7,2) not null,
     constraint fk_pedido_empresa
 		foreign key (id_requisitante) references empresa (id_empresa)
@@ -54,6 +54,7 @@ create table pedido (
    
 	
 );
+
 
 create table itensPedido (
 	idPedido_fk int not null,

@@ -6,26 +6,14 @@ package com.mycompany.poo_project.Login_cadastro;
 
 import DAO.EmpresaDAO;
 import DAO.FuncionarioDAO;
-import DAO.ProdutoDAO;
 import Login.RequisitanteLogin;
-import Model.Produto;
 import com.mycompany.poo_project.Login_cadastro.Tela01_cadastro;
 import com.mycompany.poo_project.Tela_Funcionario.Tela02_Funcionario;
 import com.mycompany.poo_project.Tela_Requisitante.Tela02_Requisitante;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridLayout;
-import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import org.w3c.dom.css.RGBColor;
 
 /**
  *
@@ -330,6 +318,7 @@ public class Tela01_Login extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Tela01_Login().setVisible(true);
             }

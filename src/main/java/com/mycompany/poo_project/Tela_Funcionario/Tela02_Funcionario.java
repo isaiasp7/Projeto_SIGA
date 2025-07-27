@@ -58,7 +58,7 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
         List<Pedido> pedidos = dao.readPedido();
 
         for (Pedido p : pedidos) {
-            if (p.getStatus() == StatusPedido.PENDENTE) {
+            if (p.getStatus() == StatusPedido.Pendente.name()) {
                 modelo.addRow(new Object[]{
                     false,
                     p.getId_pedido(),
@@ -77,6 +77,7 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
         PedidoDAO pdao = new PedidoDAO();
         for (int id : ids) {
             Pedido p = new Pedido();
+            p.setId_requisitante(2);
             p.setStatus(novoStatus);
             pdao.updatePedido(p,id);
         }
@@ -192,7 +193,7 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
 
         int opcao = JOptionPane.showConfirmDialog(this, "Deseja aceitar os pedidos selecionados?", "Confirmação", JOptionPane.YES_NO_OPTION);
         if (opcao == JOptionPane.YES_OPTION) {
-            atualizarStatusPedidos(pedidosSelecionados, StatusPedido.APROVADO);
+            atualizarStatusPedidos(pedidosSelecionados, StatusPedido.Aprovado);
             JOptionPane.showMessageDialog(this, "Pedidos aceitos.");
             carregarDados();
         }
@@ -218,7 +219,7 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
 
         int opcao = JOptionPane.showConfirmDialog(this, "Deseja recusar os pedidos selecionados?", "Confirmação", JOptionPane.YES_NO_OPTION);
         if (opcao == JOptionPane.YES_OPTION) {
-            atualizarStatusPedidos(pedidosSelecionados, StatusPedido.NEGADO);
+            atualizarStatusPedidos(pedidosSelecionados, StatusPedido.Recusado);
             JOptionPane.showMessageDialog(this, "Pedidos recusados.");
             carregarDados();
         }

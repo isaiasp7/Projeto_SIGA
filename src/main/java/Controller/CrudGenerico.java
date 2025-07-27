@@ -58,17 +58,22 @@ public abstract class CrudGenerico {
         List<String> colunas = new ArrayList<>();
         List<String> valores = new ArrayList<>();
 
+        List<Field> camposValidos = new ArrayList<>();
+
         for (Field f : fields) {
-            if (!f.getName().equals(nomeCampoID)) {
+            if (!f.getName().equals(nomeCampoID) && !f.getName().equals("lista_pedido")) {
                 colunas.add(f.getName());
                 valores.add("?");
+                camposValidos.add(f);
             }
-
         }
-       /* System.out.println("colunas {");
-        for (String coluna : colunas)System.out.println(coluna) ;
-                System.out.println("}");
-        */
+
+        System.out.println("colunas {");
+        for (String coluna : colunas) {
+            System.out.println(coluna);
+        }
+        System.out.println("}");
+
         StringBuilder sql = new StringBuilder();
         sql.append("UPDATE " + tabela + " SET ");
         for (int cont1 = 0; cont1 < colunas.size(); cont1++) {
@@ -82,15 +87,18 @@ public abstract class CrudGenerico {
         sql.append(" WHERE " + nomeCampoID + " = ?");
 
         try (PreparedStatement ps = conexao.prepareStatement(sql.toString())) {
-            for (int i = 1; i < fields.length; i++) {//esse for é para substituir ? pelo valor
-                fields[i].setAccessible(true);
-                ps.setObject(i, fields[i].get(obj)); // JDBC faz o escape
+            for (int i = 0; i < camposValidos.size(); i++) {
+                camposValidos.get(i).setAccessible(true);
+                ps.setObject(i + 1, camposValidos.get(i).get(obj)); // JDBC index starts at 1
             }
-            ps.setInt(fields.length, id);
+
+// último parâmetro: o ID (WHERE cláusula)
+            ps.setObject(camposValidos.size() + 1, id);
+
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
             System.out.println("============================================");
-            System.out.println("Erro : " + e);
+            System.out.println("Erro update: " + e);
         }
         return false;
 

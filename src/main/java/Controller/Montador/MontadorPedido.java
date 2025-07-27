@@ -6,6 +6,7 @@ package Controller.Montador;
 
 import Controller.MontadorReadAll;
 import Model.Pedido;
+import Model.StatusPedido;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -21,6 +22,7 @@ public class MontadorPedido implements MontadorReadAll<Pedido>{
        ped.setId_pedido(rs.getInt("id_pedido"));
        ped.setId_requisitante(rs.getInt("id_requisitante"));
        ped.setId_funcionario(rs.getInt("id_funcionario"));
+       ped.setStatus(StatusPedido.conversor(rs.getString("status")));
        return ped;
     }
     

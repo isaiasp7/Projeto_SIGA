@@ -13,14 +13,19 @@ import Model.Produto;
 public class ProdutoDTO {
       private Produto prod;
       private int quantidadeDesejada;
+
+    public ProdutoDTO() {
+    }
     
+public ProdutoDTO(Produto p,int quantidadeDesejada) {
+        this.setProd(p);
+}
 
-   
-
-    public ProdutoDTO(Produto p,int quantidadeDesejada) {
-        this.prod.setId(p.getId());
+    public ProdutoDTO(int p,int quantidadeDesejada) {
+        this.setID(p);
         this.quantidadeDesejada = quantidadeDesejada;
     }
+   
 
     public ProdutoDTO(Produto prod) {
         this.prod = prod;
@@ -31,7 +36,12 @@ public class ProdutoDTO {
     public Produto getProd() {
         return prod;
     }
-
+    public void setPreco(double v){
+    this.prod.setValor(v);
+    }
+    public void setID(int id){
+        this.prod.setId(id);
+    }
     public void setProd(Produto prod) {
         this.prod = prod;
     }

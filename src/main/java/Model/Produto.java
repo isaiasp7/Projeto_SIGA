@@ -18,6 +18,15 @@ public class Produto {
     private double preco;
     
     public Produto() {}
+    public Produto(Produto p) {
+        this.id_fornecedor_fk = p.getId_fornecedor();
+        this.nome_prod = p.getNome();
+        this.id_prod = p.getId();
+        this.preco = p.getValor();
+        this.quant_disponivel = p.getQuantDisponivel();
+        
+    }
+    
     public Produto(String nome, int quantDisponivel, Integer id_fornecedor, double valor) {
         this.id_prod = Utilitarios.gerar_id("produto");
         this.preco = valor;
@@ -30,6 +39,12 @@ public class Produto {
         this.nome_prod = nome;
         this.id_fornecedor_fk = id_fornecedor;
     }
+
+    public Produto(Integer id_prod, String nome_prod) {
+        this.id_prod = id_prod;
+        this.nome_prod = nome_prod;
+    }
+    
 
     
     

@@ -9,5 +9,25 @@ package Model;
  * @author Isaias
  */
 public enum StatusPedido {
-    PENDENTE, APROVADO, NEGADO;
+    Pendente,Recusado,Aprovado,Empacotando, Enviado,Entregue;
+    public static StatusPedido conversor(String tipo){
+        //'Pendente','Recusado','Empacotando', 'Enviado','Entregue'
+        switch (tipo) {
+            case "Pendente":
+                return Pendente;
+            case "Recusado":
+                return Recusado;
+            case "Empacotando":
+                return Empacotando;
+            case "Aprovado":
+                return Aprovado;
+            case "Enviado":
+                return Enviado;
+            case "Entregue":
+                return Entregue;
+            default:
+                throw new AssertionError();
+        }
+    }
+    
 }

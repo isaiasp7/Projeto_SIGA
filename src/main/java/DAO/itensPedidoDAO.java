@@ -7,6 +7,7 @@ package DAO;
 import Controller.ConexaoSingleton;
 import Controller.CrudGenerico;
 import Controller.Montador.MontadorPedido;
+import Controller.Montador.MontadorProduto;
 import DTO.ProdutoDTO;
 import Model.Pedido;
 import Model.Produto;
@@ -23,9 +24,8 @@ import java.util.Map;
  *
  * @author Isaias
  */
-
 public class itensPedidoDAO extends CrudGenerico {
-    
+
     private Connection conexao = ConexaoSingleton.getInstancia().getConexao();
     private String nomeTabelaBd = "itenspedido";
 
@@ -43,29 +43,22 @@ public class itensPedidoDAO extends CrudGenerico {
 
     public boolean deleteItensPedido(int id) {
         return this.delete(this.nomeTabelaBd, "id_pedido", id);
-        }
+    }
 
-        public List<ProdutoDTO> getProdutosPorPedido(int idPedido) {
+    public List<ProdutoDTO> getProdutosPorPedido(int idPedido) {//
         List<ProdutoDTO> lista = new ArrayList<>();
 
-        String sql = "SELECT p.id_produto, p.nome_produto, p.preco, ip.quantidade " +
-                     "FROM itenspedido ip " +
-                     "JOIN produto p ON p.id_produto = ip.idProduto_fk " +
-                     "WHERE ip.idPedido_fk = ?";
+        String sql = "SELECT p.id_prod, p.nome_prod, p.preco, ip.quantidade "
+                + "FROM itenspedido ip "
+                + "JOIN produto p ON p.id_prod = ip.idProduto_fk "
+                + "WHERE ip.idPedido_fk = ?";
 
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
             ps.setInt(1, idPedido);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Produto prod = new Produto();
-                prod.setId(rs.getInt("id_produto"));
-                prod.setNome(rs.getString("nome_produto"));
-                prod.setValor(rs.getDouble("preco"));
-
-                int qtdDesejada = rs.getInt("quantidade");
-
-                ProdutoDTO dto = new ProdutoDTO(prod, qtdDesejada);
+                ProdutoDTO dto = new ProdutoDTO(new MontadorProduto().montar(rs), rs.getInt("quantidade"));
                 lista.add(dto);
             }
         } catch (Exception e) {
@@ -75,5 +68,4 @@ public class itensPedidoDAO extends CrudGenerico {
         return lista;
     }
 
-    
 }
