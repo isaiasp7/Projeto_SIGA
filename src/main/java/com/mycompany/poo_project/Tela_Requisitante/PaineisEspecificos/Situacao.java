@@ -11,6 +11,9 @@ import Model.Pedido;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,7 +32,18 @@ public class Situacao extends javax.swing.JPanel {
         lista = new PedidoDAO().requestByIdRequisitante(/*RequisitanteLogin.getId()*/5);
         initComponents();
         this.renderizaDados();
-
+        System.out.println("tela iniciada");
+         // Aplica o centralizador a todas as colunas
+          DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < jTableDefault.getColumnCount(); i++) {
+            jTableDefault.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+            jTableDetalhada.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) jTableDefault.getTableHeader().getDefaultRenderer();
+        DefaultTableCellRenderer headerRenderer2 = (DefaultTableCellRenderer) jTableDetalhada.getTableHeader().getDefaultRenderer();
+        headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        headerRenderer2.setHorizontalAlignment(SwingConstants.CENTER);
     }
 
     /**
@@ -61,13 +75,32 @@ public class Situacao extends javax.swing.JPanel {
             new String [] {
                 "Id Pedido", "Situação"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableDefault.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableDefaultMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTableDefault);
+        if (jTableDefault.getColumnModel().getColumnCount() > 0) {
+            jTableDefault.getColumnModel().getColumn(0).setResizable(false);
+            jTableDefault.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel2.setText("Situação dos pedidos");
@@ -78,15 +111,22 @@ public class Situacao extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id Produto", "Quantidade"
+                "Id Produto", "Nome", "Quantidade desejada"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTableDetalhada.setMinimumSize(new java.awt.Dimension(30, 80));
@@ -109,19 +149,6 @@ public class Situacao extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,6 +158,19 @@ public class Situacao extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabelValorTotal)
                         .addGap(86, 86, 86))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,6 +194,9 @@ public class Situacao extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+              JOptionPane.showConfirmDialog(null,"Tem certeza que deseja cancelar o pedido:",
+          "Confirme a ação",JOptionPane.YES_NO_OPTION);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTableDefaultMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDefaultMouseClicked
@@ -161,14 +204,16 @@ public class Situacao extends javax.swing.JPanel {
         if (jTableDefault.getSelectedRow() != -1) {
             DefaultTableModel model = (DefaultTableModel) jTableDetalhada.getModel();
             model.setRowCount(0);
-            Integer idNaTabela = (Integer) jTableDefault.getValueAt(jTableDefault.getSelectedRow(), jTableDefault.getSelectedColumn());
+            Integer idNaTabela = Integer.parseInt(jTableDefault.getValueAt(jTableDefault.getSelectedRow(), 0).toString());
+            System.out.println("row select");
             for (Map.Entry<Pedido, List<ProdutoDTO>> entry : lista.entrySet()) {
                 Pedido pedido = entry.getKey();
-
                 List<ProdutoDTO> val = entry.getValue();
-                if (pedido.getId_pedido() == idNaTabela) {
-                    for (int i = 0; i < lista.size(); i++) {
-                        model.addRow(new Object[]{val.get(i).getProd().getId(), val.get(i).getQuantidadeDesejada()});
+                System.out.println(pedido.getId_pedido() +"=="+ idNaTabela);
+                if (pedido.getId_pedido().equals(idNaTabela)) {
+                    System.out.println("if");
+                    for (int i = 0; i < val.size(); i++) {
+                        model.addRow(new Object[]{val.get(i).getProd().getId(),val.get(i).getProd().getNome(), val.get(i).getQuantidadeDesejada()});
                         jLabelValorTotal.setText("Valor do pedido: "+pedido.getValorTotal()); 
                     }
 

@@ -98,6 +98,7 @@ public class Pedido {
     public void setValorTotal(double valorTotal) {
         this.total_pedido = valorTotal;
     }
+    
 
    
     

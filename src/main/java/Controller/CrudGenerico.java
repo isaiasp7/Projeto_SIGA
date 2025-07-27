@@ -166,7 +166,7 @@ public abstract class CrudGenerico {
         return null;
     }
 
-    public <T> T requestById(String tableName, String idColumn, Long id, MontadorReadAll<T> montador) {
+    public <T> T requestById(String tableName, String idColumn, Integer id, MontadorReadAll<T> montador) {
         String sql = "SELECT * FROM " + tableName + " WHERE " + idColumn + "= ?";
         try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setLong(1, id);

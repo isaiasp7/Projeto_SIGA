@@ -19,10 +19,12 @@ public class ProdutoDTO {
     
 public ProdutoDTO(Produto p,int quantidadeDesejada) {
         this.setProd(p);
+         this.quantidadeDesejada = quantidadeDesejada;
 }
 
     public ProdutoDTO(int p,int quantidadeDesejada) {
-        this.setID(p);
+        this.prod = new Produto();
+        this.prod.setId(p);
         this.quantidadeDesejada = quantidadeDesejada;
     }
    
@@ -38,9 +40,6 @@ public ProdutoDTO(Produto p,int quantidadeDesejada) {
     }
     public void setPreco(double v){
     this.prod.setValor(v);
-    }
-    public void setID(int id){
-        this.prod.setId(id);
     }
     public void setProd(Produto prod) {
         this.prod = prod;
