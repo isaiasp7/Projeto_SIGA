@@ -268,6 +268,7 @@ public class Tela01_Login extends javax.swing.JFrame {
                     String tipo = rs.getString("email"); // lê o valor do campo
 
                     if (tipo.contains("Emp")) {
+                        //new FuncionarioLogin()
                         this.getTelaFuncionario();
                     } else{ 
                         
