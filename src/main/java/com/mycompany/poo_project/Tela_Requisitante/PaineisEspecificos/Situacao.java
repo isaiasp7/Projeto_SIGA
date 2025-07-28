@@ -8,6 +8,7 @@ import DAO.PedidoDAO;
 import DAO.ProdutoDAO;
 import DTO.ProdutoDTO;
 import Model.Pedido;
+import Model.StatusPedido;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -143,7 +144,7 @@ public class Situacao extends javax.swing.JPanel {
         });
 
         jLabelValorTotal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelValorTotal.setText("O valor do pedido apareça aqui...");
+        jLabelValorTotal.setText("O valor do pedido aparece aqui...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -161,15 +162,15 @@ public class Situacao extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(jButton1)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -186,16 +187,42 @@ public class Situacao extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabelValorTotal)
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-              JOptionPane.showConfirmDialog(null,"Tem certeza que deseja cancelar o pedido:",
+             
+             int opcao = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja cancelar o pedido:",
           "Confirme a ação",JOptionPane.YES_NO_OPTION);
+             boolean selectRowTrue = false;
+             if (opcao==JOptionPane.YES_OPTION) {
+                  Object selectRowTable = jTableDefault.getValueAt(jTableDefault.getSelectedRow(), 0);
+                  for (Pedido pedido : lista.keySet()) {
+                      System.out.println("-----------------laço----------------------------");
+                      System.out.println(pedido.getId_pedido().equals(selectRowTable));
+                      System.out.println(pedido.getStatus().contains("Pendente"));
+                      if (pedido.getId_pedido().equals(selectRowTable) && pedido.getStatus().contains("Pendente")) {
+                           pedido.setStatus(StatusPedido.Recusado);
+                           new PedidoDAO().updatePedido(pedido, pedido.getId_pedido());
+                           selectRowTrue = true;
+                           JOptionPane.showMessageDialog(this, "Pedido cancelado com sucesso!!.","Ação concluida",JOptionPane.OK_OPTION);
+                           this.renderizaDados();
+                           
+                          break;
+                      }
+                 }System.out.println("----------------------fora do laco-----------------");
+        }
+             if (!selectRowTrue) {
+           
+                          JOptionPane.showMessageDialog(this, "O pedido não pode ser cancelado.");
+                          
+                      
+        }
+ 
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -209,7 +236,7 @@ public class Situacao extends javax.swing.JPanel {
             for (Map.Entry<Pedido, List<ProdutoDTO>> entry : lista.entrySet()) {
                 Pedido pedido = entry.getKey();
                 List<ProdutoDTO> val = entry.getValue();
-                System.out.println(pedido.getId_pedido() +"=="+ idNaTabela);
+                //System.out.println(pedido.getId_pedido() +"=="+ idNaTabela);
                 if (pedido.getId_pedido().equals(idNaTabela)) {
                     System.out.println("if");
                     for (int i = 0; i < val.size(); i++) {

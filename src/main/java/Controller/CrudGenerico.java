@@ -61,10 +61,21 @@ public abstract class CrudGenerico {
         List<Field> camposValidos = new ArrayList<>();
 
         for (Field f : fields) {
-            if (!f.getName().equals(nomeCampoID) && !f.getName().equals("lista_pedido")) {
-                colunas.add(f.getName());
-                valores.add("?");
-                camposValidos.add(f);
+            try {
+                f.setAccessible(true);
+                if (!f.getName().equals(nomeCampoID) && !f.getName().equals("lista_pedido")) {
+                    Object value = f.get(obj);
+                    if (value != null && !value.toString().isEmpty()) {
+                        colunas.add(f.getName());
+                        valores.add("?");
+                        camposValidos.add(f);
+                    }
+
+                }
+
+            } catch (IllegalAccessException | IllegalArgumentException e) {
+                System.out.println("ERRO update laco: " + e);
+                break;
             }
         }
 
