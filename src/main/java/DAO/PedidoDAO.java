@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,48 +72,55 @@ public class PedidoDAO extends CrudGenerico {
         System.out.println("requestByIdRequisitante");
         HashMap<Pedido, List<ProdutoDTO>> pedidosRequisitante = new HashMap<>();
 
-        String sql = "SELECT ped.id_pedido, " +
-"                  ped.status, " +
-"                    ip.idProduto_fk, " +
-"                   prod.nome_prod, " +
-"                     ip.quantidade as quantidadeDesejada, " +
-"                     prod.preco, "+
-                 "ped.total_pedido" + 
-"                FROM pedido ped " +
-"                INNER JOIN itenspedido ip ON ped.id_pedido = ip.idPedido_fk " +
-"                INNER JOIN produto prod ON ip.idProduto_fk = prod.id_prod " +
-"                WHERE ped.id_requisitante = ?";
+        String sql = "SELECT ped.id_pedido, "
+                + "                  ped.status, "
+                + "                    ip.idProduto_fk, "
+                + "                   prod.nome_prod, "
+                + "                     ip.quantidade as quantidadeDesejada, "
+                + "                     prod.preco, "
+                + "ped.total_pedido"
+                + "                FROM pedido ped "
+                + "                INNER JOIN itenspedido ip ON ped.id_pedido = ip.idPedido_fk "
+                + "                INNER JOIN produto prod ON ip.idProduto_fk = prod.id_prod "
+                + "                WHERE ped.id_requisitante = ?";
 
         //retorna {id_prod, nome_prod,quantidade,preco}
         try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
-            System.out.println("pos conexao");
 
             stmt.setLong(1, id_requisitante);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                System.out.println("valor encontrado, preenchendo hash");
                 //criando dados na mão
                 Pedido pedido = new Pedido();
                 pedido.setId_pedido(rs.getInt("id_pedido"));
                 pedido.setStatus(StatusPedido.conversor(rs.getString("status")));
                 pedido.setValorTotal(rs.getDouble("total_pedido"));
                 System.out.println("pedido");
-                ProdutoDTO produto = new ProdutoDTO(rs.getInt("idProduto_fk"),rs.getInt("quantidadeDesejada"));//ERRO
-                
-                
-                
+
+                ProdutoDTO produto = new ProdutoDTO(new ProdutoDAO().requestIdProduto(rs.getInt("idProduto_fk")), rs.getInt("quantidadeDesejada"));
+
                 // Se já tiver o pedido no mapa, só adiciona o produto
-                if (pedidosRequisitante.containsKey(pedido)) {
-                    pedidosRequisitante.get(pedido).add(new ProdutoDTO(produto.getProd(), rs.getInt("quantidadeDesejada")));
+                Pedido encontrado = null;
+                for (Pedido p : pedidosRequisitante.keySet()) {
+                   if (p.getId_pedido().equals(pedido.getId_pedido()) ){
+                        encontrado = p;
+                        break;
+                    }
+                }
+               if (encontrado != null) {
+                   System.out.println("encontrado=true > "+rs.getInt("quantidadeDesejada"));
+                    pedidosRequisitante.get(encontrado).add(new ProdutoDTO(produto.getProd(), rs.getInt("quantidadeDesejada")));
                 } else {
+                   System.out.println("encontrado=false > "+rs.getInt("quantidadeDesejada"));
                     List<ProdutoDTO> lista = new ArrayList<>();
                     lista.add(new ProdutoDTO(produto.getProd(), rs.getInt("quantidadeDesejada")));
                     pedidosRequisitante.put(pedido, lista);
                 }
+
             }
 
         } catch (SQLException ex) {
-            System.out.println("erro em requestByIdRequisitante : "+ex);
+            System.out.println("erro em requestByIdRequisitante : " + ex);
             //Logger.getLogger(CrudGenerico.class.getName()).log(Level.SEVERE, null, ex);
         }
         return pedidosRequisitante;

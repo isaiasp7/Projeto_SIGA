@@ -16,6 +16,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -75,8 +77,8 @@ public class Carrinho extends javax.swing.JPanel {
     private void renderizandoDados() {
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         if (ids.size() > 0) {
-            for (long l : ids) {
-                Produto p = prod.requestID(l);
+            for (Integer l : ids) {
+                Produto p = prod.requestIdProduto(l);
                 this.setListaCarrinho(new ProdutoDTO(p));
                 //this.quantidadeTotalProd = p.getQuantDisponivel();
                 //this.valorProduto = p.getValor();
@@ -329,6 +331,7 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
 
           DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
+        ids.clear();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

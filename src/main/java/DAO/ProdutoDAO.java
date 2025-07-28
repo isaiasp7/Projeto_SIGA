@@ -32,7 +32,7 @@ public class ProdutoDAO extends CrudGenerico {
         return this.readAll(this.nomeTabelaBd, new MontadorProduto());
     }
 
-    public boolean updateProduto(Produto obj, int id) {
+    public boolean updateProduto(Produto obj, int id){
        // System.out.println(" dentro de produtoUpdate");
         return this.update(this.nomeTabelaBd, obj, id, "id_prod");
     }
@@ -41,7 +41,7 @@ public class ProdutoDAO extends CrudGenerico {
         return this.delete(this.nomeTabelaBd, "id_prod", id);
     }
 
-    public Produto requestID(Long id) {//rever
+    public Produto requestIdProduto(Integer id) {//rever
        return this.requestById(nomeTabelaBd, "id_prod", id,new MontadorProduto());
     }
 
@@ -82,5 +82,7 @@ public class ProdutoDAO extends CrudGenerico {
         }
          return p;
     }
+
+    
 
 }

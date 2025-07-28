@@ -61,10 +61,21 @@ public abstract class CrudGenerico {
         List<Field> camposValidos = new ArrayList<>();
 
         for (Field f : fields) {
-            if (!f.getName().equals(nomeCampoID) && !f.getName().equals("lista_pedido")) {
-                colunas.add(f.getName());
-                valores.add("?");
-                camposValidos.add(f);
+            try {
+                f.setAccessible(true);
+                if (!f.getName().equals(nomeCampoID) && !f.getName().equals("lista_pedido")) {
+                    Object value = f.get(obj);
+                    if (value != null && !value.toString().isEmpty()) {
+                        colunas.add(f.getName());
+                        valores.add("?");
+                        camposValidos.add(f);
+                    }
+
+                }
+
+            } catch (IllegalAccessException | IllegalArgumentException e) {
+                System.out.println("ERRO update laco: " + e);
+                break;
             }
         }
 
@@ -166,7 +177,7 @@ public abstract class CrudGenerico {
         return null;
     }
 
-    public <T> T requestById(String tableName, String idColumn, Long id, MontadorReadAll<T> montador) {
+    public <T> T requestById(String tableName, String idColumn, Integer id, MontadorReadAll<T> montador) {
         String sql = "SELECT * FROM " + tableName + " WHERE " + idColumn + "= ?";
         try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setLong(1, id);
