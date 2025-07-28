@@ -4,86 +4,18 @@
  */
 package com.mycompany.poo_project.Tela_Funcionario;
 
-import DAO.PedidoDAO;
-import Model.Pedido;
-import Model.StatusPedido;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author Isaias
  */
 public class Tela02_Funcionario extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Tela02_Sistema01
      */
     public Tela02_Funcionario() {
         initComponents();
-
-        DefaultTableModel modelo = new DefaultTableModel(
-            new Object [][] {},
-            new String [] {
-                "Seleção", "ID", "Requisitante", "Data", "Total", "Status"
-            }
-        ) {
-            Class[] types = new Class [] {
-                Boolean.class, Integer.class, String.class, java.sql.Date.class, java.math.BigDecimal.class, String.class
-            };
-
-            @Override
-            public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
-            }
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return column == 0; // apenas checkbox editável
-            }
-        };
-
-        tabelaPedidosPendentes.setModel(modelo);
-
-        carregarDados();
     }
-    
-    private void carregarDados() {
-        DefaultTableModel modelo = (DefaultTableModel) tabelaPedidosPendentes.getModel();
-        modelo.setRowCount(0); 
-        
-        PedidoDAO dao = new PedidoDAO();
-        List<Pedido> pedidos = dao.readPedido();
-
-        for (Pedido p : pedidos) {
-            if (p.getStatus() == StatusPedido.Pendente.name()) {
-                modelo.addRow(new Object[]{
-                    false,
-                    p.getId_pedido(),
-                    p.getId_requisitante(),
-                    java.sql.Date.valueOf(p.getData_pedido()),
-                    p.getValorTotal(),
-                    p.getStatus().toString()
-                });
-            }
-        }
-        
-    }
-    
-    
-    private void atualizarStatusPedidos(List<Integer>ids, StatusPedido novoStatus){
-        PedidoDAO pdao = new PedidoDAO();
-        for (int id : ids) {
-            Pedido p = new Pedido();
-            p.setId_requisitante(2);
-            p.setStatus(novoStatus);
-            pdao.updatePedido(p,id);
-        }
-
-    }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -94,165 +26,71 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaPedidosPendentes = new javax.swing.JTable();
-        btnVerProdutos = new javax.swing.JButton();
-        btnAceitar = new javax.swing.JButton();
-        btnRecusar = new javax.swing.JButton();
+        painelMenu = new javax.swing.JPanel();
+        btnPedidosPendentes = new javax.swing.JButton();
+        painelPrincipal = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tabelaPedidosPendentes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Seleção", "ID", "Requisitante", "Data", "Total", "Status"
-            }
-        ));
-        jScrollPane1.setViewportView(tabelaPedidosPendentes);
-        if (tabelaPedidosPendentes.getColumnModel().getColumnCount() > 0) {
-            tabelaPedidosPendentes.getColumnModel().getColumn(5).setResizable(false);
-        }
+        painelMenu.setBackground(new java.awt.Color(255, 255, 255));
+        painelMenu.setPreferredSize(new java.awt.Dimension(112, 591));
 
-        jScrollPane2.setViewportView(jScrollPane1);
+        btnPedidosPendentes.setText("<html><center>Pedidos<br>Pendentes</center></html>");
+        btnPedidosPendentes.setPreferredSize(new java.awt.Dimension(78, 23));
 
-        btnVerProdutos.setText("Ver Produtos");
-        btnVerProdutos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerProdutosActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout painelMenuLayout = new javax.swing.GroupLayout(painelMenu);
+        painelMenu.setLayout(painelMenuLayout);
+        painelMenuLayout.setHorizontalGroup(
+            painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnPedidosPendentes, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        painelMenuLayout.setVerticalGroup(
+            painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelMenuLayout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(btnPedidosPendentes, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        btnAceitar.setText("Aceitar");
-        btnAceitar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceitarActionPerformed(evt);
-            }
-        });
-
-        btnRecusar.setText("Recusar");
-        btnRecusar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRecusarActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout painelPrincipalLayout = new javax.swing.GroupLayout(painelPrincipal);
+        painelPrincipal.setLayout(painelPrincipalLayout);
+        painelPrincipalLayout.setHorizontalGroup(
+            painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 464, Short.MAX_VALUE)
+        );
+        painelPrincipalLayout.setVerticalGroup(
+            painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 447, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(102, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnVerProdutos)
-                        .addGap(74, 74, 74)
-                        .addComponent(btnAceitar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRecusar))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(85, 85, 85))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(painelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVerProdutos)
-                    .addComponent(btnAceitar)
-                    .addComponent(btnRecusar))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(painelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAceitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceitarActionPerformed
-        // TODO add your handling code here:
-        List<Integer> pedidosSelecionados = new ArrayList<>();
-
-        for (int i = 0; i < tabelaPedidosPendentes.getRowCount(); i++) {
-            Boolean isSelected = (Boolean) tabelaPedidosPendentes.getValueAt(i, 0);
-            if (isSelected != null && isSelected) {
-                int idPedido = (int) tabelaPedidosPendentes.getValueAt(i, 1); 
-                pedidosSelecionados.add(idPedido);
-            }
-        }
-
-        if (pedidosSelecionados.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Selecione pelo menos um pedido.");
-            return;
-        }
-
-        int opcao = JOptionPane.showConfirmDialog(this, "Deseja aceitar os pedidos selecionados?", "Confirmação", JOptionPane.YES_NO_OPTION);
-        if (opcao == JOptionPane.YES_OPTION) {
-            atualizarStatusPedidos(pedidosSelecionados, StatusPedido.Aprovado);
-            JOptionPane.showMessageDialog(this, "Pedidos aceitos.");
-            carregarDados();
-        }
-    
-    }//GEN-LAST:event_btnAceitarActionPerformed
-
-    private void btnRecusarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecusarActionPerformed
-        // TODO add your handling code here:
-        List<Integer> pedidosSelecionados = new ArrayList<>();
-
-        for (int i = 0; i < tabelaPedidosPendentes.getRowCount(); i++) {
-            Boolean isSelected = (Boolean) tabelaPedidosPendentes.getValueAt(i, 0);
-            if (isSelected != null && isSelected) {
-                int idPedido = (int) tabelaPedidosPendentes.getValueAt(i, 1); 
-                pedidosSelecionados.add(idPedido);
-            }
-        }
-
-        if (pedidosSelecionados.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Selecione pelo menos um pedido.");
-            return;
-        }
-
-        int opcao = JOptionPane.showConfirmDialog(this, "Deseja recusar os pedidos selecionados?", "Confirmação", JOptionPane.YES_NO_OPTION);
-        if (opcao == JOptionPane.YES_OPTION) {
-            atualizarStatusPedidos(pedidosSelecionados, StatusPedido.Recusado);
-            JOptionPane.showMessageDialog(this, "Pedidos recusados.");
-            carregarDados();
-        }
-
-    }//GEN-LAST:event_btnRecusarActionPerformed
-
-    private void btnVerProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProdutosActionPerformed
-        // TODO add your handling code here:
-        int countSelected = 0;
-        int idPedido = -1;
-
-        for (int i = 0; i < tabelaPedidosPendentes.getRowCount(); i++) {
-            Boolean isSelected = (Boolean) tabelaPedidosPendentes.getValueAt(i, 0); 
-            if (isSelected != null && isSelected) {
-                countSelected++;
-                idPedido = (int) tabelaPedidosPendentes.getValueAt(i, 1); 
-            }
-        }
-
-        if (countSelected == 0) {
-            JOptionPane.showMessageDialog(this, "Selecione um pedido.");
-            return;
-        }
-
-        if (countSelected > 1) {
-            JOptionPane.showMessageDialog(this, "Selecione apenas um pedido por vez.");
-            return;
-        }
-
-        Tela_ProdutosPedido telaProdutos = new Tela_ProdutosPedido(idPedido);
-        telaProdutos.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        telaProdutos.setVisible(true);
-    }//GEN-LAST:event_btnVerProdutosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,11 +129,8 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceitar;
-    private javax.swing.JButton btnRecusar;
-    private javax.swing.JButton btnVerProdutos;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tabelaPedidosPendentes;
+    private javax.swing.JButton btnPedidosPendentes;
+    private javax.swing.JPanel painelMenu;
+    private javax.swing.JPanel painelPrincipal;
     // End of variables declaration//GEN-END:variables
 }
