@@ -4,11 +4,14 @@
  */
 package DAO;
 
+import Controller.ConexaoSingleton;
 import Controller.CrudGenerico;
 import Controller.Montador.MontadorProduto;
 import Controller.MontadorReadAll;
 import DTO.ProdutoDTO;
 import Model.Produto;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -83,6 +86,26 @@ public class ProdutoDAO extends CrudGenerico {
          return p;
     }
 
-    
+    public List<Produto> getProdutosPorFornecedor(int idFornecedor) {
+        List<Produto> lista = new ArrayList<>();
+        String sql = "SELECT * FROM produto WHERE id_fornecedor_fk = ?";
+
+        try {
+            Connection conexao = ConexaoSingleton.getInstancia().getConexao();
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, idFornecedor);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Produto p = new MontadorProduto().montar(rs);
+                lista.add(p);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
 
 }

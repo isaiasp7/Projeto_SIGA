@@ -4,6 +4,10 @@
  */
 package com.mycompany.poo_project.Tela_Funcionario;
 
+import com.mycompany.poo_project.Tela_Funcionario.Paineis.PedidosPendentes;
+import com.mycompany.poo_project.Tela_Funcionario.Paineis.Produtos;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Isaias
@@ -15,6 +19,13 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
      */
     public Tela02_Funcionario() {
         initComponents();
+    }
+    
+    private void mostrarPainel(JPanel painel){
+        painelPrincipal.removeAll();
+        painelPrincipal.add(painel);
+        painelPrincipal.revalidate();
+        painelPrincipal.repaint();
     }
 
     /**
@@ -28,6 +39,7 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
 
         painelMenu = new javax.swing.JPanel();
         btnPedidosPendentes = new javax.swing.JButton();
+        btnProdutos = new javax.swing.JButton();
         painelPrincipal = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -37,6 +49,19 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
 
         btnPedidosPendentes.setText("<html><center>Pedidos<br>Pendentes</center></html>");
         btnPedidosPendentes.setPreferredSize(new java.awt.Dimension(78, 23));
+        btnPedidosPendentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidosPendentesActionPerformed(evt);
+            }
+        });
+
+        btnProdutos.setText("Produtos");
+        btnProdutos.setPreferredSize(new java.awt.Dimension(78, 23));
+        btnProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProdutosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout painelMenuLayout = new javax.swing.GroupLayout(painelMenu);
         painelMenu.setLayout(painelMenuLayout);
@@ -44,7 +69,9 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
             painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelMenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnPedidosPendentes, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPedidosPendentes, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(btnProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                 .addContainerGap())
         );
         painelMenuLayout.setVerticalGroup(
@@ -52,6 +79,8 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
             .addGroup(painelMenuLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(btnPedidosPendentes, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(btnProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -82,15 +111,27 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(painelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnPedidosPendentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosPendentesActionPerformed
+        // TODO add your handling code here:
+        PedidosPendentes painel = new PedidosPendentes();
+        painel.setBounds(0, 0, painelPrincipal.getWidth(), painelPrincipal.getHeight());
+        mostrarPainel(painel);
+    }//GEN-LAST:event_btnPedidosPendentesActionPerformed
+
+    private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
+        // TODO add your handling code here:
+        Produtos painel = new Produtos();
+        painel.setBounds(0, 0, painelPrincipal.getWidth(), painelPrincipal.getHeight());
+        mostrarPainel(painel);
+    }//GEN-LAST:event_btnProdutosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,6 +171,7 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPedidosPendentes;
+    private javax.swing.JButton btnProdutos;
     private javax.swing.JPanel painelMenu;
     private javax.swing.JPanel painelPrincipal;
     // End of variables declaration//GEN-END:variables

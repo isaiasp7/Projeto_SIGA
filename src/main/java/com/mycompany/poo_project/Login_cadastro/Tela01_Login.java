@@ -6,6 +6,7 @@ package com.mycompany.poo_project.Login_cadastro;
 
 import DAO.EmpresaDAO;
 import DAO.FuncionarioDAO;
+import Login.FornecedorLogin;
 import Login.RequisitanteLogin;
 import com.mycompany.poo_project.Login_cadastro.Tela01_cadastro;
 import com.mycompany.poo_project.Tela_Funcionario.Tela02_Funcionario;
@@ -267,8 +268,11 @@ public class Tela01_Login extends javax.swing.JFrame {
                 if (rs != null && rs.next()) { // move para o primeiro resultado
                     String tipo = rs.getString("email"); // lê o valor do campo
 
-                    if (tipo.contains("Emp")) {
+                   if (tipo.contains("Emp")) {
+                       
+                        new FornecedorLogin(rs.getInt("id_empresa"),  rs.getString("nome_empresa"), tipo,  this.inputSenha.getText() );
                         this.getTelaFuncionario();
+                        
                     } else{ 
                         
                         new RequisitanteLogin(rs.getInt("id_empresa"),rs.getString("nome_empresa"),tipo,this.inputSenha.getText());
