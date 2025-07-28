@@ -8,6 +8,7 @@ import DAO.PedidoDAO;
 import DAO.ProdutoDAO;
 import DAO.itensPedidoDAO;
 import DTO.ProdutoDTO;
+import Login.RequisitanteLogin;
 import Model.Pedido;
 import Model.Produto;
 import Model.itensPedido;
@@ -34,9 +35,9 @@ public class Carrinho extends javax.swing.JPanel {
 
     private ProdutoDAO prod = new ProdutoDAO();
     private double valorTotalCal;//usado para calcular os valores de cada produto
-    private double valorProduto;
+    /*private double valorProduto;
     private int quantidadeTotalProd;
-    private int quantDesejadaProd;
+    private int quantDesejadaProd;*/
     public static List<Integer> ids = new ArrayList<>();//public, pois é usado dentro de Visualização para receber os id dos pedidos
     private List<ProdutoDTO> listaCarrinho = new ArrayList<>();//o retorno dos ids requisitados estão aqui em listaCarrinho 
 
@@ -306,7 +307,7 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
             }
             System.out.println("total a ser pago no pedido = " + valorTotalCal);
 
-            Pedido pedido = new Pedido(/*RequisitanteLogin.getId()*/5, listaCarrinho, valorTotalCal);
+            Pedido pedido = new Pedido(RequisitanteLogin.getId(), listaCarrinho, valorTotalCal);
 
             new PedidoDAO().createPedido(pedido);
             System.out.println("criou pedido no banco");
