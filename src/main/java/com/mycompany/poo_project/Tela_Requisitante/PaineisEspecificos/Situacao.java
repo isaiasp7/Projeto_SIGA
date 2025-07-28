@@ -7,6 +7,7 @@ package com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos;
 import DAO.PedidoDAO;
 import DAO.ProdutoDAO;
 import DTO.ProdutoDTO;
+import Login.RequisitanteLogin;
 import Model.Pedido;
 import Model.StatusPedido;
 import java.util.HashMap;
@@ -30,7 +31,7 @@ public class Situacao extends javax.swing.JPanel {
      * Creates new form Situacao1
      */
     public Situacao() {
-        lista = new PedidoDAO().requestByIdRequisitante(/*RequisitanteLogin.getId()*/5);
+        lista = new PedidoDAO().requestByIdRequisitante(RequisitanteLogin.getId());
         initComponents();
         this.renderizaDados();
         System.out.println("tela iniciada");
