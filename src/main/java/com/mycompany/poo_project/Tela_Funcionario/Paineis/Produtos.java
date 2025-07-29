@@ -7,7 +7,9 @@ package com.mycompany.poo_project.Tela_Funcionario.Paineis;
 import DAO.ProdutoDAO;
 import Login.FornecedorLogin;
 import Model.Produto;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -48,9 +50,10 @@ public class Produtos extends javax.swing.JPanel {
     
     private void carregarDados() {
         //Temporario
+        
         ProdutoDAO dao = new ProdutoDAO();
 
-        List<Produto> produtos = dao.readProduto(); // pega tudo, sem filtro
+        List<Produto> produtos = dao.readProduto(); 
 
         DefaultTableModel modelo = (DefaultTableModel) tabelaProdutos.getModel();
         modelo.setRowCount(0);
@@ -65,6 +68,7 @@ public class Produtos extends javax.swing.JPanel {
             };
             modelo.addRow(linha);
         }
+        
         //Codigo real: 
         /*
         ProdutoDAO dao = new ProdutoDAO();
@@ -118,10 +122,25 @@ public class Produtos extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tabelaProdutos);
 
         btnCriar.setText("Criar");
+        btnCriar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCriarActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -152,6 +171,73 @@ public class Produtos extends javax.swing.JPanel {
                 .addContainerGap(49, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
+        // TODO add your handling code here:
+        CriarProduto tela = new CriarProduto(null, true); 
+        tela.setVisible(true); 
+        carregarDados(); 
+    }//GEN-LAST:event_btnCriarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        int linhaSelecionada = tabelaProdutos.getSelectedRow();
+        if (linhaSelecionada != -1) {
+            int id = (int) tabelaProdutos.getValueAt(linhaSelecionada, 0);
+            String nome = (String) tabelaProdutos.getValueAt(linhaSelecionada, 1);
+            int quantidade = (int) tabelaProdutos.getValueAt(linhaSelecionada, 2);
+            double preco = (double) tabelaProdutos.getValueAt(linhaSelecionada, 3);
+
+            EditarProduto editarDialog = new EditarProduto(null, true, id, nome, quantidade, preco);
+            editarDialog.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um produto para editar.");
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) tabelaProdutos.getModel();
+        ProdutoDAO dao = new ProdutoDAO();
+
+        List<Integer> idsParaExcluir = new ArrayList<>();
+
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            Boolean selecionado = (Boolean) modelo.getValueAt(i, 0);
+            if (selecionado != null && selecionado) {
+                int idProduto = (int) modelo.getValueAt(i, 1);
+                idsParaExcluir.add(idProduto);
+            }
+        }
+
+        if (idsParaExcluir.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecione ao menos um produto para excluir.");
+            return;
+        }
+
+        int confirmar = JOptionPane.showConfirmDialog(this, 
+            "Tem certeza que deseja excluir os produtos selecionados?", 
+            "Confirmação", JOptionPane.YES_NO_OPTION);
+
+        if (confirmar == JOptionPane.YES_OPTION) {
+            boolean sucesso = true;
+            for (Integer id : idsParaExcluir) {
+                boolean excluiu = dao.deleteProduto(id);
+                if (!excluiu) {
+                    sucesso = false;
+                }
+            }
+
+            if (sucesso) {
+                JOptionPane.showMessageDialog(this, "Produtos excluídos com sucesso.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir alguns produtos.");
+            }
+
+            carregarDados(); 
+
+        } 
+
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
