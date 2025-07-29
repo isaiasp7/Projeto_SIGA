@@ -50,7 +50,7 @@ public class Produtos extends javax.swing.JPanel {
     
     private void carregarDados() {
         //Temporario
-        
+        /*
         ProdutoDAO dao = new ProdutoDAO();
 
         List<Produto> produtos = dao.readProduto(); 
@@ -68,9 +68,9 @@ public class Produtos extends javax.swing.JPanel {
             };
             modelo.addRow(linha);
         }
-        
+        */
         //Codigo real: 
-        /*
+        
         ProdutoDAO dao = new ProdutoDAO();
         int idFornecedor = FornecedorLogin.getId(); // pega o id do fornecedor logado
 
@@ -89,7 +89,7 @@ public class Produtos extends javax.swing.JPanel {
                 p.getValor()         
             };
             modelo.addRow(linha);
-        }*/
+        }
     }
 
 
