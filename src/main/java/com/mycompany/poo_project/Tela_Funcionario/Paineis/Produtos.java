@@ -5,7 +5,6 @@
 package com.mycompany.poo_project.Tela_Funcionario.Paineis;
 
 import DAO.ProdutoDAO;
-import Login.FornecedorLogin;
 import Model.Produto;
 import java.util.ArrayList;
 import java.util.List;

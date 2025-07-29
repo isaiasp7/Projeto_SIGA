@@ -180,7 +180,7 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
         jButton2 = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(872, 557));
-        setPreferredSize(new java.awt.Dimension(848, 659));
+        setPreferredSize(new java.awt.Dimension(825, 659));
 
         jTable2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(

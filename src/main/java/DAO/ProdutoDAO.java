@@ -7,14 +7,11 @@ package DAO;
 import Controller.ConexaoSingleton;
 import Controller.CrudGenerico;
 import Controller.Montador.MontadorProduto;
-import Controller.MontadorReadAll;
 import DTO.ProdutoDTO;
 import Model.Produto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 

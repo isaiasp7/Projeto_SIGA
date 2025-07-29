@@ -34,7 +34,7 @@ public class Situacao extends javax.swing.JPanel {
         lista = new PedidoDAO().requestByIdRequisitante(RequisitanteLogin.getId());
         initComponents();
         this.renderizaDados();
-        System.out.println("tela iniciada");
+        //System.out.println("tela iniciada");
          // Aplica o centralizador a todas as colunas
           DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
