@@ -160,16 +160,17 @@ public class Produtos extends javax.swing.JPanel {
         // TODO add your handling code here:
         int linhaSelecionada = tabelaProdutos.getSelectedRow();
         if (linhaSelecionada != -1) {
-            int id = (int) tabelaProdutos.getValueAt(linhaSelecionada, 0);
-            String nome = (String) tabelaProdutos.getValueAt(linhaSelecionada, 1);
-            int quantidade = (int) tabelaProdutos.getValueAt(linhaSelecionada, 2);
-            double preco = (double) tabelaProdutos.getValueAt(linhaSelecionada, 3);
+            int id = (int) tabelaProdutos.getValueAt(linhaSelecionada, 1);
+            String nome = (String) tabelaProdutos.getValueAt(linhaSelecionada,2);
+            int quantidade = (int) tabelaProdutos.getValueAt(linhaSelecionada, 3);
+            double preco = (double) tabelaProdutos.getValueAt(linhaSelecionada, 4);
 
             EditarProduto editarDialog = new EditarProduto(null, true, id, nome, quantidade, preco);
             editarDialog.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um produto para editar.");
         }
+        carregarDados();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
