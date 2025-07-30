@@ -24,29 +24,16 @@ import java.util.List;
 public class EmpresaDAO extends CrudGenerico{
       private Connection conexao = ConexaoSingleton.getInstancia().getConexao();
     
-    public boolean createFornecedor(Fornecedor fornecedor){
-        return this.create(fornecedor, "empresa");
+    public boolean createEmpresa(Empresa empresa){
+        return this.create(empresa, "empresa");
     }
-   public List<Empresa> readFornecedor(String tabela){
+   public List<Empresa> readEmpresa(String tabela){
        return this.readAll(tabela, new MontadorEmpresa());
    }
-    public boolean updateFornecedor(String tipo, Fornecedor obj, int id, String nomeCampoID) {
+    public boolean updateEmpresa(String tipo, Empresa obj, int id, String nomeCampoID) {
         return this.update(tipo, obj, id, nomeCampoID) ;
     }
-   public boolean deleteFornecedor(String tipo, String nomeCampoID, int id){
-       return this.delete(tipo, nomeCampoID, id);
-   }
-  /*===============================================================================================*/
-      public boolean createRequisitante(Requisitante fornecedor){
-        return this.create(fornecedor, "empresa");
-    }
-   public List<Empresa> readRequisitante(String tabela){
-       return this.readAll(tabela, new MontadorEmpresa());
-   }
-    public boolean updateRequisitante(String tipo, Requisitante obj, int id, String nomeCampoID) {
-        return this.update("Empresa", obj, id, "id_empresa") ;
-    }
-   public boolean deleteRequisitante(String tipo, String nomeCampoID, int id){
+   public boolean deleteEmpresa(String tipo, String nomeCampoID, int id){
        return this.delete(tipo, nomeCampoID, id);
    }
    

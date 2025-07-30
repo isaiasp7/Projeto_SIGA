@@ -16,13 +16,15 @@ public class Empresa {
     private String cnpj;
     private String nomeEmpresa;
     private String email;
+    private String senha;
 
-    public Empresa( String tipo, String cnpj, String nomeEmpresa, String email) {
+    public Empresa(String cnpj, String nomeEmpresa, String email, String senha) {
         this.id =Utilitarios.gerar_id("empresa");
-        this.tipo = tipo;
+        this.tipo = "Requisitante";
         this.cnpj = cnpj;
         this.nomeEmpresa = nomeEmpresa;
         this.email = email;
+        this.senha = senha;
     }
 
    
@@ -32,6 +34,8 @@ public class Empresa {
     public String getTipo() {
         return tipo;
     }
+    
+    
 
     public void setTipo(String tipo) {
         this.tipo = tipo;

@@ -8,7 +8,7 @@ import DAO.EmpresaDAO;
 import DAO.FuncionarioDAO;
 import Login.FuncionarioLogin;
 import Login.RequisitanteLogin;
-import com.mycompany.poo_project.Login_cadastro.Tela01_cadastro;
+import com.mycompany.poo_project.Login_cadastro.Tela01_cadastroEmpresa;
 import com.mycompany.poo_project.Tela_Funcionario.Tela02_Funcionario;
 import com.mycompany.poo_project.Tela_Requisitante.Tela02_Requisitante;
 import java.awt.Color;
@@ -36,12 +36,8 @@ System.out.println("URL da imagem: " + url);*/
 
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
-      getContentPane().setBackground(Color.decode("#34195f")); // cor pêssego
-        int largura = jLabelImg.getWidth();
-        int altura = jLabelImg.getHeight();
-        System.out.println(" largura: " + largura + ", altura : " + altura);
-        
-
+      getContentPane().setBackground(Color.decode("#071739")); // cor pêssego
+     
     }
 
     /**
@@ -86,9 +82,11 @@ System.out.println("URL da imagem: " + url);*/
 
         jLabelImg.setBackground(new java.awt.Color(51, 255, 51));
         jLabelImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/teste.png"))); // NOI18N
+        jLabelImg.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 0, new java.awt.Color(255, 102, 51)));
         jLabelImg.setIconTextGap(0);
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 1, new java.awt.Color(255, 102, 51)));
 
         textEmail.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
 
@@ -246,7 +244,19 @@ System.out.println("URL da imagem: " + url);*/
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+             
+Object[] itens = { "Funcionario","Empresa"};
+      Object selectedValue = JOptionPane.showInputDialog(null,
+         "Escolha um item", "Opçao",
+              JOptionPane.INFORMATION_MESSAGE, null,
+                  itens, itens [0]); 
+        if (selectedValue.equals("Funcionario")) {
+            this.getTelaCadastroFuncionario();
+        }else{
         this.getTelaCadastro();
+        }
+//
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void inputEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusLost
@@ -290,7 +300,11 @@ System.out.println("URL da imagem: " + url);*/
     }//GEN-LAST:event_inputEmailActionPerformed
 
     private void getTelaCadastro() {
-        Tela01_cadastro cadastro = new Tela01_cadastro();
+        Tela01_cadastroEmpresa cadastro = new Tela01_cadastroEmpresa();
+        cadastro.setVisible(true);
+    }
+    private void getTelaCadastroFuncionario() {
+        Tela01_cadastroFuncionario cadastro = new Tela01_cadastroFuncionario ();
         cadastro.setVisible(true);
     }
 
