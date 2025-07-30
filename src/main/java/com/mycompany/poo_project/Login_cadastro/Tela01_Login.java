@@ -219,7 +219,7 @@ System.out.println("URL da imagem: " + url);*/
         System.out.println("email = "+inputEmail.getText());*/
         if ((!inputEmail.getText().isBlank() && !inputEmail.getText().contains("email")) && (!inputSenha.getText().isBlank() && !inputSenha.getText().contains("Senha"))) {
             if (inputEmail.getText().contains("Emp")) {
-                this.Login("funcionario");
+                //this.Login("funcionario");
                 if (!this.Login("funcionario")) {
                     JOptionPane.showMessageDialog(null,
                             "Campo de senha ou email incorreto", "alerta", JOptionPane.ERROR_MESSAGE);
