@@ -47,9 +47,8 @@ public class Produtos extends javax.swing.JPanel {
         carregarDados();
     }
     
-    private void carregarDados() {
-        //Temporario
-        /*
+    private void carregarDados() {        
+
         ProdutoDAO dao = new ProdutoDAO();
 
         List<Produto> produtos = dao.readProduto(); 
@@ -67,28 +66,7 @@ public class Produtos extends javax.swing.JPanel {
             };
             modelo.addRow(linha);
         }
-        */
-        //Codigo real: 
         
-        ProdutoDAO dao = new ProdutoDAO();
-        int idFornecedor = FornecedorLogin.getId(); // pega o id do fornecedor logado
-
-        List<Produto> produtos = dao.getProdutosPorFornecedor(idFornecedor);
-
-        DefaultTableModel modelo = (DefaultTableModel) tabelaProdutos.getModel();
-
-        modelo.setRowCount(0);
-
-        for (Produto p : produtos) {
-            Object[] linha = new Object[]{
-                false,           
-                p.getId(),           
-                p.getNome(),         
-                p.getQuantDisponivel(),
-                p.getValor()         
-            };
-            modelo.addRow(linha);
-        }
     }
 
 

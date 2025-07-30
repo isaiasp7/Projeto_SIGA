@@ -311,7 +311,9 @@ System.out.println("URL da imagem: " + url);*/
             try {
                 rs = funcDAO.validacaoLoginFuncionario(inputEmail.getText(), inputSenha.getText());
                 if (rs != null && rs.next()) {
-                    new FuncionarioLogin(rs.getInt("id_func"));
+                    int idFuncionario = rs.getInt("id_func");
+                    int idEmpresa = rs.getInt("id_empresa_fk");
+                    new FuncionarioLogin(idFuncionario, idEmpresa);
                     this.getTelaFuncionario();
                     return true;
                 }

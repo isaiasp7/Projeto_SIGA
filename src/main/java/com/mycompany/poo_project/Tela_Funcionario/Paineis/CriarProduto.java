@@ -114,7 +114,7 @@ public class CriarProduto extends javax.swing.JDialog {
             int quantidade = Integer.parseInt(txtQuantidade.getText().trim());
             double preco = Double.parseDouble(txtPreco.getText().trim());
 
-            int idFornecedor = Login.FornecedorLogin.getId(); // pega o id do fornecedor logado
+            int idFornecedor = Login.FuncionarioLogin.getId_empresa_fk(); 
 
             Produto novo = new Produto(nome, quantidade, idFornecedor, preco);
 
