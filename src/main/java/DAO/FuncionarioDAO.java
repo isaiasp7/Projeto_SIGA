@@ -34,17 +34,14 @@ public class FuncionarioDAO extends CrudGenerico{
        return this.delete(this.nomeTabelaBd, "id_func", id);
    }
    public  ResultSet validacaoLoginFuncionario(String email, String senha){
-       String sql = "SELECT id_func FROM funcionario WHERE email=? AND senha=? ";
-        
-       try {
+       String sql = "SELECT id_func, id_empresa_fk FROM funcionario WHERE email = ? AND senha = ?";
+        try {
             PreparedStatement script = this.conexao.prepareStatement(sql);
             script.setString(1, email);
-            script.setString(2,senha);
-            ResultSet rs = script.executeQuery();           
-             return rs;
-          
+            script.setString(2, senha);
+            return script.executeQuery();
         } catch (Exception e) {
-            System.out.println("ERRO (validação login): "+e);
+            System.out.println("ERRO (validação login): " + e);
         }
         return null;
 
