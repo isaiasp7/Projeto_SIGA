@@ -48,10 +48,10 @@ public class itensPedidoDAO extends CrudGenerico {
     public List<ProdutoDTO> getProdutosPorPedido(int idPedido) {//
         List<ProdutoDTO> lista = new ArrayList<>();
 
-        String sql = "SELECT p.id_prod, p.nome_prod, p.preco, ip.quantidade "
-                + "FROM itenspedido ip "
-                + "JOIN produto p ON p.id_prod = ip.idProduto_fk "
-                + "WHERE ip.idPedido_fk = ?";
+        String sql = "SELECT p.id_prod, p.nome_prod, p.preco, p.quant_disponivel, p.id_fornecedor_fk, ip.quantidade "
+           + "FROM itenspedido ip "
+           + "JOIN produto p ON p.id_prod = ip.idProduto_fk "
+           + "WHERE ip.idPedido_fk = ?";
 
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
             ps.setInt(1, idPedido);
