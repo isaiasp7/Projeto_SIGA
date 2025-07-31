@@ -20,6 +20,10 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
      */
     public Tela02_Funcionario() {
         initComponents();
+        
+        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        PedidosPendentes painelInicial = new PedidosPendentes();
+        mostrarPainel(painelInicial);
     }
     
     private void mostrarPainel(JPanel painel){
@@ -95,16 +99,7 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout painelPrincipalLayout = new javax.swing.GroupLayout(painelPrincipal);
-        painelPrincipal.setLayout(painelPrincipalLayout);
-        painelPrincipalLayout.setHorizontalGroup(
-            painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 464, Short.MAX_VALUE)
-        );
-        painelPrincipalLayout.setVerticalGroup(
-            painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 543, Short.MAX_VALUE)
-        );
+        painelPrincipal.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,21 +128,18 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
     private void btnPedidosPendentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosPendentesActionPerformed
         // TODO add your handling code here:
         PedidosPendentes painel = new PedidosPendentes();
-        painel.setBounds(0, 0, painelPrincipal.getWidth(), painelPrincipal.getHeight());
         mostrarPainel(painel);
     }//GEN-LAST:event_btnPedidosPendentesActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
         // TODO add your handling code here:
         Produtos painel = new Produtos();
-        painel.setBounds(0, 0, painelPrincipal.getWidth(), painelPrincipal.getHeight());
         mostrarPainel(painel);
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     private void btnGerenciaPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciaPedidosActionPerformed
         // TODO add your handling code here:
         GerenciaPedidos painel = new GerenciaPedidos();
-        painel.setBounds(0, 0, painelPrincipal.getWidth(), painelPrincipal.getHeight());
         mostrarPainel(painel);
     }//GEN-LAST:event_btnGerenciaPedidosActionPerformed
 
