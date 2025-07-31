@@ -8,28 +8,33 @@ import DAO.EmpresaDAO;
 import Model.Empresa;
 import Model.Requisitante;
 import com.mycompany.poo_project.Tela_Requisitante.Tela02_Requisitante;
+import static com.mycompany.poo_project.Login_cadastro.ValidaCamposCadastro.verificarCNPJ;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
 /**
  *
  * @author Isaias
  */
 public class Tela01_cadastroEmpresa extends javax.swing.JFrame {
-    private boolean validaCampos= true;
+
+    private boolean validaCampos = true;
+    private ValidaCamposCadastro valido;
+
     /**
      * Creates new form Tela02_cadastro
      */
     public Tela01_cadastroEmpresa() {
         initComponents();
-         this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
         this.PainelFormulario.setVisible(true);
-        
-         //getContentPane().setBackground(Color.BLACK); 
-         getContentPane().setBackground(Color.decode("#071739")); 
-        
+
+        //getContentPane().setBackground(Color.BLACK); 
+        getContentPane().setBackground(Color.decode("#071739"));
+
     }
 
     /**
@@ -92,6 +97,11 @@ public class Tela01_cadastroEmpresa extends javax.swing.JFrame {
                 jTextCNPJFocusLost(evt);
             }
         });
+        jTextCNPJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextCNPJActionPerformed(evt);
+            }
+        });
 
         jTextNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,7 +139,6 @@ public class Tela01_cadastroEmpresa extends javax.swing.JFrame {
 
         jLabelEmailError.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabelEmailError.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelEmailError.setMaximumSize(new java.awt.Dimension(0, 0));
         jLabelEmailError.setMinimumSize(new java.awt.Dimension(0, 10));
         jLabelEmailError.setPreferredSize(new java.awt.Dimension(200, 15));
 
@@ -217,17 +226,17 @@ public class Tela01_cadastroEmpresa extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (!jTextNome.getText().isBlank() && !jTextEmail.getText().isBlank() &&!jTextCNPJ.getText().isBlank() && !jTextSenha.getText().isBlank()) {
+        if (!jTextNome.getText().isBlank() && !jTextEmail.getText().isBlank() && !jTextCNPJ.getText().isBlank() && !jTextSenha.getText().isBlank()) {
             EmpresaDAO emp = new EmpresaDAO();
-            emp.createEmpresa(new Empresa(jTextCNPJ.getText(), jTextNome.getText(),jTextEmail.getText(),jTextSenha.getText()));
+            emp.createEmpresa(new Empresa(jTextCNPJ.getText(), jTextNome.getText(), jTextEmail.getText(), jTextSenha.getText()));
             this.setVisible(false);
             this.getTela_Requisitante();
-        }else{
-            JOptionPane.showMessageDialog(this,"Preencha todos os campos");
+        } else {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-     private void getTela_Requisitante() {
+    private void getTela_Requisitante() {
         Tela02_Requisitante telaReq = new Tela02_Requisitante();
         telaReq.setVisible(true);
         //
@@ -241,30 +250,85 @@ public class Tela01_cadastroEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextNomeActionPerformed
 
     private void jTextCNPJFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextCNPJFocusLost
-              if (ValidaCamposCadastro.Cnpj(jTextCNPJ.getText()).contains("false")) {
-            jLabelCnpjErro.setText("Esse cnpj não existe");
-           jTextCNPJ.setBorder(BorderFactory.createLineBorder(Color.RED));
-           this.validaCampos=false;
-        }else if(ValidaCamposCadastro.Cnpj(jTextCNPJ.getText()).contains("Só é aceito números")){
-               jLabelCnpjErro.setText("Só é aceitos valores númericos");
-        
-        }else if(ValidaCamposCadastro.Cnpj(jTextCNPJ.getText()).contains("14")){
-         jLabelCnpjErro.setText("É necessário que a quantidade de caracteres seja 14");
-        }
-               
+        new SwingWorker<String, Void>() {
+
+            @Override
+            protected String doInBackground() throws Exception {
+                // Aqui roda fora da interface (thread separada)
+                return valido.verificarCNPJ(jTextCNPJ.getText());
+            }
+
+            @Override
+            protected void done() {
+                // Aqui já terminou e volta pra interface (thread principal)
+                try {
+                    String validacao = get(); // resultado que veio do doInBackground
+
+                    switch (validacao) {
+                        case "CNPJ não existe":
+                            jLabelCnpjErro.setText("CNPJ não existe");
+                            validaCampos = false;
+                            break;
+                        case "Só é aceito números":
+                            jLabelCnpjErro.setText("Só é aceito números");
+                            validaCampos = false;
+                            break;
+                        case "CNPJ deve ter 14 dígitos":
+                            jLabelCnpjErro.setText("CNPJ deve ter 14 dígitos");
+                            validaCampos = false;
+                            break;
+                        case "true":
+                            jLabelCnpjErro.setText("");
+                            break;
+                        default:
+                            throw new AssertionError();
+                    }
+                } catch (Exception e) {
+                    jLabelCnpjErro.setText("Erro ao validar CNPJ");
+                    e.printStackTrace(); // para você saber o que aconteceu
+                }
+            }
+
+        }.execute(); // isso faz a "thread paralela" começar
+
     }//GEN-LAST:event_jTextCNPJFocusLost
 
     private void jTextEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextEmailFocusLost
-        if (!jTextEmail.getText().isEmpty()) {
-            if (!jTextEmail.getText().contains("@")) {
-            jLabelEmailError.setText("O email precisa possuir '@'");
-              this.validaCampos=false;
-        }
-        }else{
-         jLabelEmailError.setText("");
-        }
-        
+        new SwingWorker<String, Void>() {
+
+            @Override
+            protected String doInBackground() throws Exception {
+                // Aqui roda fora da interface (thread separada)
+                return valido.validarCampoEmail(jTextCNPJ.getText());
+            }
+
+            @Override
+            protected void done() {
+                switch (ValidaCamposCadastro.validarCampoEmail(jTextEmail.getText())) {
+                    case "não existe":
+                        jLabelEmailError.setText("Email inexistente");
+                        validaCampos = false;
+                        break;
+
+                    case "formato errado":
+                        jLabelEmailError.setText("Email possui um formato errado.");
+                        validaCampos = false;
+                        break;
+                    case null:
+                        validaCampos = false;
+                        jLabelEmailError.setText("");
+                        break;
+
+                    default:
+                        throw new AssertionError();
+                } // isso faz a "thread paralela" começar
+            }
+        }.execute();
     }//GEN-LAST:event_jTextEmailFocusLost
+
+    private void jTextCNPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCNPJActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextCNPJActionPerformed
 
     /**
      * @param args the command line arguments
