@@ -5,6 +5,7 @@
 package com.mycompany.poo_project.Tela_Funcionario.Paineis;
 
 import DAO.PedidoDAO;
+import Login.FuncionarioLogin;
 import Model.Pedido;
 import Model.StatusPedido;
 import java.util.ArrayList;
@@ -76,10 +77,13 @@ public class PedidosPendentes extends javax.swing.JPanel {
     
     private void atualizarStatusPedidos(List<Integer>ids, StatusPedido novoStatus){
         PedidoDAO pdao = new PedidoDAO();
+        int idFuncionario = FuncionarioLogin.getId();
+        
         for (int id : ids) {
             Pedido p = new Pedido();
             p.setId_requisitante(2);
             p.setStatus(novoStatus);
+            p.setId_funcionario(idFuncionario);
             pdao.updatePedido(p,id);
         }
 
