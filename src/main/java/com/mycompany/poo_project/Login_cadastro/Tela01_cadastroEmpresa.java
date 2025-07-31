@@ -250,7 +250,7 @@ public class Tela01_cadastroEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextNomeActionPerformed
 
     private void jTextCNPJFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextCNPJFocusLost
-        new SwingWorker<String, Void>() {
+        new SwingWorker<String, Void>() {//assincrono
 
             @Override
             protected String doInBackground() throws Exception {
@@ -317,6 +317,9 @@ public class Tela01_cadastroEmpresa extends javax.swing.JFrame {
                     case null:
                         validaCampos = false;
                         jLabelEmailError.setText("");
+                        break;
+                    case "erro na requisição":
+                          jLabelEmailError.setText("Erro na request");
                         break;
 
                     default:

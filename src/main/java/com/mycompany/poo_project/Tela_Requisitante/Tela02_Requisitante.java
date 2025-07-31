@@ -8,6 +8,7 @@ import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Carrinho;
 import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Situacao;
 import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Visualizador;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -30,6 +31,7 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
         content.removeAll();
         content.add(tela1, BorderLayout.CENTER);
         content.repaint();
+           
         /*ImageIcon icon = new ImageIcon(getClass().getResource("/imagens/vista-lateral-vazia-do-carrinho-de-compras_1")); // Load image from resources
         BProdutos.setIcon(icon); // Set image as icon
 
@@ -48,6 +50,7 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         BCarrinho = new javax.swing.JButton();
@@ -56,8 +59,10 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(7, 23, 57));
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 0));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         BCarrinho.setText("Carrinho");
         BCarrinho.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +70,14 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
                 BCarrinhoActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 45;
+        gridBagConstraints.ipady = 96;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(31, 6, 0, 6);
+        jPanel1.add(BCarrinho, gridBagConstraints);
 
         BProdutos.setText("Produtos");
         BProdutos.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +85,14 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
                 BProdutosActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 43;
+        gridBagConstraints.ipady = 90;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(78, 6, 0, 6);
+        jPanel1.add(BProdutos, gridBagConstraints);
 
         BSituacao.setText("Situação");
         BSituacao.addActionListener(new java.awt.event.ActionListener() {
@@ -79,34 +100,16 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
                 BSituacaoActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 46;
+        gridBagConstraints.ipady = 101;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(45, 6, 47, 6);
+        jPanel1.add(BSituacao, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BSituacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(BProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(BCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
-        );
-
-        content.setBackground(new java.awt.Color(0, 0, 0));
+        content.setBackground(new java.awt.Color(7, 23, 57));
         content.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,7 +127,7 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
