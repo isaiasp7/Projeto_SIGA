@@ -8,53 +8,104 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import org.codehaus.jackson.map.ObjectMapper;
+import org.apache.commons.validator.EmailValidator;
+import org.json.JSONObject;
 
 /**
  *
  * @author Isaias
  */
-public class ValidaCamposCadastro{
-    
+//https://rapidapi.com/cnpja/api/consulta-cnpj-gratis
+public class ValidaCamposCadastro {
 
-    public static String Cnpj(String cnpj) {
-        if (cnpj.matches("[0-9]*") ) {
-            if (cnpj.hashCode() == 14) {
-                try {
-                // 1. Criar cliente HTTP
-                HttpClient client = HttpClient.newHttpClient();
-
-                // 2. Criar requisição GET para URL da API
-                HttpRequest request = HttpRequest.newBuilder()
-                        .uri(new URI("https://receitaws.com.br/v1/cnpj/" + cnpj))
-                        .GET()
-                        .build();
-
-                // 3. Enviar requisição e receber resposta como String
-                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-                int statusCode = response.statusCode();
-                if (statusCode == 200) {
-                    // 4. Criar ObjectMapper para converter JSON
-                } else {
-                    // Trate erro conforme código
-                    System.out.println("Erro na requisição. Código HTTP: " + statusCode);
-                    System.out.println("Mensagem: " + response.body()); // muitas APIs mandam erro em JSON também
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
+    public static String validarCampoEmail(String email) {
+        if (EmailValidator.getInstance().isValid(email)) {
+            if (consultarEmail(email).equals("true")) {
+                return null;
+            } else {
+                return "não existe";
             }
-            }else{
-            return "14";
-            }
-            
+
         } else {
-           return "Só é aceito números";
+            return "formato errado";
         }
-        return "false";
+
+    }
+
+    public static String consultarEmail(String email) {
+
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://validect-email-verification-v1.p.rapidapi.com/v1/verify?email=" + email))
+                    .header("x-rapidapi-key", "632ce6e0f4mshcea6867d6686244p167cbfjsnb7f72c00c93a")
+                    .header("x-rapidapi-host", "validect-email-verification-v1.p.rapidapi.com")
+                    .method("GET", HttpRequest.BodyPublishers.noBody())
+                    .build();
+            HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            String json = response.body(); // Suponha que seja: {"status": "ok"}
+            JSONObject obj = new JSONObject(json);
+            String status = obj.getString("status");
+            System.out.println(status);
+            if (status.equals("invalid")) {
+               return "formato errado";
+            }else{
+            return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "erro na requisição";
+        }
+    }
+
+    /*====================================================================================*/
+    public static String validarCampoCNPJ(String cnpj) {
+        // Valida se contém apenas números
+        if (!cnpj.matches("[0-9]*")) {
+            return "Só é aceito números";
+        }
+
+        // Valida se tem 14 caracteres
+        if (cnpj.length() != 14) {
+            return "CNPJ deve ter 14 dígitos";
+        }
+
+        return null; // Retorna null se a validação passar
+    }
+
+    public static boolean consultarCNPJ(String cnpj) {
+
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://consulta-cnpj-gratis.p.rapidapi.com/office/" + cnpj + "?simples=false"))
+                    .header("x-rapidapi-key", "632ce6e0f4mshcea6867d6686244p167cbfjsnb7f72c00c93a")
+                    .header("x-rapidapi-host", "consulta-cnpj-gratis.p.rapidapi.com")
+                    .method("GET", HttpRequest.BodyPublishers.noBody())
+                    .build();
+
+            HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            int statusCode = response.statusCode();
+
+            return statusCode == 200;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+// Método original refatorado para usar os novos métodos
+    public static String verificarCNPJ(String cnpj) {
+        String validacao = validarCampoCNPJ(cnpj);
+        if (validacao != null) {
+            return validacao;
+        }
+
+        if (consultarCNPJ(cnpj)) {
+            return "true"; // Sucesso
+        } else {
+            return "CNPJ não existe";
+        }
     }
 
 }
