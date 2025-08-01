@@ -353,7 +353,7 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
             model.setRowCount(0);
             if (pesquisa.matches("[1-9][0-9]*")) {
                 resultados = prod.searchIDdto(listaCarrinho, pesquisa);
-            } else if (pesquisa.matches("[A-Za-z]+")) {//ERRO = ADD MAIS DE UMA VEZ E NÃO RECEBE 
+            } else if (pesquisa.matches("[A-Za-z]+")) {
                 resultados = prod.searchNomedto(listaCarrinho, pesquisa.toLowerCase());
                
             } else {
@@ -367,7 +367,7 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
             System.out.println("renderizando");
             for (ProdutoDTO p : resultados) {
                  System.out.println(resultados.size());
-                model.addRow(new Object[]{p.getProd().getId(), p.getProd().getNome(), p.getProd().getId_fornecedor(), p.getProd().getQuantDisponivel()});
+                model.addRow(new Object[]{p.getProd().getId(), p.getProd().getNome(), p.getProd().getId_fornecedor(), p.getProd().getQuantDisponivel(),0,p.getProd().getValor()});
             }
         }
     }//GEN-LAST:event_jInputSearchKeyReleased
