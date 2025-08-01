@@ -66,8 +66,9 @@ public class Situacao extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabelValorTotal = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(7, 23, 57));
         setMinimumSize(new java.awt.Dimension(872, 557));
-        setPreferredSize(new java.awt.Dimension(872, 659));
+        setPreferredSize(new java.awt.Dimension(872, 557));
 
         jTableDefault.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTableDefault.setModel(new javax.swing.table.DefaultTableModel(
@@ -105,6 +106,7 @@ public class Situacao extends javax.swing.JPanel {
         }
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Situação dos pedidos");
 
         jTableDetalhada.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -145,81 +147,77 @@ public class Situacao extends javax.swing.JPanel {
         });
 
         jLabelValorTotal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelValorTotal.setForeground(new java.awt.Color(255, 255, 255));
         jLabelValorTotal.setText("O valor do pedido aparece aqui...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(260, 260, 260))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelValorTotal)
-                        .addGap(86, 86, 86))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(274, 274, 274)
+                        .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(jButton1)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addGap(23, 23, 23)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel1)
+                        .addGap(35, 35, 35)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(61, 61, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelValorTotal)
+                .addGap(110, 110, 110))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel2)
-                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
+                        .addGap(203, 203, 203)
                         .addComponent(jLabel1))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel2)
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
-                .addComponent(jLabelValorTotal)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabelValorTotal))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-             
+             if (jTableDefault.getSelectedRow()<=-1) {
+            JOptionPane.showMessageDialog(this, "Nenhuma linha foi selecionada");
+        }else{
              int opcao = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja cancelar o pedido:",
           "Confirme a ação",JOptionPane.YES_NO_OPTION);
-             boolean selectRowTrue = false;
              if (opcao==JOptionPane.YES_OPTION) {
                   Object selectRowTable = jTableDefault.getValueAt(jTableDefault.getSelectedRow(), 0);
                   for (Pedido pedido : lista.keySet()) {
-                      System.out.println("-----------------laço----------------------------");
-                      System.out.println(pedido.getId_pedido().equals(selectRowTable));
-                      System.out.println(pedido.getStatus().contains("Pendente"));
                       if (pedido.getId_pedido().equals(selectRowTable) && pedido.getStatus().contains("Pendente")) {
                            pedido.setStatus(StatusPedido.Recusado);
                            new PedidoDAO().updatePedido(pedido, pedido.getId_pedido());
-                           selectRowTrue = true;
+                          
                            JOptionPane.showMessageDialog(this, "Pedido cancelado com sucesso!!.","Ação concluida",JOptionPane.OK_OPTION);
                            this.renderizaDados();
                            
                           break;
                       }
-                 }System.out.println("----------------------fora do laco-----------------");
+                 }
         }
-             if (!selectRowTrue) {
-           
-                          JOptionPane.showMessageDialog(this, "O pedido não pode ser cancelado.");
+             
                           
                       
         }

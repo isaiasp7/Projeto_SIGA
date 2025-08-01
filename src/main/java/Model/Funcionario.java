@@ -15,13 +15,16 @@ public class Funcionario {
     private Integer id;
     private String nomeEmpregado;
     private String funcaoCargo;
-    private Integer id_empresa_fornecedora;
     private String email;
+    private String senha;
 
-    public Funcionario( String nomeEmpregado, String funcaoCargo, Integer id_empresa_fornecedora) {
+    public Funcionario( String nomeEmpregado, String funcaoCargo, String email, String senha) {
         this.nomeEmpregado = nomeEmpregado;
         this.funcaoCargo = funcaoCargo;
-        this.id_empresa_fornecedora = id_empresa_fornecedora;
+       this.email = email;
+          this.id = Utilitarios.gerar_id("funcionario");
+          this.senha = senha;
+       
     }
 
     
@@ -65,13 +68,6 @@ public String getEmail() {
         this.funcaoCargo = funcaoCargo;
     }
 
-    public Integer getId_empresa_fornecedora() {
-        return id_empresa_fornecedora;
-    }
-
-    public void setId_empresa_fornecedora(Integer id_empresa_fornecedora) {
-        this.id_empresa_fornecedora = id_empresa_fornecedora;
-    }
     /*public Empresa getEmpresa(){
         EmpresaDAO empDAO = new EmpresaDAO();
         empDAO.

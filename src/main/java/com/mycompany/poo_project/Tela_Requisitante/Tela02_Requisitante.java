@@ -8,7 +8,6 @@ import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Carrinho;
 import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Situacao;
 import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Visualizador;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -31,7 +30,6 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
         content.removeAll();
         content.add(tela1, BorderLayout.CENTER);
         content.repaint();
-           
         /*ImageIcon icon = new ImageIcon(getClass().getResource("/imagens/vista-lateral-vazia-do-carrinho-de-compras_1")); // Load image from resources
         BProdutos.setIcon(icon); // Set image as icon
 
@@ -59,7 +57,6 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(7, 23, 57));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new java.awt.GridBagLayout());
@@ -109,7 +106,7 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(45, 6, 47, 6);
         jPanel1.add(BSituacao, gridBagConstraints);
 
-        content.setBackground(new java.awt.Color(7, 23, 57));
+        content.setBackground(new java.awt.Color(0, 0, 0));
         content.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -190,6 +187,12 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Tela02_Requisitante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

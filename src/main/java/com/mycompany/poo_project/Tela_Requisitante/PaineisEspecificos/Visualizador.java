@@ -60,6 +60,7 @@ public class Visualizador extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(7, 23, 57));
+        setMinimumSize(new java.awt.Dimension(872, 557));
         setPreferredSize(new java.awt.Dimension(872, 557));
         setLayout(new java.awt.GridBagLayout());
 
@@ -88,11 +89,11 @@ public class Visualizador extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 850;
-        gridBagConstraints.ipady = 380;
+        gridBagConstraints.ipady = 104;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(30, 0, 6, 0);
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 180, 0);
         add(jScrollPane1, gridBagConstraints);
 
         jInputSearch.setForeground(new java.awt.Color(255, 255, 255));
@@ -112,12 +113,11 @@ public class Visualizador extends javax.swing.JPanel {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 194;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 413, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(45, 1, 0, 0);
         add(jInputSearch, gridBagConstraints);
 
         AdicionarCar.setText("Adicionar ao carrinho");
@@ -131,7 +131,7 @@ public class Visualizador extends javax.swing.JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 27, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(45, 6, 0, 0);
         add(AdicionarCar, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -141,7 +141,7 @@ public class Visualizador extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(41, 94, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(41, 99, 0, 0);
         add(jLabel1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 

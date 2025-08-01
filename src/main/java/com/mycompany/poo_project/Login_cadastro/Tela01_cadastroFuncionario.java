@@ -4,20 +4,27 @@
  */
 package com.mycompany.poo_project.Login_cadastro;
 
+import DAO.FuncionarioDAO;
+import Model.Funcionario;
+import com.mycompany.poo_project.Tela_Funcionario.Tela02_Funcionario;
 import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
 /**
  *
  * @author Isaias
  */
 public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
-    
+     private boolean validaCampos = true;
+    private ValidaCamposCadastro valido;
     /**
      * Creates new form Tela02_cadastro
      */
     public Tela01_cadastroFuncionario() {
         initComponents();
         this.PainelFormulario.setVisible(false);
+         this.setExtendedState(this.MAXIMIZED_BOTH);
     }
 
     /**
@@ -32,91 +39,242 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
-        jOptionFuncionario = new javax.swing.JRadioButton();
-        jOptionEmpresa = new javax.swing.JRadioButton();
         PainelFormulario = new javax.swing.JPanel();
+        jTextEmail = new javax.swing.JTextField();
+        jTextCargo = new javax.swing.JTextField();
+        jTextNome = new javax.swing.JTextField();
+        jTextSenha = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabelCargo = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jgif = new javax.swing.JLabel();
+        jLabelEmailError = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
         jMenuItem2.setText("jMenuItem2");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("Classificação de tipo");
+        PainelFormulario.setBackground(new java.awt.Color(0, 0, 0));
+        PainelFormulario.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        buttonGroup1.add(jOptionFuncionario);
-        jOptionFuncionario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jOptionFuncionario.setText("Funcionario");
-        jOptionFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jOptionFuncionarioActionPerformed(evt);
+        jTextEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextEmailFocusLost(evt);
             }
         });
 
-        buttonGroup1.add(jOptionEmpresa);
-        jOptionEmpresa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jOptionEmpresa.setText("Empresa");
-        jOptionEmpresa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jOptionEmpresaActionPerformed(evt);
+        jTextCargo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextCargoFocusLost(evt);
             }
         });
+        jTextCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextCargoActionPerformed(evt);
+            }
+        });
+
+        jTextNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextNomeActionPerformed(evt);
+            }
+        });
+
+        jTextSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextSenhaActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Nome do Funcionário");
+
+        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Email");
+
+        jLabelCargo.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCargo.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabelCargo.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCargo.setText("Cargo");
+
+        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Senha");
+
+        jgif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/imagem_2025-07-31_170538231-removebg-preview.png"))); // NOI18N
+
+        jLabelEmailError.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabelEmailError.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelEmailError.setMinimumSize(new java.awt.Dimension(0, 10));
+        jLabelEmailError.setPreferredSize(new java.awt.Dimension(200, 15));
 
         javax.swing.GroupLayout PainelFormularioLayout = new javax.swing.GroupLayout(PainelFormulario);
         PainelFormulario.setLayout(PainelFormularioLayout);
         PainelFormularioLayout.setHorizontalGroup(
             PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 406, Short.MAX_VALUE)
+            .addGroup(PainelFormularioLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextSenha)
+                        .addComponent(jLabel2)
+                        .addComponent(jTextNome)
+                        .addComponent(jLabelCargo)
+                        .addComponent(jTextCargo)
+                        .addComponent(jTextEmail)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabelEmailError, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jgif, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
         PainelFormularioLayout.setVerticalGroup(
             PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
+            .addGroup(PainelFormularioLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jgif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(PainelFormularioLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(6, 6, 6)
+                        .addComponent(jTextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addComponent(jLabelCargo)
+                        .addGap(6, 6, 6)
+                        .addComponent(jTextCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addGap(6, 6, 6)
+                        .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelEmailError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addGap(6, 6, 6)
+                        .addComponent(jTextSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
+
+        jButton1.setText("Submeter formulário");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Cadastro de Funcionário");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(PainelFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jOptionFuncionario)
-                        .addGap(55, 55, 55)
-                        .addComponent(jOptionEmpresa)
-                        .addGap(31, 31, 31)))
-                .addGap(75, 75, 75))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(PainelFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(122, 122, 122))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(241, 241, 241))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel1)
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jOptionFuncionario)
-                    .addComponent(jOptionEmpresa))
-                .addGap(18, 18, 18)
                 .addComponent(PainelFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(jButton1)
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jOptionEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOptionEmpresaActionPerformed
+    private void jTextEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextEmailFocusLost
+        new SwingWorker<String, Void>() {
+
+            @Override
+            protected String doInBackground() throws Exception {
+                // Aqui roda fora da interface (thread separada)
+                return valido.validarCampoEmail(jTextCargo.getText());
+            }
+
+            @Override
+            protected void done() {
+                switch (ValidaCamposCadastro.validarCampoEmail(jTextEmail.getText())) {
+                    case "não existe":
+                    jLabelEmailError.setText("Email inexistente");
+                    validaCampos = false;
+                    break;
+
+                    case "formato errado":
+                    jLabelEmailError.setText("Email possui um formato errado.");
+                    validaCampos = false;
+                    break;
+                    case null:
+                    validaCampos = false;
+                    jLabelEmailError.setText("");
+                    break;
+                    case "erro na requisição":
+                    jLabelEmailError.setText("Erro na request");
+                    break;
+
+                    default:
+                    throw new AssertionError();
+                } // isso faz a "thread paralela" começar
+            }
+        }.execute();
+    }//GEN-LAST:event_jTextEmailFocusLost
+
+    private void jTextCargoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextCargoFocusLost
+        
+    }//GEN-LAST:event_jTextCargoFocusLost
+
+    private void jTextCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCargoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jOptionEmpresaActionPerformed
+    }//GEN-LAST:event_jTextCargoActionPerformed
 
-    private void jOptionFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOptionFuncionarioActionPerformed
-            
-    }//GEN-LAST:event_jOptionFuncionarioActionPerformed
+    private void jTextNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextNomeActionPerformed
 
+    private void jTextSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextSenhaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if (!jTextNome.getText().isBlank() && !jTextEmail.getText().isBlank() && !jTextCargo.getText().isBlank() && !jTextSenha.getText().isBlank()) {
+            FuncionarioDAO func = new FuncionarioDAO();
+            func.createFuncionario(new Funcionario(jTextNome.getText(),jTextCargo.getText(),jTextEmail.getText(),jTextSenha.getText()));
+            this.setVisible(false);
+            this.getTelaFuncionario();
+        } else {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+private void getTelaFuncionario() {
+        Tela02_Funcionario telaFunc = new Tela02_Funcionario();
+        telaFunc.setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */
@@ -158,10 +316,19 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PainelFormulario;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelCargo;
+    private javax.swing.JLabel jLabelEmailError;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JRadioButton jOptionEmpresa;
-    private javax.swing.JRadioButton jOptionFuncionario;
+    private javax.swing.JTextField jTextCargo;
+    private javax.swing.JTextField jTextEmail;
+    private javax.swing.JTextField jTextNome;
+    private javax.swing.JTextField jTextSenha;
+    private javax.swing.JLabel jgif;
     // End of variables declaration//GEN-END:variables
 }

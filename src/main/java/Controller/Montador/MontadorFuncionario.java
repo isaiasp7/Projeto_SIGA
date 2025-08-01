@@ -20,7 +20,6 @@ public class MontadorFuncionario implements MontadorReadAll<Funcionario> {
         e.setId(rs.getInt("id_func"));
         e.setNomeEmpregado(rs.getString("nome_func"));
         e.setFuncaoCargo(rs.getString("cargo"));
-        e.setId_empresa_fornecedora(rs.getInt("id_empresa_fk"));
         return e;
     }
 
