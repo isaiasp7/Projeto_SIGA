@@ -57,7 +57,7 @@ public class ProdutoDAO extends CrudGenerico {
        public List<Produto> searchNome(List<Produto> lista, String nome) {
         List<Produto> p = new ArrayList<>();
         for (Produto produto : lista) {
-            if (String.valueOf(produto.getNome()).contains(nome)) {
+            if (String.valueOf(produto.getNome().toLowerCase()).contains(nome)) {
                 p.add(produto);
             }
         }
@@ -76,7 +76,7 @@ public class ProdutoDAO extends CrudGenerico {
     public List<Produto> searchNomedto(List<ProdutoDTO> lista, String nome) {
         List<Produto> p = new ArrayList<>();
         for (ProdutoDTO produto : lista) {
-            if (String.valueOf(produto.getProd().getNome()).contains(nome)) {
+            if (String.valueOf(produto.getProd().getNome().toLowerCase()).contains(nome)) {
                 p.add(produto.getProd());
             }
         }

@@ -353,7 +353,7 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
             if (pesquisa.matches("[1-9][0-9]*")) {
                 resultados = prod.searchIDdto(listaCarrinho, pesquisa);
             } else if (pesquisa.matches("[A-Za-z]+")) {
-                resultados = prod.searchNomedto(listaCarrinho, pesquisa);
+                resultados = prod.searchNomedto(listaCarrinho, pesquisa.toLowerCase());
             } else {
 
                 JOptionPane.showMessageDialog(null, "Nenhum dado com esse identificador");

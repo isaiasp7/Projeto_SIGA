@@ -187,7 +187,7 @@ public class Visualizador extends javax.swing.JPanel {
             if (pesquisa.matches("[1-9][0-9]*")) {
                 resultados = prod.searchID(lista, pesquisa);
             } else if (pesquisa.matches("[A-Za-z]+")) {
-                resultados = prod.searchNome(lista, pesquisa);
+                resultados = prod.searchNome(lista, pesquisa.toLowerCase());
             } else {
 
                 JOptionPane.showMessageDialog(null, "Nenhum dado com esse identificador");
