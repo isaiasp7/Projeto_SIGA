@@ -63,21 +63,22 @@ public class ProdutoDAO extends CrudGenerico {
         }
          return p;
     }
-     public List<Produto> searchIDdto(List<ProdutoDTO> lista, String id) {
-        List<Produto> p = new ArrayList<>();
+     public List<ProdutoDTO> searchIDdto(List<ProdutoDTO> lista, String id) {
+        List<ProdutoDTO> p = new ArrayList<>();
         for (ProdutoDTO produto : lista) {
             if (String.valueOf(produto.getProd().getId()).contains(id)) {
-                 p.add(produto.getProd());
+                 p.add(produto);
             }
         }
         return p;
     }
 
-    public List<Produto> searchNomedto(List<ProdutoDTO> lista, String nome) {
-        List<Produto> p = new ArrayList<>();
+    public List<ProdutoDTO> searchNomedto(List<ProdutoDTO> lista, String nome) {
+        List<ProdutoDTO> p = new ArrayList<>();
         for (ProdutoDTO produto : lista) {
             if (String.valueOf(produto.getProd().getNome().toLowerCase()).contains(nome)) {
-                p.add(produto.getProd());
+                System.out.println(produto);
+                p.add(produto);
             }
         }
          return p;

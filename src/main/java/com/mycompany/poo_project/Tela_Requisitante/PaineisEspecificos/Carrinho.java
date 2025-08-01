@@ -35,9 +35,6 @@ public class Carrinho extends javax.swing.JPanel {
 
     private ProdutoDAO prod = new ProdutoDAO();
     private double valorTotalCal;//usado para calcular os valores de cada produto
-    /*private double valorProduto;
-    private int quantidadeTotalProd;
-    private int quantDesejadaProd;*/
     public static List<Integer> ids = new ArrayList<>();//public, pois é usado dentro de Visualização para receber os id dos pedidos
     private List<ProdutoDTO> listaCarrinho = new ArrayList<>();//o retorno dos ids requisitados estão aqui em listaCarrinho 
 
@@ -64,6 +61,7 @@ public class Carrinho extends javax.swing.JPanel {
     }
 
     public void setListaCarrinho(ProdutoDTO p) {
+       
         this.listaCarrinho.add(p);
     }
 
@@ -77,13 +75,14 @@ public class Carrinho extends javax.swing.JPanel {
 
     private void renderizandoDados() {
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        listaCarrinho.clear();
         if (ids.size() > 0) {
             for (Integer l : ids) {
                 Produto p = prod.requestIdProduto(l);
                 this.setListaCarrinho(new ProdutoDTO(p));
                 //this.quantidadeTotalProd = p.getQuantDisponivel();
                 //this.valorProduto = p.getValor();
-                System.out.println("A quantidade disponivel do produto(" + p.getNome() + ") é : " + p.getQuantDisponivel());
+                //System.out.println("A quantidade disponivel do produto(" + p.getNome() + ") é : " + p.getQuantDisponivel());
                 model.addRow(new Object[]{p.getId(), p.getNome(), p.getId_fornecedor(), p.getQuantDisponivel(), 0, p.getValor()});
 
             }
@@ -179,6 +178,7 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(7, 23, 57));
         setMinimumSize(new java.awt.Dimension(872, 557));
         setPreferredSize(new java.awt.Dimension(825, 659));
 
@@ -209,6 +209,8 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
         jTable2.setRowSelectionAllowed(false);
         jScrollPane2.setViewportView(jTable2);
 
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Fazer Pedido");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,6 +218,8 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
             }
         });
 
+        jInputSearch.setBackground(new java.awt.Color(0, 0, 0));
+        jInputSearch.setForeground(new java.awt.Color(255, 255, 255));
         jInputSearch.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jInputSearchFocusGained(evt);
@@ -233,8 +237,12 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Carrinho de compras");
 
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Delete um produto");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,40 +257,32 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jInputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(21, 21, 21))))
+                        .addGap(304, 304, 304)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(267, 267, 267)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(304, 304, 304)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 351, Short.MAX_VALUE)
+                                .addComponent(jInputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jInputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(69, 69, 69))
+                    .addComponent(jButton2)
+                    .addComponent(jInputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(133, 133, 133)
+                .addComponent(jButton1))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -344,7 +344,8 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
         //  ProdutoDAO prod = new ProdutoDAO();
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         String pesquisa = jInputSearch.getText();
-        List<Produto> resultados = new ArrayList<>();
+       
+        List<ProdutoDTO> resultados = new ArrayList<>();
         if (pesquisa.isBlank()) {
             model.setRowCount(0);
             this.renderizandoDados();
@@ -352,8 +353,9 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
             model.setRowCount(0);
             if (pesquisa.matches("[1-9][0-9]*")) {
                 resultados = prod.searchIDdto(listaCarrinho, pesquisa);
-            } else if (pesquisa.matches("[A-Za-z]+")) {
+            } else if (pesquisa.matches("[A-Za-z]+")) {//ERRO = ADD MAIS DE UMA VEZ E NÃO RECEBE 
                 resultados = prod.searchNomedto(listaCarrinho, pesquisa.toLowerCase());
+               
             } else {
 
                 JOptionPane.showMessageDialog(null, "Nenhum dado com esse identificador");
@@ -361,9 +363,11 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
                 this.renderizandoDados();
             }
         }
-        if (resultados.size() > -1) {
-            for (Produto p : resultados) {
-                model.addRow(new Object[]{p.getId(), p.getNome(), p.getId_fornecedor(), p.getQuantDisponivel()});
+        if (!resultados.isEmpty()) {
+            System.out.println("renderizando");
+            for (ProdutoDTO p : resultados) {
+                 System.out.println(resultados.size());
+                model.addRow(new Object[]{p.getProd().getId(), p.getProd().getNome(), p.getProd().getId_fornecedor(), p.getProd().getQuantDisponivel()});
             }
         }
     }//GEN-LAST:event_jInputSearchKeyReleased
@@ -393,7 +397,7 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
     private void jInputSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInputSearchFocusGained
         // TODO add your handling code here:
         jInputSearch.setText("");
-        jInputSearch.setForeground(Color.BLACK);
+        jInputSearch.setForeground(Color.WHITE);
     }//GEN-LAST:event_jInputSearchFocusGained
 
 

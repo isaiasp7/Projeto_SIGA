@@ -8,7 +8,7 @@ import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Carrinho;
 import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Situacao;
 import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Visualizador;
 import java.awt.BorderLayout;
-import javax.swing.ImageIcon;
+import java.awt.Color;
 import javax.swing.JPanel;
 
 /**
@@ -26,7 +26,7 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
         Visualizador tela1 = new Visualizador();
         tela1.setSize(872, 557);
         tela1.setLocation(0, 0);
-
+      this.getContentPane().setBackground(Color.decode("#071739"));//POG MASTER PLUS ULTRA
         content.removeAll();
         content.add(tela1, BorderLayout.CENTER);
         content.repaint();
@@ -57,8 +57,9 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 102));
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 204, 0));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         BCarrinho.setText("Carrinho");
@@ -106,8 +107,8 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(45, 6, 47, 6);
         jPanel1.add(BSituacao, gridBagConstraints);
 
-        content.setBackground(new java.awt.Color(0, 0, 0));
-        content.setLayout(new java.awt.BorderLayout());
+        content.setBackground(new java.awt.Color(7, 23, 57));
+        content.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 150));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,8 +117,8 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,12 +188,6 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Tela02_Requisitante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

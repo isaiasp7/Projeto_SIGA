@@ -12,10 +12,8 @@ import com.mycompany.poo_project.Login_cadastro.Tela01_cadastroEmpresa;
 import com.mycompany.poo_project.Tela_Funcionario.Tela02_Funcionario;
 import com.mycompany.poo_project.Tela_Requisitante.Tela02_Requisitante;
 import java.awt.Color;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.GroupLayout;
 import javax.swing.JOptionPane;
 
 /**
