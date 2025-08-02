@@ -49,11 +49,14 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
         painelPrincipal = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 102));
 
-        painelMenu.setBackground(new java.awt.Color(255, 255, 255));
-        painelMenu.setPreferredSize(new java.awt.Dimension(112, 591));
+        painelMenu.setBackground(new java.awt.Color(255, 204, 0));
+        painelMenu.setPreferredSize(new java.awt.Dimension(133, 557));
 
         btnPedidosPendentes.setText("<html><center>Pedidos<br>Pendentes</center></html>");
+        btnPedidosPendentes.setMaximumSize(new java.awt.Dimension(78, 23));
+        btnPedidosPendentes.setMinimumSize(new java.awt.Dimension(78, 23));
         btnPedidosPendentes.setPreferredSize(new java.awt.Dimension(78, 23));
         btnPedidosPendentes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +72,9 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
         });
 
         btnGerenciaPedidos.setText("<html><center>Gerenciar<br>Pedidos</center>\n</html>");
+        btnGerenciaPedidos.setMaximumSize(new java.awt.Dimension(78, 23));
+        btnGerenciaPedidos.setMinimumSize(new java.awt.Dimension(78, 23));
+        btnGerenciaPedidos.setPreferredSize(new java.awt.Dimension(78, 23));
         btnGerenciaPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGerenciaPedidosActionPerformed(evt);
@@ -82,9 +88,9 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
             .addGroup(painelMenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPedidosPendentes, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(btnProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(btnGerenciaPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                    .addComponent(btnPedidosPendentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                    .addComponent(btnGerenciaPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         painelMenuLayout.setVerticalGroup(
@@ -96,9 +102,11 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
                 .addComponent(btnProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62)
                 .addComponent(btnGerenciaPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        painelPrincipal.setBackground(new java.awt.Color(7, 23, 57));
+        painelPrincipal.setPreferredSize(new java.awt.Dimension(20, 300));
         painelPrincipal.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -106,20 +114,18 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(painelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(painelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
+                .addGap(11, 11, 11))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(painelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
+                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(painelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

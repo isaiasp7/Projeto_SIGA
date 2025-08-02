@@ -98,12 +98,16 @@ public class PedidosPendentes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaPedidosPendentes = new javax.swing.JTable();
         btnVerProdutos = new javax.swing.JButton();
         btnAceitar = new javax.swing.JButton();
         btnRecusar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(7, 23, 57));
+        setMinimumSize(new java.awt.Dimension(872, 557));
+        setPreferredSize(new java.awt.Dimension(825, 659));
 
         tabelaPedidosPendentes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -116,10 +120,11 @@ public class PedidosPendentes extends javax.swing.JPanel {
                 "Seleção", "ID", "Requisitante", "Data", "Total", "Status"
             }
         ));
+        tabelaPedidosPendentes.setRowSelectionAllowed(false);
         jScrollPane1.setViewportView(tabelaPedidosPendentes);
 
-        jScrollPane2.setViewportView(jScrollPane1);
-
+        btnVerProdutos.setBackground(new java.awt.Color(0, 0, 0));
+        btnVerProdutos.setForeground(new java.awt.Color(255, 255, 255));
         btnVerProdutos.setText("Ver Produtos");
         btnVerProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,6 +132,8 @@ public class PedidosPendentes extends javax.swing.JPanel {
             }
         });
 
+        btnAceitar.setBackground(new java.awt.Color(0, 0, 0));
+        btnAceitar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceitar.setText("Aceitar");
         btnAceitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,6 +141,8 @@ public class PedidosPendentes extends javax.swing.JPanel {
             }
         });
 
+        btnRecusar.setBackground(new java.awt.Color(0, 0, 0));
+        btnRecusar.setForeground(new java.awt.Color(255, 255, 255));
         btnRecusar.setText("Recusar");
         btnRecusar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,33 +150,45 @@ public class PedidosPendentes extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Pedidos Pendentes");
+        jLabel1.setMaximumSize(new java.awt.Dimension(289, 48));
+        jLabel1.setMinimumSize(new java.awt.Dimension(289, 48));
+        jLabel1.setName(""); // NOI18N
+        jLabel1.setPreferredSize(new java.awt.Dimension(289, 48));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(79, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVerProdutos)
                         .addGap(74, 74, 74)
                         .addComponent(btnAceitar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRecusar))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 854, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(479, 479, 479))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVerProdutos)
                     .addComponent(btnAceitar)
                     .addComponent(btnRecusar))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -263,8 +284,8 @@ public class PedidosPendentes extends javax.swing.JPanel {
     private javax.swing.JButton btnAceitar;
     private javax.swing.JButton btnRecusar;
     private javax.swing.JButton btnVerProdutos;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tabelaPedidosPendentes;
     // End of variables declaration//GEN-END:variables
 }
