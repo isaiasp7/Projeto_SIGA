@@ -25,6 +25,8 @@ public class PedidosPendentes extends javax.swing.JPanel {
      */
     public PedidosPendentes() {
         initComponents();
+        
+        lblMensagemVazia.setVisible(false);
 
         DefaultTableModel modelo = new DefaultTableModel(
             new Object [][] {},
@@ -72,6 +74,8 @@ public class PedidosPendentes extends javax.swing.JPanel {
             }
         }
         
+        lblMensagemVazia.setVisible(modelo.getRowCount() == 0);
+        
     }
     
     
@@ -104,6 +108,7 @@ public class PedidosPendentes extends javax.swing.JPanel {
         btnAceitar = new javax.swing.JButton();
         btnRecusar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        lblMensagemVazia = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(7, 23, 57));
         setMinimumSize(new java.awt.Dimension(872, 557));
@@ -157,38 +162,51 @@ public class PedidosPendentes extends javax.swing.JPanel {
         jLabel1.setMaximumSize(new java.awt.Dimension(289, 48));
         jLabel1.setMinimumSize(new java.awt.Dimension(289, 48));
         jLabel1.setName(""); // NOI18N
-        jLabel1.setPreferredSize(new java.awt.Dimension(289, 48));
+        jLabel1.setPreferredSize(new java.awt.Dimension(659, 48));
+
+        lblMensagemVazia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblMensagemVazia.setForeground(new java.awt.Color(255, 255, 255));
+        lblMensagemVazia.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblMensagemVazia.setText("Não há pedidos pendentes no momento");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(lblMensagemVazia, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(6, 6, 6))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 872, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
                         .addComponent(btnVerProdutos)
                         .addGap(74, 74, 74)
                         .addComponent(btnAceitar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRecusar))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 854, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(479, 479, 479))
+                        .addComponent(btnRecusar))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblMensagemVazia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVerProdutos)
                     .addComponent(btnAceitar)
                     .addComponent(btnRecusar))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addGap(102, 102, 102))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -286,6 +304,7 @@ public class PedidosPendentes extends javax.swing.JPanel {
     private javax.swing.JButton btnVerProdutos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblMensagemVazia;
     private javax.swing.JTable tabelaPedidosPendentes;
     // End of variables declaration//GEN-END:variables
 }
