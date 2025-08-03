@@ -7,11 +7,9 @@ package DAO;
 import Controller.ConexaoSingleton;
 import Controller.CrudGenerico;
 import Controller.Montador.MontadorPedido;
-import Controller.Montador.MontadorProduto;
 import DTO.ProdutoDTO;
 
 import Model.Pedido;
-import Model.Produto;
 import Model.StatusPedido;
 
 import java.sql.Connection;
@@ -21,10 +19,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -126,5 +120,8 @@ public class PedidoDAO extends CrudGenerico {
         return pedidosRequisitante;
 
     }
+      public boolean validateIDPedido(String id){//se false, não existe ninguem com o id 
+    return this.validateID("pedido", "id_pedido", id);
+            }
 
 }

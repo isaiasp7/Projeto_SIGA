@@ -5,6 +5,10 @@
 package Utils;
 
 import DAO.EmpresaDAO;
+import DAO.FuncionarioDAO;
+import DAO.PedidoDAO;
+import DAO.ProdutoDAO;
+import Model.Pedido;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -12,19 +16,54 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author Isaias
  */
 public class Utilitarios {
+     public static Integer gerar_id_produto(){
+          int id;
+         do {             
+            id= ThreadLocalRandom.current().nextInt(1000000, 9999999);//length =7
+         } while (new ProdutoDAO().validateIDProduto(String.valueOf(id)));
+         return id;
+     
+     
+     }
+     public static Integer gerar_id_pedido(){
+          int id;
+         do {             
+            id=  ThreadLocalRandom.current().nextInt(10000000, 99999999);//length =7
+         } while (new PedidoDAO().validateIDPedido(String.valueOf(id)));
+         return id;
+     
+     
+     }
+     public static Integer gerar_id_funcionario(){
+          int id;
+         do {             
+            id=  ThreadLocalRandom.current().nextInt(10000000, 99999999);//length =7
+         } while (new FuncionarioDAO().validateIDFuncionario(String.valueOf(id)));
+         return id;
+     
+     
+     }
+     public static Integer gerar_id_empresa(){
+          int id;
+         do {             
+            id= ThreadLocalRandom.current().nextInt(100000, 999999);//length = 6
+         } while (new EmpresaDAO().validateIDEmpresa(String.valueOf(id)));
+         return id;
+     
+     
+     }
          public static Integer gerar_id(String  tipo){//verificar dentro do banco se o id ja existe 
             Integer id;
-             do{
                  
                  id = switch (tipo) {
-                     case "produto" -> ThreadLocalRandom.current().nextInt(100000000, 999999999);//length=9
-                     case "pedido" ->
-                             ThreadLocalRandom.current().nextInt(10000000, 99999999);//length =8
-                     case "funcionario" ->    ThreadLocalRandom.current().nextInt(1000000, 9999999);//length =7
-                     case "empresa" -> ThreadLocalRandom.current().nextInt(100000, 999999);//length = 6
+                     case "produto" -> gerar_id_funcionario();
+                     case "pedido" -> gerar_id_pedido();
+                           
+                     case "funcionario" ->   gerar_id_funcionario();
+                     case "empresa" -> gerar_id_empresa();
                      default -> throw new IllegalArgumentException("Tipo de ID desconhecido: " + tipo);
                  };
-             }while(new EmpresaDAO().validateIDEmpresa(String.valueOf(id)));
+            
                  //verificar se o id gerado já existe. se for o caso, gerar outro
 
             return id;

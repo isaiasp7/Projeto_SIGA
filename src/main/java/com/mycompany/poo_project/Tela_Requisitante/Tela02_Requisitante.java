@@ -83,7 +83,7 @@ BProdutos.setVerticalAlignment(SwingConstants.CENTER);
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 31;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(45, 10, 0, 9);
+        gridBagConstraints.insets = new java.awt.Insets(45, 10, 0, 10);
         jPanel1.add(BCarrinho, gridBagConstraints);
 
         BProdutos.setBackground(new java.awt.Color(255, 255, 255));
@@ -99,7 +99,7 @@ BProdutos.setVerticalAlignment(SwingConstants.CENTER);
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 31;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(67, 10, 0, 9);
+        gridBagConstraints.insets = new java.awt.Insets(45, 10, 0, 10);
         jPanel1.add(BProdutos, gridBagConstraints);
 
         BSituacao.setBackground(new java.awt.Color(255, 255, 255));
@@ -115,7 +115,7 @@ BProdutos.setVerticalAlignment(SwingConstants.CENTER);
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 31;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(45, 10, 0, 9);
+        gridBagConstraints.insets = new java.awt.Insets(45, 10, 0, 10);
         jPanel1.add(BSituacao, gridBagConstraints);
 
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -127,7 +127,7 @@ BProdutos.setVerticalAlignment(SwingConstants.CENTER);
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 69;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 10, 0, 9);
+        gridBagConstraints.insets = new java.awt.Insets(4, 10, 0, 10);
         jPanel1.add(jLabel1, gridBagConstraints);
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -136,9 +136,9 @@ BProdutos.setVerticalAlignment(SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 129;
+        gridBagConstraints.ipadx = 119;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 0, 0);
         jPanel1.add(jLabel2, gridBagConstraints);
 
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -150,11 +150,10 @@ BProdutos.setVerticalAlignment(SwingConstants.CENTER);
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 57;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 10, 45, 9);
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 45, 10);
         jPanel1.add(jLabel3, gridBagConstraints);
 
         content.setBackground(new java.awt.Color(7, 23, 57));
-        content.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 150));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,8 +162,8 @@ BProdutos.setVerticalAlignment(SwingConstants.CENTER);
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

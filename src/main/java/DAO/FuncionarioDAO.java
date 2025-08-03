@@ -25,6 +25,9 @@ public class FuncionarioDAO extends CrudGenerico{
          System.out.println(func);
         return this.create(func, this.nomeTabelaBd);
     }
+       public boolean validateIDFuncionario(String id){//se false, não existe ninguem com o id 
+    return this.validateID("funcionario", "id_func", id);
+            }
    public List<Funcionario> readFuncionario(){
        return this.readAll(this.nomeTabelaBd, new MontadorFuncionario());
    }

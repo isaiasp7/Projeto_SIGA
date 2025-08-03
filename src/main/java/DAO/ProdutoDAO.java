@@ -105,5 +105,9 @@ public class ProdutoDAO extends CrudGenerico {
         return lista;
     }
     
+      public boolean validateIDProduto(String id){//se false, não existe ninguem com o id 
+    return this.validateID("produto", "id_prod", id);
+            }
+    
     
 }

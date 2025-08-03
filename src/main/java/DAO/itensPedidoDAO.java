@@ -10,15 +10,12 @@ import Controller.Montador.MontadorPedido;
 import Controller.Montador.MontadorProduto;
 import DTO.ProdutoDTO;
 import Model.Pedido;
-import Model.Produto;
 import Model.itensPedido;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -67,5 +64,6 @@ public class itensPedidoDAO extends CrudGenerico {
 
         return lista;
     }
+     
 
 }
