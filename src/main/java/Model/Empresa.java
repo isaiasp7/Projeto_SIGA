@@ -11,18 +11,18 @@ import Utils.Utilitarios;
  * @author Isaias
  */
 public class Empresa {
-        private Integer id;
-    private String tipo;
-    private String cnpj;
-    private String nomeEmpresa;
+        private Integer id_empresa;
+    private String tipo_empresa;
+    private String CNPJ;
+    private String nome_empresa;
     private String email;
     private String senha;
 
     public Empresa(String cnpj, String nomeEmpresa, String email, String senha) {
-        this.id =Utilitarios.gerar_id("empresa");
-        this.tipo = "Requisitante";
-        this.cnpj = cnpj;
-        this.nomeEmpresa = nomeEmpresa;
+        this.id_empresa =Utilitarios.gerar_id("empresa");
+        this.tipo_empresa = "Requisitante";
+        this.CNPJ = cnpj;
+        this.nome_empresa = nomeEmpresa;
         this.email = email;
         this.senha = senha;
     }
@@ -32,39 +32,39 @@ public class Empresa {
     public Empresa() {}
 
     public String getTipo() {
-        return tipo;
+        return tipo_empresa;
     }
     
     
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        this.tipo_empresa = tipo;
     }
     
     
     public long getId() {
-        return id;
+        return id_empresa;
     }
     public void setId(Integer id){
-        this.id=id;
+        this.id_empresa=id;
     }
     
 
 
     public String getCnpj() {
-        return cnpj;
+        return CNPJ;
     }
 
     public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+        this.CNPJ = cnpj;
     }
 
     public String getNomeEmpresa() {
-        return nomeEmpresa;
+        return nome_empresa;
     }
 
     public void setNomeEmpresa(String nomeEmpresa) {
-        this.nomeEmpresa = nomeEmpresa;
+        this.nome_empresa = nomeEmpresa;
     }
 
     public String getEmail() {

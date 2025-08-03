@@ -12,17 +12,17 @@ import Utils.Utilitarios;
  * @author Isaias
  */
 public class Funcionario {
-    private Integer id;
-    private String nomeEmpregado;
-    private String funcaoCargo;
+    private Integer id_func;
+    private String nome_func;
+    private String cargo;
     private String email;
     private String senha;
 
     public Funcionario( String nomeEmpregado, String funcaoCargo, String email, String senha) {
-        this.nomeEmpregado = nomeEmpregado;
-        this.funcaoCargo = funcaoCargo;
+        this.nome_func = nomeEmpregado;
+        this.cargo= funcaoCargo;
        this.email = email;
-          this.id = Utilitarios.gerar_id("funcionario");
+          this.id_func= Utilitarios.gerar_id("funcionario");
           this.senha = senha;
        
     }
@@ -30,7 +30,7 @@ public class Funcionario {
     
 
     public Funcionario() {
-        this.id = Utilitarios.gerar_id("funcionario");
+        this.id_func= Utilitarios.gerar_id("funcionario");
     }
     
     
@@ -44,28 +44,28 @@ public String getEmail() {
         this.email = email;
     }
     public Integer getId() {
-        return id;
+        return id_func;
     }
     public void setId(Integer id){
-        this.id = id;
+        this.id_func = id;
     }
 
   
 
     public String getNomeEmpregado() {
-        return nomeEmpregado;
+        return nome_func;
     }
 
     public void setNomeEmpregado(String nomeEmpregado) {
-        this.nomeEmpregado = nomeEmpregado;
+        this.nome_func = nomeEmpregado;
     }
 
     public String getFuncaoCargo() {
-        return funcaoCargo;
+        return cargo;
     }
 
     public void setFuncaoCargo(String funcaoCargo) {
-        this.funcaoCargo = funcaoCargo;
+        this.cargo = funcaoCargo;
     }
 
     /*public Empresa getEmpresa(){

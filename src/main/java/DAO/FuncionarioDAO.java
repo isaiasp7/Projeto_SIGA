@@ -22,6 +22,7 @@ public class FuncionarioDAO extends CrudGenerico{
            private Connection conexao = ConexaoSingleton.getInstancia().getConexao();
       
      public boolean createFuncionario(Funcionario func ){
+         System.out.println(func);
         return this.create(func, this.nomeTabelaBd);
     }
    public List<Funcionario> readFuncionario(){

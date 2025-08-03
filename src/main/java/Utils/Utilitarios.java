@@ -4,6 +4,7 @@
  */
 package Utils;
 
+import DAO.EmpresaDAO;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -11,8 +12,11 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author Isaias
  */
 public class Utilitarios {
-         public static Integer gerar_id(String  tipo){//verificar dentro do banco se o id ja existe
-                 Integer id = switch (tipo) {
+         public static Integer gerar_id(String  tipo){//verificar dentro do banco se o id ja existe 
+            Integer id;
+             do{
+                 
+                 id = switch (tipo) {
                      case "produto" -> ThreadLocalRandom.current().nextInt(100000000, 999999999);//length=9
                      case "pedido" ->
                              ThreadLocalRandom.current().nextInt(10000000, 99999999);//length =8
@@ -20,6 +24,7 @@ public class Utilitarios {
                      case "empresa" -> ThreadLocalRandom.current().nextInt(100000, 999999);//length = 6
                      default -> throw new IllegalArgumentException("Tipo de ID desconhecido: " + tipo);
                  };
+             }while(new EmpresaDAO().validateIDEmpresa(String.valueOf(id)));
                  //verificar se o id gerado já existe. se for o caso, gerar outro
 
             return id;

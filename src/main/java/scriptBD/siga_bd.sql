@@ -6,8 +6,8 @@ create table empresa (
     nome_empresa varchar(150) not null,
     tipo_empresa enum('requisitante', 'fornecedor') not null,
     email varchar(100),
-    CNPJ varchar(20) not null,
-    senha varchar(10) not null
+    CNPJ varchar(20) not null unique,
+    senha varchar(15) not null
 );
 
 
@@ -29,14 +29,15 @@ CREATE TABLE produto (
 create table funcionario (
 	id_func int primary key,
     nome_func varchar(100) not null,
-    cargo varchar(100) not null,
+    cargo varchar(20) not null,
     email varchar(100),
     id_empresa_fk int,
-	senha varchar(10),
+	senha varchar(15) not null,
      constraint fk_funcionario_empresa
 		foreign key(id_empresa_fk) references empresa(id_empresa)
          on delete set null
 );
+
 
 create table pedido (
 	id_pedido int primary key,

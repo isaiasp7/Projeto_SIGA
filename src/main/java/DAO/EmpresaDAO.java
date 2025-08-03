@@ -7,14 +7,10 @@ package DAO;
 import Controller.ConexaoSingleton;
 import Controller.CrudGenerico;
 import Controller.Montador.MontadorEmpresa;
-import Controller.MontadorReadAll;
 import Model.Empresa;
-import Model.Fornecedor;
-import Model.Requisitante;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -25,6 +21,7 @@ public class EmpresaDAO extends CrudGenerico{
       private Connection conexao = ConexaoSingleton.getInstancia().getConexao();
     
     public boolean createEmpresa(Empresa empresa){
+        System.out.println("persistind no banco");
         return this.create(empresa, "empresa");
     }
    public List<Empresa> readEmpresa(String tabela){
@@ -54,7 +51,28 @@ public class EmpresaDAO extends CrudGenerico{
 
    
    }
- 
+    
+    public boolean validateIDEmpresa(String id){//se false, não existe ninguem com o id 
+    return this.validateID("empresa", "id_empresa", id);
+            }
+    
+public boolean validateCNPJEmpresa(String cnpj) {
+    String sql = "SELECT CNPJ FROM empresa WHERE CNPJ = ?";
+
+    try {
+        PreparedStatement script = this.conexao.prepareStatement(sql);
+        script.setString(1, cnpj);
+        ResultSet rs = script.executeQuery();
+
+        // Se achou o CNPJ no banco, retorna false
+        return !rs.next(); // se não tem resultado, retorna true
+    } catch (Exception e) {
+        System.out.println("ERRO: " + e);
+    }
+
+    return false; // erro na execução → por segurança, não deixa cadastrar
+}
+
  
 }
 

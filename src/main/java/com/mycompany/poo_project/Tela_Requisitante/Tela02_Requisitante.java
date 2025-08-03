@@ -10,10 +10,13 @@ import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Visualizad
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  *
  * @author Isaias
+ * @creditos img de buttons : https://www.flaticon.com/br/autores/hazicon
+ * https://www.flaticon.com/br/autores/inipagistudio
  */
 public class Tela02_Requisitante extends javax.swing.JFrame {
 
@@ -22,11 +25,13 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
      */
     public Tela02_Requisitante() {
         initComponents();
-
         Visualizador tela1 = new Visualizador();
         tela1.setSize(872, 557);
         tela1.setLocation(0, 0);
-      this.getContentPane().setBackground(Color.decode("#071739"));//POG MASTER PLUS ULTRA
+        this.getContentPane().setBackground(Color.decode("#071739"));//POG MASTER PLUS ULTRA
+        BProdutos.setHorizontalAlignment(SwingConstants.CENTER);
+BProdutos.setVerticalAlignment(SwingConstants.CENTER);
+
         content.removeAll();
         content.add(tela1, BorderLayout.CENTER);
         content.repaint();
@@ -54,15 +59,19 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
         BCarrinho = new javax.swing.JButton();
         BProdutos = new javax.swing.JButton();
         BSituacao = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 102));
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 153, 0));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        BCarrinho.setText("Carrinho");
+        BCarrinho.setBackground(new java.awt.Color(255, 255, 255));
+        BCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/carrinho-vazio.png"))); // NOI18N
         BCarrinho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BCarrinhoActionPerformed(evt);
@@ -70,14 +79,15 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 45;
-        gridBagConstraints.ipady = 96;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 31;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(31, 6, 0, 6);
+        gridBagConstraints.insets = new java.awt.Insets(45, 10, 0, 9);
         jPanel1.add(BCarrinho, gridBagConstraints);
 
-        BProdutos.setText("Produtos");
+        BProdutos.setBackground(new java.awt.Color(255, 255, 255));
+        BProdutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/caixa-de-armazenamento.png"))); // NOI18N
         BProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BProdutosActionPerformed(evt);
@@ -86,13 +96,14 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 43;
-        gridBagConstraints.ipady = 90;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 31;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(78, 6, 0, 6);
+        gridBagConstraints.insets = new java.awt.Insets(67, 10, 0, 9);
         jPanel1.add(BProdutos, gridBagConstraints);
 
-        BSituacao.setText("Situação");
+        BSituacao.setBackground(new java.awt.Color(255, 255, 255));
+        BSituacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/descricao-do-produto.png"))); // NOI18N
         BSituacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BSituacaoActionPerformed(evt);
@@ -100,12 +111,47 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 46;
-        gridBagConstraints.ipady = 101;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 31;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(45, 6, 47, 6);
+        gridBagConstraints.insets = new java.awt.Insets(45, 10, 0, 9);
         jPanel1.add(BSituacao, gridBagConstraints);
+
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Visualizar Produtos");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 69;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 10, 0, 9);
+        jPanel1.add(jLabel1, gridBagConstraints);
+
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Carrinho");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 129;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        jPanel1.add(jLabel2, gridBagConstraints);
+
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Situação dos Pedidos");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 57;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 45, 9);
+        jPanel1.add(jLabel3, gridBagConstraints);
 
         content.setBackground(new java.awt.Color(7, 23, 57));
         content.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 150));
@@ -117,16 +163,16 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
-                .addGap(14, 14, 14))
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         content.getAccessibleContext().setAccessibleName("");
@@ -204,6 +250,9 @@ public class Tela02_Requisitante extends javax.swing.JFrame {
     private javax.swing.JButton BProdutos;
     private javax.swing.JButton BSituacao;
     private javax.swing.JPanel content;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

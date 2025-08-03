@@ -18,13 +18,15 @@ import javax.swing.SwingWorker;
 public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
      private boolean validaCampos = true;
     private ValidaCamposCadastro valido;
+    private String confirmaSenha = null;//é usado para receber a senha e depois se´ra usado para comparar os campos
     /**
      * Creates new form Tela02_cadastro
      */
     public Tela01_cadastroFuncionario() {
         initComponents();
-        this.PainelFormulario.setVisible(false);
+        //this.PainelFormulario.setVisible(false);
          this.setExtendedState(this.MAXIMIZED_BOTH);
+           getContentPane().setBackground(Color.decode("#071739"));
     }
 
     /**
@@ -35,27 +37,39 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
         PainelFormulario = new javax.swing.JPanel();
         jTextEmail = new javax.swing.JTextField();
-        jTextCargo = new javax.swing.JTextField();
         jTextNome = new javax.swing.JTextField();
-        jTextSenha = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabelCargo = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jgif = new javax.swing.JLabel();
         jLabelEmailError = new javax.swing.JLabel();
+        jLabelSenhaError = new javax.swing.JLabel();
+        jComboCargo = new javax.swing.JComboBox<>();
+        jLabelSenhaError1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jPasswordSenha = new javax.swing.JPasswordField();
+        jPasswordSenha1 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
         jMenuItem2.setText("jMenuItem2");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 0));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setPreferredSize(new java.awt.Dimension(667, 507));
+        setSize(new java.awt.Dimension(667, 507));
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         PainelFormulario.setBackground(new java.awt.Color(0, 0, 0));
         PainelFormulario.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -66,26 +80,9 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
             }
         });
 
-        jTextCargo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextCargoFocusLost(evt);
-            }
-        });
-        jTextCargo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCargoActionPerformed(evt);
-            }
-        });
-
         jTextNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextNomeActionPerformed(evt);
-            }
-        });
-
-        jTextSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextSenhaActionPerformed(evt);
             }
         });
 
@@ -102,7 +99,7 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
         jLabelCargo.setBackground(new java.awt.Color(0, 0, 0));
         jLabelCargo.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabelCargo.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelCargo.setText("Cargo");
+        jLabelCargo.setText("Cargo :");
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
@@ -116,54 +113,120 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
         jLabelEmailError.setMinimumSize(new java.awt.Dimension(0, 10));
         jLabelEmailError.setPreferredSize(new java.awt.Dimension(200, 15));
 
+        jLabelSenhaError.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabelSenhaError.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelSenhaError.setMinimumSize(new java.awt.Dimension(0, 10));
+        jLabelSenhaError.setPreferredSize(new java.awt.Dimension(200, 15));
+
+        jComboCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Operador", "Gerente", " " }));
+        jComboCargo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jComboCargoFocusLost(evt);
+            }
+        });
+        jComboCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboCargoActionPerformed(evt);
+            }
+        });
+
+        jLabelSenhaError1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabelSenhaError1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelSenhaError1.setMinimumSize(new java.awt.Dimension(0, 10));
+        jLabelSenhaError1.setPreferredSize(new java.awt.Dimension(200, 15));
+
+        jLabel6.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel6.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Confirmar senha");
+
+        jPasswordSenha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPasswordSenhaFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout PainelFormularioLayout = new javax.swing.GroupLayout(PainelFormulario);
         PainelFormulario.setLayout(PainelFormularioLayout);
         PainelFormularioLayout.setHorizontalGroup(
             PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelFormularioLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
                 .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextSenha)
-                        .addComponent(jLabel2)
-                        .addComponent(jTextNome)
-                        .addComponent(jLabelCargo)
-                        .addComponent(jTextCargo)
-                        .addComponent(jTextEmail)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabelEmailError, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addGroup(PainelFormularioLayout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(jLabelSenhaError1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PainelFormularioLayout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jTextNome, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                                    .addGroup(PainelFormularioLayout.createSequentialGroup()
+                                        .addComponent(jLabelCargo)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jComboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel3)
+                                    .addComponent(jTextEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                                    .addComponent(jLabelEmailError, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jPasswordSenha)))
+                            .addGroup(PainelFormularioLayout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(jLabelSenhaError, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelFormularioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPasswordSenha1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jgif, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         PainelFormularioLayout.setVerticalGroup(
             PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelFormularioLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jgif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(50, 50, 50)
+                .addComponent(jLabel2)
+                .addGap(6, 6, 6)
+                .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PainelFormularioLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(6, 6, 6)
                         .addComponent(jTextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addComponent(jLabelCargo)
-                        .addGap(6, 6, 6)
-                        .addComponent(jTextCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(17, 17, 17)
+                        .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelCargo)
+                            .addComponent(jComboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
                         .addComponent(jLabel3)
                         .addGap(6, 6, 6)
                         .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelEmailError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
                         .addGap(6, 6, 6)
-                        .addComponent(jTextSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addComponent(jLabelEmailError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPasswordSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelSenhaError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPasswordSenha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jgif, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelSenhaError1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 44;
+        gridBagConstraints.ipady = 24;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(28, 52, 0, 0);
+        getContentPane().add(PainelFormulario, gridBagConstraints);
 
         jButton1.setText("Submeter formulário");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -171,39 +234,24 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 287, 0, 0);
+        getContentPane().add(jButton1, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cadastro de Funcionário");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(PainelFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(122, 122, 122))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(241, 241, 241))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1)
-                .addGap(28, 28, 28)
-                .addComponent(PainelFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jButton1)
-                .addContainerGap(97, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(14, 182, 0, 0);
+        getContentPane().add(jLabel1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -214,7 +262,7 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
             @Override
             protected String doInBackground() throws Exception {
                 // Aqui roda fora da interface (thread separada)
-                return valido.validarCampoEmail(jTextCargo.getText());
+                return valido.validarCampoEmail(jTextEmail.getText());
             }
 
             @Override
@@ -244,33 +292,48 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
         }.execute();
     }//GEN-LAST:event_jTextEmailFocusLost
 
-    private void jTextCargoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextCargoFocusLost
-        
-    }//GEN-LAST:event_jTextCargoFocusLost
-
-    private void jTextCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCargoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCargoActionPerformed
-
     private void jTextNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextNomeActionPerformed
-
-    private void jTextSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextSenhaActionPerformed
-
+public void validarConfirmaSenhaM(String senha){
+    if (!confirmaSenha.equals(senha)){
+       this.validaCampos=false;
+       jLabelSenhaError1.setText("senha incorreta");
+    }else{
+     this.validaCampos=true;
+      jLabelSenhaError1.setText("");
+    }
+}
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (!jTextNome.getText().isBlank() && !jTextEmail.getText().isBlank() && !jTextCargo.getText().isBlank() && !jTextSenha.getText().isBlank()) {
-            FuncionarioDAO func = new FuncionarioDAO();
-            func.createFuncionario(new Funcionario(jTextNome.getText(),jTextCargo.getText(),jTextEmail.getText(),jTextSenha.getText()));
-            this.setVisible(false);
+        this.validarConfirmaSenhaM(jPasswordSenha1.getText());
+        if (!jTextNome.getText().isBlank() && !jTextEmail.getText().isBlank() && !jPasswordSenha.getText().isBlank() && validaCampos) {
+            FuncionarioDAO func = new FuncionarioDAO();            
+            if (func.createFuncionario(new Funcionario(jTextNome.getText(),jComboCargo.getSelectedItem().toString(),jTextEmail.getText(),confirmaSenha))) {
+                 this.setVisible(false);
             this.getTelaFuncionario();
+            }else {
+            JOptionPane.showMessageDialog(this, "erro na persinstencia do banco");
+        }
+            
+           
         } else {
-            JOptionPane.showMessageDialog(this, "Preencha todos os campos");
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos corretamente");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCargoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboCargoActionPerformed
+
+    private void jComboCargoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboCargoFocusLost
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_jComboCargoFocusLost
+
+    private void jPasswordSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordSenhaFocusLost
+        this.confirmaSenha = jPasswordSenha.getText();
+    }//GEN-LAST:event_jPasswordSenhaFocusLost
 private void getTelaFuncionario() {
         Tela02_Funcionario telaFunc = new Tela02_Funcionario();
         telaFunc.setVisible(true);
@@ -317,18 +380,22 @@ private void getTelaFuncionario() {
     private javax.swing.JPanel PainelFormulario;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboCargo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelCargo;
     private javax.swing.JLabel jLabelEmailError;
+    private javax.swing.JLabel jLabelSenhaError;
+    private javax.swing.JLabel jLabelSenhaError1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JTextField jTextCargo;
+    private javax.swing.JPasswordField jPasswordSenha;
+    private javax.swing.JPasswordField jPasswordSenha1;
     private javax.swing.JTextField jTextEmail;
     private javax.swing.JTextField jTextNome;
-    private javax.swing.JTextField jTextSenha;
     private javax.swing.JLabel jgif;
     // End of variables declaration//GEN-END:variables
 }

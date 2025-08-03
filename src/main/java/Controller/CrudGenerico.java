@@ -1,19 +1,12 @@
 package Controller;
 
-import Model.Funcionario;
-import Model.Produto;
-import Model.Requisitante;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.logging.Level;
@@ -48,7 +41,7 @@ public abstract class CrudGenerico {
             return ps.executeUpdate() > 0; // retorna true se pelo menos 1 linha foi inserida
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("ERRO CREATE : "+e);
             return false;
         }
     }
@@ -194,5 +187,21 @@ public abstract class CrudGenerico {
         return null;
 
     }
+    
+     public boolean validateID(String tableName, String nameColumn, String id) {
+         String sql = "SELECT "+nameColumn+" FROM "+tableName+"WHERE "+nameColumn+"="+id;
+          try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return true; // usa a função montadora
+                } else {
+                    return false; // ou lançar exceção
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CrudGenerico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+     }
 
 }
