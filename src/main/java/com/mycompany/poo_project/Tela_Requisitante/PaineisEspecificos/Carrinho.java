@@ -214,10 +214,10 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 742;
-        gridBagConstraints.ipady = 173;
+        gridBagConstraints.ipadx = 800;
+        gridBagConstraints.ipady = 252;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -237,7 +237,7 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
         gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 99;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(133, 54, 72, 0);
+        gridBagConstraints.insets = new java.awt.Insets(54, 54, 72, 0);
         add(jButton1, gridBagConstraints);
 
         jInputSearch.setBackground(new java.awt.Color(0, 0, 0));
@@ -260,7 +260,6 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 194;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(69, 73, 0, 0);
@@ -273,7 +272,7 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 457;
         gridBagConstraints.ipady = 34;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -340,14 +339,14 @@ private void reescreveValores() {//me responsabilizo por 60% desse metodo
                 new ProdutoDAO().updateProduto(produtoDTO.getProd(), produtoDTO.getProd().getId());
             }
             System.out.println("dados de produtos atualizado no banco");
-        } else {
-            JOptionPane.showMessageDialog(null, "nenhum campo de quantidade desejada pode ser 0",
-                    "alert", JOptionPane.ERROR_MESSAGE);
-        }
-
-          DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
         ids.clear();
+        } else {
+            JOptionPane.showMessageDialog(null, "nenhum campo de quantidade desejada pode ser 0","alert", JOptionPane.ERROR_MESSAGE);
+        }
+
+         
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

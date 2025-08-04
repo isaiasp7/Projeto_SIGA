@@ -115,7 +115,7 @@ BProdutos.setVerticalAlignment(SwingConstants.CENTER);
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 31;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(45, 10, 0, 10);
+        gridBagConstraints.insets = new java.awt.Insets(49, 10, 0, 10);
         jPanel1.add(BSituacao, gridBagConstraints);
 
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -136,9 +136,9 @@ BProdutos.setVerticalAlignment(SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 119;
+        gridBagConstraints.ipadx = 84;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 10, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(2, 40, 0, 0);
         jPanel1.add(jLabel2, gridBagConstraints);
 
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -162,16 +162,16 @@ BProdutos.setVerticalAlignment(SwingConstants.CENTER);
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 847, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         content.getAccessibleContext().setAccessibleName("");

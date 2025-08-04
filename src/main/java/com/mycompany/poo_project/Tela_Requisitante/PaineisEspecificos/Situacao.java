@@ -118,12 +118,12 @@ public class Situacao extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 365;
-        gridBagConstraints.ipady = 198;
+        gridBagConstraints.ipadx = 359;
+        gridBagConstraints.ipady = 215;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(97, 50, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(67, 0, 0, 0);
         add(jScrollPane1, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -133,7 +133,7 @@ public class Situacao extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipadx = 534;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(37, 2, 0, 0);
@@ -169,15 +169,14 @@ public class Situacao extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 323;
-        gridBagConstraints.ipady = 198;
+        gridBagConstraints.ipadx = 388;
+        gridBagConstraints.ipady = 215;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(97, 18, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(67, 6, 0, 0);
         add(jScrollPane2, gridBagConstraints);
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
@@ -188,7 +187,7 @@ public class Situacao extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(183, 18, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(184, 0, 0, 0);
         add(jLabel1, gridBagConstraints);
 
         jButton1.setText("Cancelar Pedido");
@@ -202,7 +201,7 @@ public class Situacao extends javax.swing.JPanel {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(42, 147, 82, 0);
+        gridBagConstraints.insets = new java.awt.Insets(42, 147, 95, 0);
         add(jButton1, gridBagConstraints);
 
         jLabelValorTotal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -213,15 +212,16 @@ public class Situacao extends javax.swing.JPanel {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = -3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 18, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 155, 0, 0);
         add(jLabelValorTotal, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String situacao = (String) jTableDefault.getValueAt(jTableDefault.getSelectedRow(),1);
              if (jTableDefault.getSelectedRow()<=-1) {
             JOptionPane.showMessageDialog(this, "Nenhuma linha foi selecionada");
-        }else{
+        }else if(situacao.equals("Pendente")){
              int opcao = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja cancelar o pedido:",
           "Confirme a ação",JOptionPane.YES_NO_OPTION);
              if (opcao==JOptionPane.YES_OPTION) {
@@ -241,6 +241,8 @@ public class Situacao extends javax.swing.JPanel {
              
                           
                       
+        }else{
+        JOptionPane.showMessageDialog(this, "Não é possivel cancelar esse pedido, pois o mesmo já foi enviado");
         }
  
         
