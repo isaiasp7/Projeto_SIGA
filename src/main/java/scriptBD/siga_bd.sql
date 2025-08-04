@@ -4,13 +4,11 @@ use siga_bd;
 create table empresa (
 	id_empresa int primary key,
     nome_empresa varchar(150) not null,
-    tipo_empresa enum('requisitante', 'fornecedor') not null,
+  tipo_empresa enum('Requisitante', 'Fornecedor') not null,
     email varchar(100),
-    CNPJ varchar(20) not null unique,
+    CNPJ char(14) not null unique,
     senha varchar(15) not null
 );
-
-
 
 CREATE TABLE produto (
     id_prod INT PRIMARY KEY,
@@ -29,15 +27,11 @@ CREATE TABLE produto (
 create table funcionario (
 	id_func int primary key,
     nome_func varchar(100) not null,
-    cargo varchar(20) not null,
+   cargo enum('Funcionario', 'Gerente') not null,
     email varchar(100),
-    id_empresa_fk int,
 	senha varchar(15) not null,
-     constraint fk_funcionario_empresa
-		foreign key(id_empresa_fk) references empresa(id_empresa)
-         on delete set null
+   CPF char(11) not null unique
 );
-
 
 create table pedido (
 	id_pedido int primary key,

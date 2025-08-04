@@ -25,7 +25,7 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
     public Tela01_cadastroFuncionario() {
         initComponents();
         //this.PainelFormulario.setVisible(false);
-         this.setExtendedState(this.MAXIMIZED_BOTH);
+         this.setExtendedState(Tela01_cadastroFuncionario.MAXIMIZED_BOTH);
            getContentPane().setBackground(Color.decode("#071739"));
     }
 
@@ -57,6 +57,9 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPasswordSenha = new javax.swing.JPasswordField();
         jPasswordSenha1 = new javax.swing.JPasswordField();
+        jTextCPF = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabelCPFError = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -118,7 +121,7 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
         jLabelSenhaError.setMinimumSize(new java.awt.Dimension(0, 10));
         jLabelSenhaError.setPreferredSize(new java.awt.Dimension(200, 15));
 
-        jComboCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Operador", "Gerente", " " }));
+        jComboCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Funcionario", "Gerente" }));
         jComboCargo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jComboCargoFocusLost(evt);
@@ -146,42 +149,60 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
             }
         });
 
+        jTextCPF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextCPFFocusLost(evt);
+            }
+        });
+
+        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("CPF");
+
+        jLabelCPFError.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabelCPFError.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCPFError.setMinimumSize(new java.awt.Dimension(0, 10));
+        jLabelCPFError.setPreferredSize(new java.awt.Dimension(200, 15));
+
         javax.swing.GroupLayout PainelFormularioLayout = new javax.swing.GroupLayout(PainelFormulario);
         PainelFormulario.setLayout(PainelFormularioLayout);
         PainelFormularioLayout.setHorizontalGroup(
             PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelFormularioLayout.createSequentialGroup()
-                .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addGroup(PainelFormularioLayout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(jLabelSenhaError1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PainelFormularioLayout.createSequentialGroup()
-                                .addGap(51, 51, 51)
+                .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel6)
+                        .addGroup(PainelFormularioLayout.createSequentialGroup()
+                            .addGap(5, 5, 5)
+                            .addComponent(jLabelSenhaError1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPasswordSenha1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PainelFormularioLayout.createSequentialGroup()
+                            .addGap(56, 56, 56)
+                            .addComponent(jLabelSenhaError, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(PainelFormularioLayout.createSequentialGroup()
+                            .addGap(51, 51, 51)
+                            .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jTextCPF)
+                                    .addComponent(jLabelCPFError, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel2)
-                                    .addComponent(jTextNome, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                                    .addComponent(jTextNome)
                                     .addGroup(PainelFormularioLayout.createSequentialGroup()
                                         .addComponent(jLabelCargo)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jComboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel3)
-                                    .addComponent(jTextEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                                    .addComponent(jTextEmail)
                                     .addComponent(jLabelEmailError, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                                     .addComponent(jLabel5)
-                                    .addComponent(jPasswordSenha)))
-                            .addGroup(PainelFormularioLayout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addComponent(jLabelSenhaError, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelFormularioLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPasswordSenha1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                    .addComponent(jPasswordSenha))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jgif, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
         PainelFormularioLayout.setVerticalGroup(
             PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,40 +213,45 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
                 .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PainelFormularioLayout.createSequentialGroup()
                         .addComponent(jTextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)
+                        .addGap(25, 25, 25)
                         .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelCargo)
                             .addComponent(jComboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(2, 2, 2)
+                        .addComponent(jTextCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
+                        .addComponent(jLabelCPFError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(2, 2, 2)
                         .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
                         .addComponent(jLabelEmailError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(2, 2, 2)
                         .addComponent(jPasswordSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelSenhaError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(2, 2, 2)
                         .addComponent(jPasswordSenha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jgif, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jgif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(6, 6, 6)
                 .addComponent(jLabelSenhaError1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 44;
-        gridBagConstraints.ipady = 24;
+        gridBagConstraints.ipadx = 28;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(28, 52, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 52, 0, 0);
         getContentPane().add(PainelFormulario, gridBagConstraints);
 
         jButton1.setText("Submeter formulário");
@@ -239,7 +265,7 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 287, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 287, 6, 0);
         getContentPane().add(jButton1, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
@@ -250,46 +276,43 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 182, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(24, 182, 0, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextEmailFocusLost
-        new SwingWorker<String, Void>() {
+       /* new SwingWorker<String, Void>() {
 
             @Override
             protected String doInBackground() throws Exception {
                 // Aqui roda fora da interface (thread separada)
-                return valido.validarCampoEmail(jTextEmail.getText());
+                return ValidaCamposCadastro.validarCampoEmail(jTextEmail.getText());
             }
 
             @Override
             protected void done() {
                 switch (ValidaCamposCadastro.validarCampoEmail(jTextEmail.getText())) {
-                    case "não existe":
-                    jLabelEmailError.setText("Email inexistente");
-                    validaCampos = false;
-                    break;
+                    case "não existe" -> {
+                        jLabelEmailError.setText("Email inexistente");
+                        validaCampos = false;
+                    }
 
-                    case "formato errado":
-                    jLabelEmailError.setText("Email possui um formato errado.");
-                    validaCampos = false;
-                    break;
-                    case null:
-                    validaCampos = false;
-                    jLabelEmailError.setText("");
-                    break;
-                    case "erro na requisição":
-                    jLabelEmailError.setText("Erro na request");
-                    break;
+                    case "formato errado" -> {
+                        jLabelEmailError.setText("Email possui um formato errado.");
+                        validaCampos = false;
+                    }
+                    case null -> {
+                        validaCampos = false;
+                        jLabelEmailError.setText("");
+                    }
+                    case "erro na requisição" -> jLabelEmailError.setText("Erro na request");
 
-                    default:
-                    throw new AssertionError();
+                    default -> throw new AssertionError();
                 } // isso faz a "thread paralela" começar
             }
-        }.execute();
+        }.execute();*/
     }//GEN-LAST:event_jTextEmailFocusLost
 
     private void jTextNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNomeActionPerformed
@@ -307,9 +330,9 @@ public void validarConfirmaSenhaM(String senha){
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.validarConfirmaSenhaM(jPasswordSenha1.getText());
-        if (!jTextNome.getText().isBlank() && !jTextEmail.getText().isBlank() && !jPasswordSenha.getText().isBlank() && validaCampos) {
+        if (!jTextNome.getText().isBlank() && !jTextEmail.getText().isBlank()&& !jPasswordSenha.getText().isBlank() && !jTextCPF.getText().isBlank() && validaCampos) {
             FuncionarioDAO func = new FuncionarioDAO();            
-            if (func.createFuncionario(new Funcionario(jTextNome.getText(),jComboCargo.getSelectedItem().toString(),jTextEmail.getText(),confirmaSenha))) {
+            if (func.createFuncionario(new Funcionario(jTextNome.getText(),jTextCPF.getText(),jComboCargo.getSelectedItem().toString(),jTextEmail.getText(),confirmaSenha))) {
                  this.setVisible(false);
             this.getTelaFuncionario();
             }else {
@@ -334,6 +357,16 @@ public void validarConfirmaSenhaM(String senha){
     private void jPasswordSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordSenhaFocusLost
         this.confirmaSenha = jPasswordSenha.getText();
     }//GEN-LAST:event_jPasswordSenhaFocusLost
+
+    private void jTextCPFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextCPFFocusLost
+        if (jTextCPF.getText().length()!=11) {
+            jLabelCPFError.setText("O cpf preciso conter exatamente 11 caracteres");
+            validaCampos = false;
+        }else{
+             jLabelCPFError.setText("");
+             validaCampos = true;
+        }
+    }//GEN-LAST:event_jTextCPFFocusLost
 private void getTelaFuncionario() {
         Tela02_Funcionario telaFunc = new Tela02_Funcionario();
         telaFunc.setVisible(true);
@@ -369,10 +402,8 @@ private void getTelaFuncionario() {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Tela01_cadastroFuncionario().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Tela01_cadastroFuncionario().setVisible(true);
         });
     }
 
@@ -384,8 +415,10 @@ private void getTelaFuncionario() {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelCPFError;
     private javax.swing.JLabel jLabelCargo;
     private javax.swing.JLabel jLabelEmailError;
     private javax.swing.JLabel jLabelSenhaError;
@@ -394,6 +427,7 @@ private void getTelaFuncionario() {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPasswordField jPasswordSenha;
     private javax.swing.JPasswordField jPasswordSenha1;
+    private javax.swing.JTextField jTextCPF;
     private javax.swing.JTextField jTextEmail;
     private javax.swing.JTextField jTextNome;
     private javax.swing.JLabel jgif;

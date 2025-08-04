@@ -4,8 +4,6 @@
  */
 package Login;
 
-import Utils.Utilitarios;
-
 /**
  *
  * @author Isaias

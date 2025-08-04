@@ -4,7 +4,6 @@
  */
 package Model;
 
-import DAO.EmpresaDAO;
 import Utils.Utilitarios;
 
 /**
@@ -17,10 +16,12 @@ public class Funcionario {
     private String cargo;
     private String email;
     private String senha;
+    private String CPF;
 
-    public Funcionario( String nomeEmpregado, String funcaoCargo, String email, String senha) {
+    public Funcionario( String nomeEmpregado,String cpf, String funcaoCargo, String email, String senha) {
         this.nome_func = nomeEmpregado;
         this.cargo= funcaoCargo;
+        this.CPF = cpf;
        this.email = email;
           this.id_func= Utilitarios.gerar_id("funcionario");
           this.senha = senha;

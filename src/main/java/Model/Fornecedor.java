@@ -4,9 +4,6 @@
  */
 package Model;
 
-import Controller.CrudGenerico;
-import Utils.Utilitarios;
-
 /**
  *
  * @author Isaias

@@ -189,7 +189,7 @@ public abstract class CrudGenerico {
     }
     
      public boolean validateID(String tableName, String nameColumn, String id) {
-         String sql = "SELECT "+nameColumn+" FROM "+tableName+"WHERE "+nameColumn+"="+id;
+         String sql = "SELECT "+nameColumn+" FROM "+tableName+" WHERE "+nameColumn+" = "+id;
           try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
