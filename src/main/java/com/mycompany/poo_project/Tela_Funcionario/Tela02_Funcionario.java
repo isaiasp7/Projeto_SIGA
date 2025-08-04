@@ -41,91 +41,127 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         painelMenu = new javax.swing.JPanel();
         btnPedidosPendentes = new javax.swing.JButton();
         btnProdutos = new javax.swing.JButton();
         btnGerenciaPedidos = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         painelPrincipal = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 102));
 
-        painelMenu.setBackground(new java.awt.Color(255, 204, 0));
-        painelMenu.setPreferredSize(new java.awt.Dimension(133, 557));
+        painelMenu.setBackground(new java.awt.Color(255, 153, 0));
+        painelMenu.setName(""); // NOI18N
+        painelMenu.setLayout(new java.awt.GridBagLayout());
 
-        btnPedidosPendentes.setText("<html><center>Pedidos<br>Pendentes</center></html>");
-        btnPedidosPendentes.setMaximumSize(new java.awt.Dimension(78, 23));
-        btnPedidosPendentes.setMinimumSize(new java.awt.Dimension(78, 23));
-        btnPedidosPendentes.setPreferredSize(new java.awt.Dimension(78, 23));
+        btnPedidosPendentes.setBackground(new java.awt.Color(255, 255, 255));
+        btnPedidosPendentes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/feedback.png"))); // NOI18N
+        btnPedidosPendentes.setMaximumSize(null);
+        btnPedidosPendentes.setMinimumSize(null);
+        btnPedidosPendentes.setPreferredSize(null);
         btnPedidosPendentes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPedidosPendentesActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 31;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(45, 10, 0, 10);
+        painelMenu.add(btnPedidosPendentes, gridBagConstraints);
 
-        btnProdutos.setText("Produtos");
+        btnProdutos.setBackground(new java.awt.Color(255, 255, 255));
+        btnProdutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/product.png"))); // NOI18N
         btnProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProdutosActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 31;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(45, 10, 0, 10);
+        painelMenu.add(btnProdutos, gridBagConstraints);
 
-        btnGerenciaPedidos.setText("<html><center>Gerenciar<br>Pedidos</center>\n</html>");
-        btnGerenciaPedidos.setMaximumSize(new java.awt.Dimension(78, 23));
-        btnGerenciaPedidos.setMinimumSize(new java.awt.Dimension(78, 23));
-        btnGerenciaPedidos.setPreferredSize(new java.awt.Dimension(78, 23));
+        btnGerenciaPedidos.setBackground(new java.awt.Color(255, 255, 255));
+        btnGerenciaPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/compare.png"))); // NOI18N
+        btnGerenciaPedidos.setMaximumSize(null);
+        btnGerenciaPedidos.setMinimumSize(null);
+        btnGerenciaPedidos.setPreferredSize(null);
         btnGerenciaPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGerenciaPedidosActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 31;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(45, 10, 0, 10);
+        painelMenu.add(btnGerenciaPedidos, gridBagConstraints);
 
-        javax.swing.GroupLayout painelMenuLayout = new javax.swing.GroupLayout(painelMenu);
-        painelMenu.setLayout(painelMenuLayout);
-        painelMenuLayout.setHorizontalGroup(
-            painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelMenuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPedidosPendentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                    .addComponent(btnGerenciaPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        painelMenuLayout.setVerticalGroup(
-            painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelMenuLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(btnPedidosPendentes, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
-                .addComponent(btnProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
-                .addComponent(btnGerenciaPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Aprovar Pedidos");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 31;
+        gridBagConstraints.insets = new java.awt.Insets(4, 10, 0, 10);
+        painelMenu.add(jLabel1, gridBagConstraints);
+
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Gerenciar Produtos");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 31;
+        gridBagConstraints.insets = new java.awt.Insets(4, 10, 0, 10);
+        painelMenu.add(jLabel2, gridBagConstraints);
+
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Gerenciar Pedidos");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 31;
+        gridBagConstraints.insets = new java.awt.Insets(4, 10, 0, 10);
+        painelMenu.add(jLabel3, gridBagConstraints);
 
         painelPrincipal.setBackground(new java.awt.Color(7, 23, 57));
-        painelPrincipal.setPreferredSize(new java.awt.Dimension(20, 300));
-        painelPrincipal.setLayout(new java.awt.BorderLayout());
+        painelPrincipal.setPreferredSize(null);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(painelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
-                .addGap(11, 11, 11))
+                .addComponent(painelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addComponent(painelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -189,6 +225,9 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
     private javax.swing.JButton btnGerenciaPedidos;
     private javax.swing.JButton btnPedidosPendentes;
     private javax.swing.JButton btnProdutos;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel painelMenu;
     private javax.swing.JPanel painelPrincipal;
     // End of variables declaration//GEN-END:variables
