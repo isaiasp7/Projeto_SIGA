@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.mycompany.poo_project.Tela_Funcionario.Paineis;
+package View.com.mycompany.poo_project.Tela_Funcionario.Paineis;
 
-import DAO.ProdutoDAO;
-import Model.Produto;
+import DAO.FuncionarioDAO;
+import Model.Funcionario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -15,60 +15,62 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Cliente
  */
-public class Produtos extends javax.swing.JPanel {
+public class GerenciarFuncionarios extends javax.swing.JPanel {
 
     /**
-     * Creates new form Produtos
+     * Creates new form GerenciarFuncionarios
      */
-    public Produtos() {
+    public GerenciarFuncionarios() {
         initComponents();
-        
+        configurarTabela();
+        carregarDados();
+    }
+    
+     private void configurarTabela(){
         DefaultTableModel modelo = new DefaultTableModel(
-            new Object[][] {},
-            new String[] { "Seleção", "ID", "Nome", "Quantidade", "Preço" }
+            new Object[][]{},
+            new String[]{"Seleção", "ID", "Nome", "Cargo", "Email", "CPF"}
         ) {
             Class[] types = new Class[]{
-                Boolean.class, Integer.class, String.class, Integer.class, Double.class
+                Boolean.class, Integer.class, String.class, String.class, String.class, String.class
             };
             boolean[] canEdit = new boolean[]{
-                true, false, false, false, false
+                true, false, false, false, false, false
             };
 
+            @Override
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
             }
 
+            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit[columnIndex];
             }
         };
 
-        tabelaProdutos.setModel(modelo); 
-        carregarDados();
+        tabelaFuncionarios.setModel(modelo);
+
     }
     
-    private void carregarDados() {        
+    private void carregarDados() {
+        FuncionarioDAO dao = new FuncionarioDAO();
+        List<Funcionario> funcionarios = dao.readFuncionario();
 
-        ProdutoDAO dao = new ProdutoDAO();
+        DefaultTableModel modelo = (DefaultTableModel) tabelaFuncionarios.getModel();
+        modelo.setRowCount(0); // limpa
 
-        List<Produto> produtos = dao.readProduto(); 
-
-        DefaultTableModel modelo = (DefaultTableModel) tabelaProdutos.getModel();
-        modelo.setRowCount(0);
-
-        for (Produto p : produtos) {
-            Object[] linha = new Object[] {
+        for (Funcionario f : funcionarios) {
+            modelo.addRow(new Object[]{
                 false,
-                p.getId(),
-                p.getNome(),
-                p.getQuantDisponivel(),
-                p.getValor()
-            };
-            modelo.addRow(linha);
+                f.getId(),
+                f.getNomeEmpregado(),
+                f.getFuncaoCargo(),
+                f.getEmail(),
+                f.getCPF()
+            });
         }
-        
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,35 +82,34 @@ public class Produtos extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaProdutos = new javax.swing.JTable();
-        btnCriar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
+        tabelaFuncionarios = new javax.swing.JTable();
         btnExcluir = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(7, 23, 57));
         setMinimumSize(new java.awt.Dimension(872, 557));
         setPreferredSize(new java.awt.Dimension(825, 659));
 
-        tabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Seleção", "ID", "Nome", "Quantidade", "Preço"
+                "Seleção", "ID", "Nome", "Cargo", "Email", "CPF"
             }
         ));
-        jScrollPane1.setViewportView(tabelaProdutos);
+        jScrollPane1.setViewportView(tabelaFuncionarios);
 
-        btnCriar.setBackground(new java.awt.Color(0, 0, 0));
-        btnCriar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCriar.setText("Criar");
-        btnCriar.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setBackground(new java.awt.Color(0, 0, 0));
+        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCriarActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
             }
         });
 
@@ -121,20 +122,10 @@ public class Produtos extends javax.swing.JPanel {
             }
         });
 
-        btnExcluir.setBackground(new java.awt.Color(0, 0, 0));
-        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
-        btnExcluir.setText("Excluir");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Produtos");
-        jLabel1.setPreferredSize(new java.awt.Dimension(143, 659));
+        jLabel1.setText("Gerenciar Funcionários");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -146,104 +137,104 @@ public class Produtos extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 860, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCriar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(40, 40, 40)
                         .addComponent(btnExcluir)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCriar)
                     .addComponent(btnEditar)
                     .addComponent(btnExcluir))
-                .addGap(49, 49, 49))
+                .addGap(86, 86, 86))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
-        // TODO add your handling code here:
-        CriarProduto tela = new CriarProduto(null, true); 
-        tela.setVisible(true); 
-        carregarDados(); 
-    }//GEN-LAST:event_btnCriarActionPerformed
-
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        int linhaSelecionada = tabelaProdutos.getSelectedRow();
+        int linhaSelecionada = tabelaFuncionarios.getSelectedRow();
         if (linhaSelecionada != -1) {
-            int id = (int) tabelaProdutos.getValueAt(linhaSelecionada, 1);
-            String nome = (String) tabelaProdutos.getValueAt(linhaSelecionada,2);
-            int quantidade = (int) tabelaProdutos.getValueAt(linhaSelecionada, 3);
-            double preco = (double) tabelaProdutos.getValueAt(linhaSelecionada, 4);
+            int id = (int) tabelaFuncionarios.getValueAt(linhaSelecionada, 1);
+            String nome = (String) tabelaFuncionarios.getValueAt(linhaSelecionada, 2);
+            String cargo = (String) tabelaFuncionarios.getValueAt(linhaSelecionada, 3);
+            String email = (String) tabelaFuncionarios.getValueAt(linhaSelecionada, 4);
+            String cpf = (String) tabelaFuncionarios.getValueAt(linhaSelecionada, 5);
 
-            EditarProduto editarDialog = new EditarProduto(null, true, id, nome, quantidade, preco);
+            EditarFuncionario editarDialog = new EditarFuncionario(null, true, id, nome, cargo, email, cpf);
             editarDialog.setVisible(true);
+
+            carregarDados(); 
         } else {
-            JOptionPane.showMessageDialog(this, "Selecione um produto para editar.");
+            JOptionPane.showMessageDialog(this, "Selecione um funcionário para editar.");
         }
-        carregarDados();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) tabelaProdutos.getModel();
-        ProdutoDAO dao = new ProdutoDAO();
+        // TODO add your handling code here:
+        DefaultTableModel modelo = (DefaultTableModel) tabelaFuncionarios.getModel();
+        FuncionarioDAO dao = new FuncionarioDAO();
 
         List<Integer> idsParaExcluir = new ArrayList<>();
+        boolean temGerenteSelecionado = false;
 
         for (int i = 0; i < modelo.getRowCount(); i++) {
             Boolean selecionado = (Boolean) modelo.getValueAt(i, 0);
-            if (selecionado != null && selecionado) {
-                int idProduto = (int) modelo.getValueAt(i, 1);
-                idsParaExcluir.add(idProduto);
+            String cargo = (String) modelo.getValueAt(i, 3);
+
+            if (Boolean.TRUE.equals(selecionado)) {
+                if ("Gerente".equalsIgnoreCase(cargo)) {
+                    temGerenteSelecionado = true;
+                } else {
+                    int idFuncionario = (int) modelo.getValueAt(i, 1);
+                    idsParaExcluir.add(idFuncionario);
+                }
             }
         }
 
+        if (temGerenteSelecionado) {
+            JOptionPane.showMessageDialog(this, "Você não pode excluir outro gerente.");
+        }
+
         if (idsParaExcluir.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Selecione ao menos um produto para excluir.");
+            JOptionPane.showMessageDialog(this, "Selecione ao menos um funcionário para excluir.");
             return;
         }
 
         int confirmar = JOptionPane.showConfirmDialog(this, 
-            "Tem certeza que deseja excluir os produtos selecionados?", 
+            "Tem certeza que deseja excluir os funcionários selecionados?", 
             "Confirmação", JOptionPane.YES_NO_OPTION);
 
         if (confirmar == JOptionPane.YES_OPTION) {
             boolean sucesso = true;
             for (Integer id : idsParaExcluir) {
-                boolean excluiu = dao.deleteProduto(id);
-                if (!excluiu) {
+                if (!dao.deleteFuncionario(id)) {
                     sucesso = false;
                 }
             }
 
             if (sucesso) {
-                JOptionPane.showMessageDialog(this, "Produtos excluídos com sucesso.");
+                JOptionPane.showMessageDialog(this, "Funcionários excluídos com sucesso.");
             } else {
-                JOptionPane.showMessageDialog(this, "Erro ao excluir alguns produtos.");
+                JOptionPane.showMessageDialog(this, "Erro ao excluir alguns funcionários.");
             }
 
-            carregarDados(); 
-
-        } 
-
+            carregarDados();
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCriar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaProdutos;
+    private javax.swing.JTable tabelaFuncionarios;
     // End of variables declaration//GEN-END:variables
 }

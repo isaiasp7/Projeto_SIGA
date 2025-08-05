@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.poo_project.Tela_Funcionario;
+package View.Tela_Funcionario.JFramePrincipal;
 
 import DAO.FuncionarioDAO;
 import Login.FuncionarioLogin;
-import com.mycompany.poo_project.Tela_Funcionario.Paineis.GerenciaPedidos;
-import com.mycompany.poo_project.Tela_Funcionario.Paineis.GerenciarFuncionarios;
-import com.mycompany.poo_project.Tela_Funcionario.Paineis.PedidosPendentes;
-import com.mycompany.poo_project.Tela_Funcionario.Paineis.Produtos;
+import View.com.mycompany.poo_project.Tela_Funcionario.Paineis.GerenciaPedidos;
+import View.com.mycompany.poo_project.Tela_Funcionario.Paineis.GerenciarFuncionarios;
+import View.com.mycompany.poo_project.Tela_Funcionario.Paineis.PedidosPendentes;
+import View.com.mycompany.poo_project.Tela_Funcionario.Paineis.Produtos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JPanel;

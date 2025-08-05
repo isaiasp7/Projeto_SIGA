@@ -2,15 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.poo_project.Login_cadastro;
+package View.Login;
 
 import DAO.EmpresaDAO;
 import DAO.FuncionarioDAO;
 import Login.FuncionarioLogin;
+
 import Login.RequisitanteLogin;
-import com.mycompany.poo_project.Login_cadastro.Tela01_cadastroEmpresa;
-import com.mycompany.poo_project.Tela_Funcionario.Tela02_Funcionario;
-import com.mycompany.poo_project.Tela_Requisitante.Tela02_Requisitante;
+import View.Tela_Funcionario.JFramePrincipal.Tela02_Funcionario;
+import View.Tela_Requisitante.JFramePrincipal.Tela02_Requisitante;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;

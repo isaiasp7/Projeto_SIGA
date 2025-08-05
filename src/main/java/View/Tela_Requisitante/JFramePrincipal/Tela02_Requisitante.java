@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.poo_project.Tela_Requisitante;
+package View.Tela_Requisitante.JFramePrincipal;
 
 import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Carrinho;
 import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Situacao;

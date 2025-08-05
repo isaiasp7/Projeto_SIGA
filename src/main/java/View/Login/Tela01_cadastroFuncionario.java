@@ -2,14 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.poo_project.Login_cadastro;
+package View.Login;
 
 import DAO.FuncionarioDAO;
 import Model.Funcionario;
-import com.mycompany.poo_project.Tela_Funcionario.Tela02_Funcionario;
+import View.Tela_Funcionario.JFramePrincipal.Tela02_Funcionario;
 import java.awt.Color;
 import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
 
 /**
  *
@@ -70,7 +69,6 @@ public class Tela01_cadastroFuncionario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(667, 507));
         setSize(new java.awt.Dimension(667, 507));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
