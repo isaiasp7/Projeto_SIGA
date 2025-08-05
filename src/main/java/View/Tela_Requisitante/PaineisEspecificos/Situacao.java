@@ -32,7 +32,10 @@ public class Situacao extends javax.swing.JPanel {
      */
     public Situacao() {
         try {
-             lista = new PedidoDAO().requestByIdRequisitante(RequisitanteLogin.getId());
+            if (!RequisitanteLogin.getId().equals("")) {
+                   lista = new PedidoDAO().requestByIdRequisitante(RequisitanteLogin.getId());
+            }
+          
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Essa empresa ainda não possui nenhuma requisição de pedido");
         }

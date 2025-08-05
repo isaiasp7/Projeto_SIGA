@@ -94,14 +94,14 @@ public class Visualizador extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 761;
-        gridBagConstraints.ipady = 156;
+        gridBagConstraints.ipadx = 864;
+        gridBagConstraints.ipady = 286;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(29, 50, 152, 0);
+        gridBagConstraints.insets = new java.awt.Insets(29, 50, 59, 0);
         add(jScrollPane1, gridBagConstraints);
 
         jInputSearch.setBackground(new java.awt.Color(0, 0, 0));
@@ -124,10 +124,9 @@ public class Visualizador extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 194;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(82, 385, 0, 6);
+        gridBagConstraints.insets = new java.awt.Insets(82, 385, 0, 0);
         add(jInputSearch, gridBagConstraints);
 
         AdicionarCar.setBackground(new java.awt.Color(0, 0, 0));
@@ -153,10 +152,10 @@ public class Visualizador extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 483;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(37, 50, 0, 6);
+        gridBagConstraints.insets = new java.awt.Insets(37, 50, 0, 0);
         add(jLabel1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
