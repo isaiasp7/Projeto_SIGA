@@ -74,6 +74,14 @@ public String getEmail() {
         empDAO.
         this.id_empresa_fornecedora
     }*/
+
+    public String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
     
     
 }

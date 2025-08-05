@@ -4,9 +4,14 @@
  */
 package com.mycompany.poo_project.Tela_Funcionario;
 
+import DAO.FuncionarioDAO;
+import Login.FuncionarioLogin;
 import com.mycompany.poo_project.Tela_Funcionario.Paineis.GerenciaPedidos;
+import com.mycompany.poo_project.Tela_Funcionario.Paineis.GerenciarFuncionarios;
 import com.mycompany.poo_project.Tela_Funcionario.Paineis.PedidosPendentes;
 import com.mycompany.poo_project.Tela_Funcionario.Paineis.Produtos;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JPanel;
 
 /**
@@ -21,11 +26,30 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
     public Tela02_Funcionario() {
         initComponents();
         
+        btnGerenciarFuncionarios.setVisible(false);
+        jLabel4.setVisible(false);
+        
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         PedidosPendentes painelInicial = new PedidosPendentes();
         mostrarPainel(painelInicial);
+        
+        FuncionarioDAO dao = new FuncionarioDAO();
+        ResultSet rsCargo = dao.buscarCargoFuncionario(FuncionarioLogin.getId());
+        
+        try {
+            if (rsCargo != null && rsCargo.next()){
+                String cargo = rsCargo.getString("cargo");
+                if (cargo != null && cargo.equalsIgnoreCase("gerente")){
+                    btnGerenciarFuncionarios.setVisible(true);
+                    jLabel4.setVisible(true);
+                }
+            }
+        } catch (SQLException e){
+            System.out.println("Erro ao buscar cargo do funcionário: " + e);
+        }
+        
     }
-    
+     
     private void mostrarPainel(JPanel painel){
         painelPrincipal.removeAll();
         painelPrincipal.add(painel);
@@ -50,6 +74,8 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        btnGerenciarFuncionarios = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         painelPrincipal = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,7 +101,7 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 31;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(45, 10, 0, 10);
+        gridBagConstraints.insets = new java.awt.Insets(15, 10, 0, 10);
         painelMenu.add(btnPedidosPendentes, gridBagConstraints);
 
         btnProdutos.setBackground(new java.awt.Color(255, 255, 255));
@@ -91,7 +117,7 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 31;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(45, 10, 0, 10);
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 0, 10);
         painelMenu.add(btnProdutos, gridBagConstraints);
 
         btnGerenciaPedidos.setBackground(new java.awt.Color(255, 255, 255));
@@ -110,7 +136,7 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 31;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(45, 10, 0, 10);
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 0, 10);
         painelMenu.add(btnGerenciaPedidos, gridBagConstraints);
 
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -121,7 +147,7 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 31;
-        gridBagConstraints.insets = new java.awt.Insets(4, 10, 0, 10);
+        gridBagConstraints.insets = new java.awt.Insets(2, 10, 0, 10);
         painelMenu.add(jLabel1, gridBagConstraints);
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -132,7 +158,7 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 31;
-        gridBagConstraints.insets = new java.awt.Insets(4, 10, 0, 10);
+        gridBagConstraints.insets = new java.awt.Insets(2, 10, 0, 10);
         painelMenu.add(jLabel2, gridBagConstraints);
 
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -143,8 +169,35 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 31;
-        gridBagConstraints.insets = new java.awt.Insets(4, 10, 0, 10);
+        gridBagConstraints.insets = new java.awt.Insets(2, 10, 0, 10);
         painelMenu.add(jLabel3, gridBagConstraints);
+
+        btnGerenciarFuncionarios.setBackground(new java.awt.Color(255, 255, 255));
+        btnGerenciarFuncionarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/satisfied-customer.png"))); // NOI18N
+        btnGerenciarFuncionarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerenciarFuncionariosActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 31;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 0, 10);
+        painelMenu.add(btnGerenciarFuncionarios, gridBagConstraints);
+
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Gerenciar Funcionários");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 31;
+        gridBagConstraints.insets = new java.awt.Insets(2, 10, 0, 10);
+        painelMenu.add(jLabel4, gridBagConstraints);
 
         painelPrincipal.setBackground(new java.awt.Color(7, 23, 57));
         painelPrincipal.setPreferredSize(null);
@@ -185,6 +238,12 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
         mostrarPainel(painel);
     }//GEN-LAST:event_btnGerenciaPedidosActionPerformed
 
+    private void btnGerenciarFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarFuncionariosActionPerformed
+        // TODO add your handling code here:
+        GerenciarFuncionarios painel = new GerenciarFuncionarios();
+        mostrarPainel(painel);
+    }//GEN-LAST:event_btnGerenciarFuncionariosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -223,11 +282,13 @@ public class Tela02_Funcionario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGerenciaPedidos;
+    private javax.swing.JButton btnGerenciarFuncionarios;
     private javax.swing.JButton btnPedidosPendentes;
     private javax.swing.JButton btnProdutos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel painelMenu;
     private javax.swing.JPanel painelPrincipal;
     // End of variables declaration//GEN-END:variables

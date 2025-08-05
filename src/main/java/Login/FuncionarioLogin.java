@@ -11,6 +11,7 @@ package Login;
 public class FuncionarioLogin {
     private  static Integer id ;
     private static Integer id_empresa_fk;
+    private static String cargo;
 
     public static Integer getId() {
         return id;
@@ -26,6 +27,14 @@ public class FuncionarioLogin {
 
     public static void setId_empresa_fk(Integer id_empresa_fk) {
         FuncionarioLogin.id_empresa_fk = id_empresa_fk;
+    }
+
+    public static String getCargo() {
+        return cargo;
+    }
+
+    public static void setCargo(String cargo) {
+        FuncionarioLogin.cargo = cargo;
     }
 
 

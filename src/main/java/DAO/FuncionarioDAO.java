@@ -52,4 +52,16 @@ public class FuncionarioDAO extends CrudGenerico{
    
    }
    
+   public ResultSet buscarCargoFuncionario(int id_funcionario){
+       String sql = "SELECT cargo FROM funcionario WHERE id_func = ?";
+       try {
+            PreparedStatement script = this.conexao.prepareStatement(sql);
+            script.setInt(1, id_funcionario);
+            return script.executeQuery();
+       } catch (Exception e) {
+            System.out.println("ERRO (buscar cargo): " + e);
+        }
+        return null;
+   }
+   
 }
