@@ -5,11 +5,11 @@
 package View.Tela_Funcionario.JFramePrincipal;
 
 import DAO.FuncionarioDAO;
-import Login.FuncionarioLogin;
-import View.com.mycompany.poo_project.Tela_Funcionario.Paineis.GerenciaPedidos;
-import View.com.mycompany.poo_project.Tela_Funcionario.Paineis.GerenciarFuncionarios;
-import View.com.mycompany.poo_project.Tela_Funcionario.Paineis.PedidosPendentes;
-import View.com.mycompany.poo_project.Tela_Funcionario.Paineis.Produtos;
+import Controller.CapturaLogin.FuncionarioLogin;
+import View.Tela_Funcionario.Paineis.GerenciarFuncionarios;
+import View.Tela_Funcionario.Paineis.GerenciaPedidos;
+import View.Tela_Funcionario.Paineis.PedidosPendentes;
+import View.Tela_Funcionario.Paineis.Produtos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JPanel;

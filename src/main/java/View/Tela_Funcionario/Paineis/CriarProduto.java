@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package View.com.mycompany.poo_project.Tela_Funcionario.Paineis;
+package View.Tela_Funcionario.Paineis;
 
+import Controller.CapturaLogin.FuncionarioLogin;
 import Model.Produto;
 
 /**
@@ -180,7 +181,7 @@ public class CriarProduto extends javax.swing.JDialog {
             int quantidade = Integer.parseInt(txtQuantidade.getText().trim());
             double preco = Double.parseDouble(txtPreco.getText().trim());
 
-            int idFornecedor = Login.FuncionarioLogin.getId_empresa_fk(); 
+            int idFornecedor = FuncionarioLogin.getId_empresa_fk(); //crie um campo para que seja inserido esse valor
 
             Produto novo = new Produto(nome, quantidade, idFornecedor, preco);
 

@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package View.com.mycompany.poo_project.Tela_Funcionario.Paineis;
+package View.Tela_Funcionario.Paineis;
 
+import Controller.CapturaLogin.FuncionarioLogin;
 import DAO.PedidoDAO;
-import Login.FuncionarioLogin;
 import Model.Pedido;
 import Model.StatusPedido;
 import java.util.ArrayList;

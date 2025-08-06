@@ -4,9 +4,9 @@
  */
 package View.Login;
 
+import Controller.CapturaLogin.FuncionarioLogin;
 import DAO.EmpresaDAO;
 import DAO.FuncionarioDAO;
-import Login.FuncionarioLogin;
 
 import Login.RequisitanteLogin;
 import View.Tela_Funcionario.JFramePrincipal.Tela02_Funcionario;
@@ -216,7 +216,7 @@ System.out.println("URL da imagem: " + url);*/
         System.out.println("senha = "+inputSenha.getText());
         System.out.println("email = "+inputEmail.getText());*/
         if ((!inputEmail.getText().isBlank() && !inputEmail.getText().contains("email")) && (!inputSenha.getText().isBlank() && !inputSenha.getText().contains("Senha"))) {
-            if (inputEmail.getText().contains("Emp")) {
+            if (inputEmail.getText().contains("empresa")) {
                 //this.Login("funcionario");
                 if (!this.Login("funcionario")) {
                     JOptionPane.showMessageDialog(null,
@@ -324,8 +324,7 @@ Object[] itens = { "Funcionario","Empresa"};
                 rs = funcDAO.validacaoLoginFuncionario(inputEmail.getText(), inputSenha.getText());
                 if (rs != null && rs.next()) {
                     int idFuncionario = rs.getInt("id_func");
-                    int idEmpresa = rs.getInt("id_empresa_fk");
-                    new FuncionarioLogin(idFuncionario, idEmpresa);
+                    new FuncionarioLogin(idFuncionario);
                     this.getTelaFuncionario();
                     return true;
                 }

@@ -4,8 +4,8 @@
  */
 package View.Tela_Requisitante.JFramePrincipal;
 
+import View.Tela_Requisitante.PaineisEspecificos.Situacao;
 import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Carrinho;
-import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Situacao;
 import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Visualizador;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -238,6 +238,7 @@ BProdutos.setVerticalAlignment(SwingConstants.CENTER);
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Tela02_Requisitante().setVisible(true);
             }

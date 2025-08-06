@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Login;
+package Controller.CapturaLogin;
 
 /**
  *
@@ -10,7 +10,6 @@ package Login;
  */
 public class FuncionarioLogin {
     private  static Integer id ;
-    private static Integer id_empresa_fk;
     private static String cargo;
 
     public static Integer getId() {
@@ -21,13 +20,7 @@ public class FuncionarioLogin {
         id = aId;
     }
 
-    public static Integer getId_empresa_fk() {
-        return id_empresa_fk;
-    }
-
-    public static void setId_empresa_fk(Integer id_empresa_fk) {
-        FuncionarioLogin.id_empresa_fk = id_empresa_fk;
-    }
+ 
 
     public static String getCargo() {
         return cargo;
@@ -38,9 +31,8 @@ public class FuncionarioLogin {
     }
 
 
-    public FuncionarioLogin(int id, int id_empresa_fk) {
+    public FuncionarioLogin(int id) {
         this.id = id;
-        this.id_empresa_fk = id_empresa_fk;
 
     }
     
