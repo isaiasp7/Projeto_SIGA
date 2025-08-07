@@ -23,6 +23,7 @@ public class MontadorPedido implements MontadorReadAll<Pedido>{
        ped.setId_requisitante(rs.getInt("id_requisitante"));
        ped.setId_funcionario(rs.getInt("id_funcionario"));
        ped.setStatus(StatusPedido.conversor(rs.getString("status")));
+        ped.setValorTotal(rs.getDouble("total_pedido"));
        return ped;
     }
     

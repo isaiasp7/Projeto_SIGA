@@ -14,9 +14,9 @@ import java.sql.DriverManager;
 public class ConexaoSingleton {
     private static ConexaoSingleton instancia;
     private Connection conexao;
-    private String url = "jdbc:MySQL://localhost:3306/siga_bd";
+    private String url = "jdbc:MySQL://caboose.proxy.rlwy.net:14850/railway";
     private String user = "root";
-    private String pass = "root12345";
+    private String pass = "qxTTsoBNdOEPCFFdFAMVoXxqqawHPxOC";
 
     private ConexaoSingleton() {
         try {

@@ -126,6 +126,7 @@ public class PedidosPendentes extends javax.swing.JPanel {
             }
         ));
         tabelaPedidosPendentes.setRowSelectionAllowed(false);
+        tabelaPedidosPendentes.setShowVerticalLines(true);
         jScrollPane1.setViewportView(tabelaPedidosPendentes);
 
         btnVerProdutos.setBackground(new java.awt.Color(0, 0, 0));

@@ -14,7 +14,7 @@ public class Produto {
     private Integer id_prod;
     private String nome_prod;
     private int quant_disponivel;
-    private Integer id_fornecedor_fk;  // associação
+    private long id_fornecedor_fk;  // associação
     private double preco;
     
     public Produto() {}
@@ -27,7 +27,7 @@ public class Produto {
         
     }
     
-    public Produto(String nome, int quantDisponivel, Integer id_fornecedor, double valor) {
+    public Produto(String nome, int quantDisponivel, long id_fornecedor, double valor) {
         this.id_prod = Utilitarios.gerar_id("produto");
         this.preco = valor;
         this.nome_prod = nome;
@@ -87,11 +87,11 @@ public class Produto {
         this.quant_disponivel = quantDisponivel;
     }
 
-    public Integer getId_fornecedor() {
+    public long getId_fornecedor() {
         return id_fornecedor_fk;
     }
 
-    public void setId_fornecedor(Integer id_fornecedor) {
+    public void setId_fornecedor(long id_fornecedor) {
         this.id_fornecedor_fk = id_fornecedor;
     }
     

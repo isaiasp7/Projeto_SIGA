@@ -40,7 +40,7 @@ public class GerenciaPedidos extends javax.swing.JPanel {
 
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 0; // Só a coluna de checkbox pode ser editada
+                return column == 0; 
             }
         };
         tabelaPedidos.setModel(modelo);
@@ -48,13 +48,13 @@ public class GerenciaPedidos extends javax.swing.JPanel {
     
     private void carregarDados() {
         DefaultTableModel model = (DefaultTableModel) tabelaPedidos.getModel();
-        model.setRowCount(0); // Limpar a tabela
+        model.setRowCount(0); 
 
         List<Pedido> pedidos = new PedidoDAO().readPedido();
 
         for (Pedido p : pedidos) {
             model.addRow(new Object[]{
-                false, // checkbox desmarcado
+                false, 
                 p.getId_pedido(),
                 p.getId_requisitante(),
                 p.getData_pedido().toString(),
@@ -79,6 +79,7 @@ public class GerenciaPedidos extends javax.swing.JPanel {
         btnAtualizar = new javax.swing.JButton();
         btnVerProdutos = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnExcluir = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(7, 23, 57));
         setMinimumSize(new java.awt.Dimension(872, 557));
@@ -96,6 +97,7 @@ public class GerenciaPedidos extends javax.swing.JPanel {
             }
         ));
         tabelaPedidos.setRowSelectionAllowed(false);
+        tabelaPedidos.setShowVerticalLines(true);
         jScrollPane1.setViewportView(tabelaPedidos);
 
         btnAtualizar.setBackground(new java.awt.Color(0, 0, 0));
@@ -121,21 +123,33 @@ public class GerenciaPedidos extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Gerenciar Pedidos");
 
+        btnExcluir.setBackground(new java.awt.Color(0, 0, 0));
+        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVerProdutos)
-                .addGap(57, 57, 57)
-                .addComponent(btnAtualizar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnVerProdutos)
+                        .addGap(57, 57, 57)
+                        .addComponent(btnAtualizar)
+                        .addGap(73, 73, 73)
+                        .addComponent(btnExcluir))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 854, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 854, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
@@ -148,7 +162,8 @@ public class GerenciaPedidos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnAtualizar)
-                    .addComponent(btnVerProdutos))
+                    .addComponent(btnVerProdutos)
+                    .addComponent(btnExcluir))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -223,7 +238,7 @@ public class GerenciaPedidos extends javax.swing.JPanel {
         JDialog dialog = new JDialog();
         dialog.setTitle("Produtos do Pedido " + idPedido);
         dialog.setContentPane(painelProdutos);
-        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); // para fechar corretamente
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); 
         dialog.pack();
         dialog.setLocationRelativeTo(this); 
         dialog.setModal(true);              
@@ -231,8 +246,45 @@ public class GerenciaPedidos extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnVerProdutosActionPerformed
 
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+         DefaultTableModel model = (DefaultTableModel) tabelaPedidos.getModel();
+        List<Integer> pedidosSelecionados = new ArrayList<>();
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            Boolean selecionado = (Boolean) model.getValueAt(i, 0);
+            if (Boolean.TRUE.equals(selecionado)) {
+                Integer idPedido = (Integer) model.getValueAt(i, 1);
+                pedidosSelecionados.add(idPedido);
+            }
+        }
+
+        if (pedidosSelecionados.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhum pedido selecionado para exclusão.");
+            return;
+        }
+
+        int confirmacao = JOptionPane.showConfirmDialog(
+            this,
+            "Tem certeza que deseja excluir os pedidos selecionados?",
+            "Confirmar Exclusão",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            PedidoDAO dao = new PedidoDAO();
+            for (Integer id : pedidosSelecionados) {
+                dao.deletePedido(id); 
+            }
+
+            JOptionPane.showMessageDialog(this, "Pedido(s) excluído(s) com sucesso.");
+            carregarDados(); 
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnVerProdutos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

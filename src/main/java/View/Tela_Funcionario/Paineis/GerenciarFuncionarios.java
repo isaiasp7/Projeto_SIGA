@@ -58,7 +58,7 @@ public class GerenciarFuncionarios extends javax.swing.JPanel {
         List<Funcionario> funcionarios = dao.readFuncionario();
 
         DefaultTableModel modelo = (DefaultTableModel) tabelaFuncionarios.getModel();
-        modelo.setRowCount(0); // limpa
+        modelo.setRowCount(0); 
 
         for (Funcionario f : funcionarios) {
             modelo.addRow(new Object[]{
@@ -102,6 +102,7 @@ public class GerenciarFuncionarios extends javax.swing.JPanel {
                 "Seleção", "ID", "Nome", "Cargo", "Email", "CPF"
             }
         ));
+        tabelaFuncionarios.setShowVerticalLines(true);
         jScrollPane1.setViewportView(tabelaFuncionarios);
 
         btnExcluir.setBackground(new java.awt.Color(0, 0, 0));

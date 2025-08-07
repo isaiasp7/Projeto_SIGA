@@ -25,13 +25,13 @@ public class Produtos extends javax.swing.JPanel {
         
         DefaultTableModel modelo = new DefaultTableModel(
             new Object[][] {},
-            new String[] { "Seleção", "ID", "Nome", "Quantidade", "Preço" }
+            new String[] { "Seleção", "ID", "Nome", "ID Fornecedor", "Quantidade", "Preço" }
         ) {
             Class[] types = new Class[]{
-                Boolean.class, Integer.class, String.class, Integer.class, Double.class
+                Boolean.class, Integer.class, String.class, Integer.class, Integer.class, Double.class
             };
             boolean[] canEdit = new boolean[]{
-                true, false, false, false, false
+                true, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -42,6 +42,7 @@ public class Produtos extends javax.swing.JPanel {
                 return canEdit[columnIndex];
             }
         };
+
 
         tabelaProdutos.setModel(modelo); 
         carregarDados();
@@ -61,6 +62,7 @@ public class Produtos extends javax.swing.JPanel {
                 false,
                 p.getId(),
                 p.getNome(),
+                p.getId_fornecedor(),
                 p.getQuantDisponivel(),
                 p.getValor()
             };
@@ -92,15 +94,16 @@ public class Produtos extends javax.swing.JPanel {
 
         tabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Seleção", "ID", "Nome", "Quantidade", "Preço"
+                "Seleção", "ID", "Nome", "ID Fornecedor", "Quantidade", "Preço"
             }
         ));
+        tabelaProdutos.setShowVerticalLines(true);
         jScrollPane1.setViewportView(tabelaProdutos);
 
         btnCriar.setBackground(new java.awt.Color(0, 0, 0));
@@ -144,14 +147,16 @@ public class Produtos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 860, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCriar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExcluir)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 806, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
+                .addGap(322, 322, 322)
+                .addComponent(btnCriar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEditar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluir)
+                .addGap(322, 322, 322))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,18 +183,26 @@ public class Produtos extends javax.swing.JPanel {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        int linhaSelecionada = tabelaProdutos.getSelectedRow();
-        if (linhaSelecionada != -1) {
-            int id = (int) tabelaProdutos.getValueAt(linhaSelecionada, 1);
-            String nome = (String) tabelaProdutos.getValueAt(linhaSelecionada,2);
-            int quantidade = (int) tabelaProdutos.getValueAt(linhaSelecionada, 3);
-            double preco = (double) tabelaProdutos.getValueAt(linhaSelecionada, 4);
+        try {
+            int linhaSelecionada = tabelaProdutos.getSelectedRow();
+            if (linhaSelecionada != -1) {
+                int id = (int) tabelaProdutos.getValueAt(linhaSelecionada, 1);
+                String nome = (String) tabelaProdutos.getValueAt(linhaSelecionada, 2);
+                int idFornecedor = ((Long) tabelaProdutos.getValueAt(linhaSelecionada, 3)).intValue();
+                int quantidade = (int) tabelaProdutos.getValueAt(linhaSelecionada, 4);
+                double preco = (double) tabelaProdutos.getValueAt(linhaSelecionada, 5);
 
-            EditarProduto editarDialog = new EditarProduto(null, true, id, nome, quantidade, preco);
-            editarDialog.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Selecione um produto para editar.");
+                EditarProduto editarDialog = new EditarProduto(null, true, id, nome, idFornecedor, quantidade, preco);
+                editarDialog.setVisible(true);
+                carregarDados();
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione um produto para editar.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao abrir tela de edição: " + e.getMessage());
         }
+
         carregarDados();
     }//GEN-LAST:event_btnEditarActionPerformed
 

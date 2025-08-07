@@ -75,7 +75,10 @@ public class Empresa {
         this.email = email;
     }
     
-    
+        @Override
+    public String toString() {
+        return this.getNomeEmpresa();
+    }
     
     
 }

@@ -11,6 +11,7 @@ import Model.Empresa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,10 +74,28 @@ public boolean validateCNPJEmpresa(String cnpj) {
     return false; // erro na execução → por segurança, não deixa cadastrar
 }
 
- 
+public List<Empresa> listarFornecedores() {
+    List<Empresa> fornecedores = new ArrayList<>();
+    String sql = "SELECT * FROM empresa WHERE tipo_empresa = 'fornecedor'";
+
+    try {
+        PreparedStatement script = this.conexao.prepareStatement(sql);
+        ResultSet rs = script.executeQuery();
+
+        MontadorEmpresa montador = new MontadorEmpresa();
+        while (rs.next()) {
+            Empresa fornecedor = montador.montar(rs);
+            fornecedores.add(fornecedor);
+        }
+    } catch (Exception e) {
+        System.out.println("Erro ao listar fornecedores: " + e);
+    }
+
+    return fornecedores;
 }
 
 
-    
 
-    
+
+}
+

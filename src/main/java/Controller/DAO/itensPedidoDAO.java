@@ -46,7 +46,7 @@ public class itensPedidoDAO extends CrudGenerico {
         List<ProdutoDTO> lista = new ArrayList<>();
 
         String sql = "SELECT p.id_prod, p.nome_prod, p.preco, p.quant_disponivel, p.id_fornecedor_fk, ip.quantidade "
-           + "FROM itenspedido ip "
+           + "FROM itensPedido ip "
            + "JOIN produto p ON p.id_prod = ip.idProduto_fk "
            + "WHERE ip.idPedido_fk = ?";
 
@@ -61,7 +61,7 @@ public class itensPedidoDAO extends CrudGenerico {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
         return lista;
     }
      
