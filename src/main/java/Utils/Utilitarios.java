@@ -5,10 +5,9 @@
 package Utils;
 
 import DAO.EmpresaDAO;
-import DAO.FuncionarioDAO;
-import DAO.PedidoDAO;
-import DAO.ProdutoDAO;
-import Model.Pedido;
+import Controller.DAO.FuncionarioDAO;
+import Controller.DAO.PedidoDAO;
+import Controller.DAO.ProdutoDAO;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**

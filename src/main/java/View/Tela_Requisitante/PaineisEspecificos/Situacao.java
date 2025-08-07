@@ -4,9 +4,9 @@
  */
 package View.Tela_Requisitante.PaineisEspecificos;
 
-import DAO.PedidoDAO;
-import DAO.ProdutoDAO;
-import DTO.ProdutoDTO;
+import Controller.DAO.PedidoDAO;
+import Controller.DAO.ProdutoDAO;
+import Controller.DTO.ProdutoDTO;
 import Login.RequisitanteLogin;
 import Model.Pedido;
 import Model.StatusPedido;
@@ -279,7 +279,7 @@ public class Situacao extends javax.swing.JPanel {
     private void renderizaDados() {//rendeiza pedidos feitos pela empresa
         DefaultTableModel model = (DefaultTableModel) jTableDefault.getModel();
         model.setRowCount(0);
-        for (java.util.Map.Entry<Model.Pedido, java.util.List<DTO.ProdutoDTO>> entry : lista.entrySet()) {
+        for (java.util.Map.Entry<Model.Pedido, java.util.List<ProdutoDTO>> entry : lista.entrySet()) {
             Pedido key = entry.getKey();
             model.addRow(new Object[]{key.getId_pedido(), key.getStatus()});
 

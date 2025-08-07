@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos;
+package View.Tela_Requisitante.PaineisEspecificos;
 
-import DAO.ProdutoDAO;
+import Controller.DAO.ProdutoDAO;
 import Model.Produto;
 import java.awt.Color;
 import java.util.ArrayList;

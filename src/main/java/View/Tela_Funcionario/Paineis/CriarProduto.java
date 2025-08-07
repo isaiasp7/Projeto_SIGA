@@ -4,7 +4,7 @@
  */
 package View.Tela_Funcionario.Paineis;
 
-import Controller.CapturaLogin.FuncionarioLogin;
+import Controller.DAO.ProdutoDAO;
 import DAO.EmpresaDAO;
 import Model.Empresa;
 import Model.Produto;
@@ -230,7 +230,7 @@ public class CriarProduto extends javax.swing.JDialog {
 
             Produto novo = new Produto(nome, quantidade, idFornecedor, preco);
 
-            DAO.ProdutoDAO dao = new DAO.ProdutoDAO();
+            ProdutoDAO dao = new ProdutoDAO();
             boolean sucesso = dao.createProduto(novo);
 
             if (sucesso) {

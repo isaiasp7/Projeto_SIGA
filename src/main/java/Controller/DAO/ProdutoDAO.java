@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DAO;
+package Controller.DAO;
 
 import Controller.ConexaoSingleton;
 import Controller.CrudGenerico;
+import Controller.DTO.ProdutoDTO;
 import Controller.Montador.MontadorProduto;
-import DTO.ProdutoDTO;
 import Model.Produto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

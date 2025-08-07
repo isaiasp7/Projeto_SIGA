@@ -6,7 +6,7 @@ package View.Login;
 
 import Controller.CapturaLogin.FuncionarioLogin;
 import DAO.EmpresaDAO;
-import DAO.FuncionarioDAO;
+import Controller.DAO.FuncionarioDAO;
 
 import Login.RequisitanteLogin;
 import View.Tela_Funcionario.JFramePrincipal.Tela02_Funcionario;

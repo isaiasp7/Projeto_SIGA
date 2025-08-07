@@ -4,7 +4,7 @@
  */
 package View.Tela_Funcionario.Paineis;
 
-import DAO.FuncionarioDAO;
+import Controller.DAO.FuncionarioDAO;
 import Model.Funcionario;
 import javax.swing.JOptionPane;
 

@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos;
+package View.Tela_Requisitante.PaineisEspecificos;
 
-import DAO.PedidoDAO;
-import DAO.ProdutoDAO;
-import DAO.itensPedidoDAO;
-import DTO.ProdutoDTO;
+import Controller.DAO.PedidoDAO;
+import Controller.DAO.ProdutoDAO;
+import Controller.DAO.itensPedidoDAO;
+import Controller.DTO.ProdutoDTO;
 import Login.RequisitanteLogin;
 import Model.Pedido;
 import Model.Produto;

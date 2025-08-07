@@ -5,8 +5,8 @@
 package View.Tela_Requisitante.JFramePrincipal;
 
 import View.Tela_Requisitante.PaineisEspecificos.Situacao;
-import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Carrinho;
-import com.mycompany.poo_project.Tela_Requisitante.PaineisEspecificos.Visualizador;
+import View.Tela_Requisitante.PaineisEspecificos.Carrinho;
+import View.Tela_Requisitante.PaineisEspecificos.Visualizador;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;

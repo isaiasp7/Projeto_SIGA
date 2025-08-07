@@ -4,7 +4,7 @@
  */
 package View.Tela_Funcionario.Paineis;
 
-import DAO.PedidoDAO;
+import Controller.DAO.PedidoDAO;
 import Model.Pedido;
 import Model.StatusPedido;
 import java.util.ArrayList;

@@ -4,7 +4,7 @@
  */
 package View.Tela_Funcionario.JFramePrincipal;
 
-import DAO.FuncionarioDAO;
+import Controller.DAO.FuncionarioDAO;
 import Controller.CapturaLogin.FuncionarioLogin;
 import View.Tela_Funcionario.Paineis.GerenciarFuncionarios;
 import View.Tela_Funcionario.Paineis.GerenciaPedidos;

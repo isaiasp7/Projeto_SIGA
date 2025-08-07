@@ -5,11 +5,10 @@
 package View.Tela_Funcionario.Paineis;
 
 import DAO.EmpresaDAO;
-import DAO.ProdutoDAO;
+import Controller.DAO.ProdutoDAO;
 import Model.Empresa;
 import Model.Produto;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  *

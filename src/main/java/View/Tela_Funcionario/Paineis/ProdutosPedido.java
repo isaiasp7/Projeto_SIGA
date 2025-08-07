@@ -4,15 +4,9 @@
  */
 package View.Tela_Funcionario.Paineis;
 
-import DAO.itensPedidoDAO;
-import DTO.ProdutoDTO;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import Controller.DAO.itensPedidoDAO;
+import Controller.DTO.ProdutoDTO;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**

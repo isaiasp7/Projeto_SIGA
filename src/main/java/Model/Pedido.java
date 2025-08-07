@@ -1,7 +1,7 @@
 package Model;
 
 
-import DTO.ProdutoDTO;
+import Controller.DTO.ProdutoDTO;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

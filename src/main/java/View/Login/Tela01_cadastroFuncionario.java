@@ -4,7 +4,7 @@
  */
 package View.Login;
 
-import DAO.FuncionarioDAO;
+import Controller.DAO.FuncionarioDAO;
 import Model.Funcionario;
 import View.Tela_Funcionario.JFramePrincipal.Tela02_Funcionario;
 import java.awt.Color;
